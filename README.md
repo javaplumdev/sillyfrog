@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1>Sillyfrog v2</h1>
 
-## Getting Started
+A user friendly social media app for interacting with users and have fun in general. Based on the Sillyfrog v1 with new UIs and new features.
 
-First, run the development server:
+## Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Prerequisites
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Node.js 20.x or higher
+- Python 3.8 or higher
+- Windows, macOS, or Linux operating system
+- pnpm must have
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Installation
 
-## Learn More
+1. Clone the repository:
 
-To learn more about Next.js, take a look at the following resources:
+   - git clone https://github.com/javaplumdev/sillyfrog-v2.git
+   - cd sillyfrog-v2
+   - nvm use v20.10.0
+   - pnpm install
+   - npm run dev
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Usage
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+To use the Sillyfrog v2, follow these steps:
 
-## Deploy on Vercel
+1. Create your username and password in signup page, or continue with Facebook and Google authentication.
+2. Post your feelings and get the change to view other's posts and content too!.
+3. Interact with the users and enjoy!
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Examples
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Post the current content on what you feel like on posting:
