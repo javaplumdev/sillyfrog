@@ -28,7 +28,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/signin",
-    "src/__test__/page.test.jsx"
+    "src/__tests__/page.test.jsx"
   ],
   "exclude": ["node_modules"]
 }
