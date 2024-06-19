@@ -1,6 +1,9 @@
 import React from 'react';
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { buttonVariants } from '@/components/ui/button';
 import BaseButton from '@/components/base/buttons/BaseButton';
+import { MoveRight } from 'lucide-react';
 
 // const headerOneGradient = {
 //   cn: 'bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text',
@@ -8,9 +11,9 @@ import BaseButton from '@/components/base/buttons/BaseButton';
 
 const LandingHero = () => {
   return (
-    <div className="my-36 text-center sm:text-left md:w-[920px]">
+    <div className="my-40 flex flex-col items-center text-center">
       <h1 className={cn('text-3xl md:text-5xl font-extrabold')}>
-        Leap, Laugh, and Share on SillyFrog!
+        Leap, Laugh, and Share on SillyFrog! &#x1F438;
       </h1>
 
       <p className="text-gray-800 my-12 text-sm sm:text-base md:w-[620px]">
@@ -18,10 +21,15 @@ const LandingHero = () => {
         community that loves to laugh as much as you do.
       </p>
 
-      <BaseButton variant="outline" className="mr-2">
-        Sign in
-      </BaseButton>
-      <BaseButton>Get Started</BaseButton>
+      <div>
+        <Link href="/signin" className={cn('mr-3', buttonVariants({ variant: 'outline' }))}>
+          Sign up
+        </Link>
+
+        <BaseButton to="/signup" endIcon={<MoveRight />}>
+          Get Started
+        </BaseButton>
+      </div>
     </div>
   );
 };

@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 const LandingNav = () => {
   return (
     <div className="p-2 sm:p-3 m-4 sm:my-8 mx-0 px-6 sm:px-12 bg-primary text-white rounded-xl flex justify-between items-center">
-      <h2>Sillyfrog</h2>
+      <h2 className="font-bold">&#x1F438; Sillyfrog</h2>
       <div>
         <li className="list-none">
           <ul>
