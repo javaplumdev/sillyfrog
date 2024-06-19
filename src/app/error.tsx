@@ -1,7 +1,7 @@
 'use client'; // Error components must be Client Components
 
 import * as React from 'react';
-// import { RiAlarmWarningFill } from 'react-icons/ri';
+import { TriangleAlert } from 'lucide-react';
 import BaseButton from '@/components/base/buttons/BaseButton';
 
 export default function Error({
@@ -21,7 +21,7 @@ export default function Error({
     <main>
       <section>
         <div className="layout flex min-h-screen flex-col items-center justify-center text-center text-primary">
-          {/* <RiAlarmWarningFill size={60} className="drop-shadow-glow animate-flicker text-red-500" /> */}
+          <TriangleAlert className="text-destructive" size={50} />
           <h1 className="mt-8 text-3xl md:text-5xl">Oops, something went wrong! :(</h1>
           <p className="my-6">
             Sorry, we're having technical issues. Please try again, sometimes it works. If the issue
