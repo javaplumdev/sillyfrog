@@ -23,7 +23,7 @@ const LandingHero = () => {
 
       <div>
         <Link href="/signin" className={cn('mr-3', buttonVariants({ variant: 'outline' }))}>
-          Sign up
+          Sign in
         </Link>
 
         <BaseButton to="/signup" endIcon={<MoveRight />}>
