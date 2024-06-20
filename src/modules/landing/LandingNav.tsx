@@ -17,7 +17,10 @@ const LandingNav = () => {
             <Link href="/signin" className={cn('mx-3', buttonVariants({ variant: 'ghost' }))}>
               Sign up
             </Link>
-            <Link href="/signup" className={buttonVariants({ variant: 'secondary' })}>
+            <Link
+              href="/signup"
+              className={cn(buttonVariants({ variant: 'outline' }), 'text-black')}
+            >
               Get started
             </Link>
           </ul>
