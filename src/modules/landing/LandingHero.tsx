@@ -11,7 +11,7 @@ import { MoveRight } from 'lucide-react';
 
 const LandingHero = () => {
   return (
-    <div className="my-40 flex flex-col items-center text-center">
+    <div className="mt-40 mb-10 flex flex-col items-center text-center">
       <h1 className={cn('text-3xl md:text-5xl font-extrabold')}>
         Leap, Laugh, and Share on SillyFrog! &#x1F438;
       </h1>
@@ -22,9 +22,11 @@ const LandingHero = () => {
       </p>
 
       <div>
-        <Link href="/signin" className={cn('mr-3', buttonVariants({ variant: 'outline' }))}>
-          Sign in
+        <Link href="/home" className={cn(buttonVariants({ variant: 'outline' }))}>
+          Visit anonymously
         </Link>
+
+        <span className="mx-3">or</span>
 
         <BaseButton to="/signup" endIcon={<MoveRight />}>
           Get Started

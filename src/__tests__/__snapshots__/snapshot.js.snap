@@ -12,16 +12,25 @@ exports[`renders homepage unchanged 1`] = `
       class="mx-2 sm:container"
     >
       <div
-        class="p-2 sm:p-3 m-4 sm:my-8 mx-0 px-6 sm:px-12 bg-primary text-white rounded-xl flex justify-between items-center"
+        class="p-2 sm:p-3 m-4 sm:my-8 mx-0 px-6 sm:px-12 rounded-xl flex justify-between items-center text-white bg-primary"
       >
-        <h2
-          class="font-bold"
+        <div
+          class="flex items-center"
         >
-          🐸 Sillyfrog
-        </h2>
+          <h2
+            class="mr-2 bg-white rounded-full border-black border px-2 py-1"
+          >
+            🐸
+          </h2>
+          <h2
+            class="font-bold"
+          >
+            Sillyfrog
+          </h2>
+        </div>
         <div>
           <li
-            class="list-none"
+            class="list-none hidden sm:block"
           >
             <ul>
               <a
@@ -37,7 +46,7 @@ exports[`renders homepage unchanged 1`] = `
                 Sign up
               </a>
               <a
-                class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2"
+                class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 text-black"
                 href="/signup"
               >
                 Get started
@@ -45,9 +54,44 @@ exports[`renders homepage unchanged 1`] = `
             </ul>
           </li>
         </div>
+        <div
+          class="sm:hidden"
+        >
+          <svg
+            class="lucide lucide-menu"
+            fill="none"
+            height="30"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="30"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <line
+              x1="4"
+              x2="20"
+              y1="12"
+              y2="12"
+            />
+            <line
+              x1="4"
+              x2="20"
+              y1="6"
+              y2="6"
+            />
+            <line
+              x1="4"
+              x2="20"
+              y1="18"
+              y2="18"
+            />
+          </svg>
+        </div>
       </div>
       <div
-        class="my-40 flex flex-col items-center text-center"
+        class="mt-40 mb-10 flex flex-col items-center text-center"
       >
         <h1
           class="text-3xl md:text-5xl font-extrabold"
@@ -61,11 +105,16 @@ exports[`renders homepage unchanged 1`] = `
         </p>
         <div>
           <a
-            class="mr-3 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
-            href="/signin"
+            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+            href="/home"
           >
-            Sign in
+            Visit anonymously
           </a>
+          <span
+            class="mx-3"
+          >
+            or
+          </span>
           <a
             href="/signup"
           >
@@ -101,6 +150,22 @@ exports[`renders homepage unchanged 1`] = `
             </button>
           </a>
         </div>
+      </div>
+      <div
+        class="flex justify-center w-100 p-0"
+      >
+        <img
+          alt="hand"
+          class="selector"
+          data-nimg="1"
+          decoding="async"
+          height="40"
+          loading="lazy"
+          src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+          srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+          style="color: transparent;"
+          width="40"
+        />
       </div>
     </div>
   </main>
