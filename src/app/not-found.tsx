@@ -9,11 +9,11 @@ const NotFound = () => {
   return (
     <main>
       <section>
-        <div className="flex min-h-screen flex-col items-center justify-center text-center text-primary">
+        <div className="flex min-h-screen flex-col items-center justify-center text-center">
           {/* <RiAlarmWarningFill size={60} className="drop-shadow-glow animate-flicker text-red-500" /> */}
           <div className="flex items-center">
-            <ShieldX className="text-destructive mt-6 mr-3" size={40} />
-            <h1 className={cn(headerOneCn.cn, 'text-destructive')}>404</h1>
+            <ShieldX className="text-red-500 mt-6 mr-3" size={40} />
+            <h1 className={cn(headerOneCn.cn, 'text-red-500')}>404</h1>
           </div>
           <h1 className={cn(headerOneCn.cn)}>Page Not Found</h1>
           <p className="my-6">Sorry, the page you are looking for could not be found.</p>
