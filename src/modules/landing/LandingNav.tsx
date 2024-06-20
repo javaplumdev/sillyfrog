@@ -7,7 +7,10 @@ import { buttonVariants } from '@/components/ui/button';
 const LandingNav = () => {
   return (
     <div className="p-2 sm:p-3 m-4 sm:my-8 mx-0 px-6 sm:px-12 rounded-xl flex justify-between items-center text-white bg-primary bg-opacity-50 backdrop-blur-md shadow-lg">
-      <h2 className="font-bold">&#x1F438; Sillyfrog</h2>
+      <div className="flex items-center">
+        <h2 className="mr-2 bg-white rounded-full border-black border px-2 py-1">&#x1F438;</h2>
+        <h2 className="font-bold">Sillyfrog</h2>
+      </div>
       <div>
         <li className="list-none hidden sm:block">
           <ul>
