@@ -1,6 +1,8 @@
 import React from 'react';
-import AboutMobile from '../../assets/landing/about-mobile.svg';
+import { cn } from '@/lib/utils';
 import Image from 'next/image';
+import styles from './styles.module.scss';
+import AboutMobile from '../../assets/landing/about-mobile.svg';
 
 const LandingAbout = () => {
   return (
@@ -15,7 +17,12 @@ const LandingAbout = () => {
       </div>
 
       <div className="flex justify-center">
-        <Image priority src={AboutMobile} alt="Follow us on Twitter" className="min-w-screen-sm" />
+        <Image
+          priority
+          src={AboutMobile}
+          alt="Follow us on Twitter"
+          className={cn(styles['image'], 'min-w-screen-sm')}
+        />
       </div>
     </div>
   );
