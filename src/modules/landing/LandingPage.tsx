@@ -4,9 +4,10 @@ import { cn } from '@/lib/utils';
 import LandingNav from './LandingNav';
 import LandingHero from './LandingHero';
 import LandingAbout from './LandingAbout';
+import LandingFooter from './LandingFooter';
 
 import styles from './styles.module.scss';
-import test from '../../assets/landing/hand-with-gradient.png';
+import img from '../../assets/landing/hand-with-gradient.png';
 
 const LandingPage = () => {
   return (
@@ -15,10 +16,11 @@ const LandingPage = () => {
       <LandingHero />
 
       <div className="flex justify-center w-100 p-0">
-        <Image src={test} alt="hand" className={cn(styles['selector'])} />
+        <Image src={img} alt="hand" className={cn(styles['image'])} />
       </div>
 
       <LandingAbout />
+      <LandingFooter />
     </div>
   );
 };
