@@ -1,11 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
-import { buttonVariants } from '@/components/ui/button';
-import BaseButton from '@/components/base/buttons/BaseButton';
-import { MoveUpRight } from 'lucide-react';
-import WaterLily from '../../assets/landing/water-lily.png';
 import Image from 'next/image';
+import { cn } from '@/lib/utils';
+import { MoveUpRight } from 'lucide-react';
+import { buttonVariants } from '@/components/ui/button';
+import WaterLily from '../../assets/landing/water-lily.png';
+import BaseButton from '@/components/base/buttons/BaseButton';
 
 // const headerOneGradient = {
 //   cn: 'bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text',

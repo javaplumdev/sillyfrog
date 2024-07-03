@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/signin",
-    "src/__tests__/page.test.jsx"
+    "src/__tests__/page.test.jsx",
+    "src/modules/signup/SignupCard.tsx"
   ],
   "exclude": ["node_modules"]
 }

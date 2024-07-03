@@ -1,10 +1,11 @@
 'use client';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
+import { SignupProps } from '@/types/signup';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const useSignup = () => {
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: SignupProps) => console.log(data);
 
   const formSchema = z.object({
     email: z
