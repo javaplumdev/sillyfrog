@@ -6,7 +6,7 @@ import AboutMobile from '../../assets/landing/about-mobile.svg';
 
 const LandingAbout = () => {
   return (
-    <div className="mt-48 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <div id="about_section" className="mt-48 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <div>
         <h1 className="text-5xl sm:text-6xl font-bold mb-4">About us</h1>
         <p className="text-gray-800 text-md md:text-lg">

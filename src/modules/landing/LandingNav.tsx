@@ -11,23 +11,18 @@ const LandingNav = () => {
         <h2 className="mr-2 bg-white rounded-full border-black border px-2 py-1">&#x1F438;</h2>
         <h2 className="font-bold">Sillyfrog</h2>
       </div>
-      <div>
-        <li className="list-none hidden sm:block">
-          <ul>
-            <Link href="/about" className={buttonVariants({ variant: 'ghost' })}>
-              About us
-            </Link>
-            <Link href="/signin" className={cn('mx-3', buttonVariants({ variant: 'ghost' }))}>
-              Sign up
-            </Link>
-            <Link
-              href="/signup"
-              className={cn(buttonVariants({ variant: 'outline' }), 'text-black')}
-            >
-              Get started
-            </Link>
-          </ul>
-        </li>
+      <div className="hidden sm:block">
+        <Link href="#about_section" className={buttonVariants({ variant: 'ghost' })}>
+          About us
+        </Link>
+
+        <Link href="/signin" className={cn('mx-3', buttonVariants({ variant: 'ghost' }))}>
+          Sign up
+        </Link>
+
+        <Link href="/signup" className={cn(buttonVariants({ variant: 'outline' }), 'text-black')}>
+          Get started
+        </Link>
       </div>
 
       <div className="sm:hidden">

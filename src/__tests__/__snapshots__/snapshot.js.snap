@@ -29,30 +29,24 @@ exports[`renders homepage unchanged 1`] = `
           </h2>
         </div>
         <div>
-          <li
-            class="list-none hidden sm:block"
+          <a
+            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+            href="#about_section"
           >
-            <ul>
-              <a
-                class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
-                href="/about"
-              >
-                About us
-              </a>
-              <a
-                class="mx-3 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
-                href="/signin"
-              >
-                Sign up
-              </a>
-              <a
-                class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 text-black"
-                href="/signup"
-              >
-                Get started
-              </a>
-            </ul>
-          </li>
+            About us
+          </a>
+          <a
+            class="mx-3 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+            href="/signin"
+          >
+            Sign up
+          </a>
+          <a
+            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 text-black"
+            href="/signup"
+          >
+            Get started
+          </a>
         </div>
         <div
           class="sm:hidden"
@@ -91,7 +85,7 @@ exports[`renders homepage unchanged 1`] = `
         </div>
       </div>
       <div
-        class="mt-40 mb-10 flex flex-col items-center text-center"
+        class="mt-40 mb-10 flex flex-col items-center text-center relative"
       >
         <h1
           class="text-3xl md:text-5xl font-extrabold"
@@ -128,7 +122,7 @@ exports[`renders homepage unchanged 1`] = `
                 class="ml-2"
               >
                 <svg
-                  class="lucide lucide-move-right"
+                  class="lucide lucide-move-up-right"
                   fill="none"
                   height="24"
                   stroke="currentColor"
@@ -140,15 +134,39 @@ exports[`renders homepage unchanged 1`] = `
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    d="M18 8L22 12L18 16"
+                    d="M13 5H19V11"
                   />
                   <path
-                    d="M2 12H22"
+                    d="M19 5L5 19"
                   />
                 </svg>
               </div>
             </button>
           </a>
+          <img
+            alt="water-lily"
+            class="hidden md:block absolute top-20 left-0"
+            data-nimg="1"
+            decoding="async"
+            height="40"
+            loading="lazy"
+            src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+            srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+            style="color: transparent;"
+            width="40"
+          />
+          <img
+            alt="water-lily"
+            class="hidden md:block absolute bottom-0 right-0"
+            data-nimg="1"
+            decoding="async"
+            height="40"
+            loading="lazy"
+            src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+            srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+            style="color: transparent;"
+            width="40"
+          />
         </div>
       </div>
       <div
@@ -156,7 +174,7 @@ exports[`renders homepage unchanged 1`] = `
       >
         <img
           alt="hand"
-          class="selector"
+          class="image"
           data-nimg="1"
           decoding="async"
           height="40"
@@ -166,6 +184,66 @@ exports[`renders homepage unchanged 1`] = `
           style="color: transparent;"
           width="40"
         />
+      </div>
+      <div
+        class="mt-48 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+        id="about_section"
+      >
+        <div>
+          <h1
+            class="text-5xl sm:text-6xl font-bold mb-4"
+          >
+            About us
+          </h1>
+          <p
+            class="text-gray-800 text-md md:text-lg"
+          >
+            Dive into the world of hilarity with SillyFrog, where laughter is a way of life and sharing your funniest moments is a daily ritual. Join a vibrant community of humor enthusiasts who are always ready to brighten your day with their wit and whimsy.
+          </p>
+        </div>
+        <div
+          class="flex justify-center"
+        >
+          <img
+            alt="Follow us on Twitter"
+            class="image min-w-screen-sm"
+            data-nimg="1"
+            decoding="async"
+            fetchpriority="high"
+            height="40"
+            src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+            srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+            style="color: transparent;"
+            width="40"
+          />
+        </div>
+      </div>
+      <div
+        class="mt-64 mb-12"
+      >
+        <div
+          class="bottom-0 p-3 text-center w-full rounded-xl"
+        >
+          <small
+            class="text-gray-800 text-sm"
+          >
+            Icons by
+             
+            <a
+              class="underline"
+              href="https://icons8.com/"
+              target="_blank"
+            >
+              Icons8
+            </a>
+          </small>
+          <br />
+          <small
+            class="text-gray-800 text-sm"
+          >
+            Sillyfrog all rights reserved
+          </small>
+        </div>
       </div>
     </div>
   </main>
