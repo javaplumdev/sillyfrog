@@ -7,12 +7,12 @@ import { Button } from '@/components/ui/button';
 import { FormField } from '@/components/ui/form';
 import { Form, FormControl, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 
-const SignupForm = ({ form, control }: any) => {
+const SignupForm = ({ form, control, isPassValid }: any) => {
   const { onSubmit, handleSubmit, watch } = form || {};
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={control}
           name="email"
@@ -41,19 +41,9 @@ const SignupForm = ({ form, control }: any) => {
           )}
         />
 
-        <div className="flex flex-col">
-          <Button type="submit" className="w-full">
-            Sign up
-          </Button>
-
-          {/* If user have a account already */}
-          <div className="text-gray-800 text-sm mt-6 text-center">
-            Already have an account?{' '}
-            <Link href="/signin" className="underline">
-              Sign in
-            </Link>
-          </div>
-        </div>
+        <Button type="submit" className="w-full" disabled={!isPassValid(watch('password'))}>
+          Sign up
+        </Button>
       </form>
     </Form>
   );

@@ -1,49 +1,46 @@
+'use client';
 import React, { createContext } from 'react';
-import { useForm } from 'react-hook-form';
 
 interface PasswordCheckerProps {
-  passwordReq: Array<PasswordReqProps>;
+  isPassValid: (password: string) => boolean;
+  passwordReq: (password: string) => { text: string; match: boolean }[];
 }
-
-interface PasswordReqProps {
-  text: string;
-  match: boolean;
-}
-
-export type PasswordReqArrayProps = PasswordReqProps[];
 
 const obj: PasswordCheckerProps = {
-  passwordReq: [],
+  passwordReq: () => [],
+  isPassValid: () => false,
 };
 
 export const PasswordCheckerContext = createContext(obj);
 
 const PasswordCheckerProvider = ({ children }: any) => {
-  const { watch } = useForm();
+  const passwordReq = (password: string): { text: string; match: boolean }[] => {
+    return [
+      {
+        text: 'Must be at least 8 characters',
+        match: (password || '').length >= 8,
+      },
+      {
+        text: 'Must contain at least 1 uppercase letter.',
+        match: /[A-Z]/.test(password),
+      },
+      {
+        text: 'Must contain at least 1 lowercase letter',
+        match: /[a-z]/.test(password),
+      },
+      {
+        text: 'Must contain at least 1 number',
+        match: /\d/.test(password),
+      },
+    ];
+  };
 
-  const password: string = watch?.('password') || '';
-
-  const passwordReq: PasswordReqArrayProps = [
-    {
-      text: 'Must be at least 8 characters',
-      match: (password || []).length >= 8,
-    },
-    {
-      text: 'Must contain at least 1 uppercase letter.',
-      match: /[A-Z]/.test(password),
-    },
-    {
-      text: 'Must contain at least 1 lowercase letter',
-      match: /[a-z]/.test(password),
-    },
-    {
-      text: 'Must contain at least 1 number',
-      match: /\d/.test(password),
-    },
-  ];
+  const isPassValid = (password: string): boolean => {
+    return passwordReq(password).every((item) => item.match === true);
+  };
 
   return (
-    <PasswordCheckerContext.Provider value={{ passwordReq }}>
+    <PasswordCheckerContext.Provider value={{ passwordReq, isPassValid }}>
       {children}
     </PasswordCheckerContext.Provider>
   );
