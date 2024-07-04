@@ -1,8 +1,8 @@
+![Group 2](https://github.com/javaplumdev/sillyfrog/assets/70713746/92b11755-ec54-4d20-a08f-9c498eaf9e6e)
+
 <h1>🐸 Sillyfrog v2</h1>
 
 A user friendly social media app for interacting with users and have fun in general. Based on the Sillyfrog v1 with new UIs and new features.
-
-![Group 2](https://github.com/javaplumdev/sillyfrog/assets/70713746/92b11755-ec54-4d20-a08f-9c498eaf9e6e)
 
 ## Table of Contents
 
@@ -13,7 +13,7 @@ A user friendly social media app for interacting with users and have fun in gene
 
 ## Prerequisites
 
-- Node.js 20.x or higher
+- Node.js 20.10.x or higher
 - Python 3.8 or higher
 - Windows, macOS, or Linux operating system
 - pnpm must have
