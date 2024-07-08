@@ -37,7 +37,7 @@ const SigninForm = ({ form }: any) => {
           )}
         />
 
-        <Button size="sm" type="submit" className="w-full">
+        <Button type="submit" className="w-full">
           Sign in
         </Button>
       </form>

@@ -17,7 +17,7 @@ const BaseNavbar = () => {
       </div>
 
       <div className="text-end w-full md:w-auto">
-        <BaseButton to="/signin" variant="outline" className="mr-2">
+        <BaseButton to="/signin" variant="ghost" className="mr-2">
           Log in
         </BaseButton>
         <BaseButton to="/signup">Create account</BaseButton>

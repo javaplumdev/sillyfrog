@@ -1,11 +1,37 @@
 'use client';
+import { useState } from 'react';
 import { z } from 'zod';
+import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { SignupProps } from '@/types/signup';
+import { auth } from '@/firebase/firebaseConfig';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 const useSignup = () => {
-  const onSubmit = (data: SignupProps) => console.log(data);
+  const router = useRouter();
+
+  const [error, setError] = useState<any>({});
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const onSubmit = async (data: SignupProps) => {
+    const { email, password } = data || {};
+
+    setIsLoading(true);
+
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+
+      toast.success('Successfully created!');
+
+      router.push('/signin');
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const formSchema = z.object({
     email: z
@@ -29,7 +55,7 @@ const useSignup = () => {
     },
   });
 
-  return { form, onSubmit };
+  return { form, error, onSubmit, isLoading };
 };
 
 export default useSignup;

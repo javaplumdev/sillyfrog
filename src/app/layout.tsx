@@ -1,6 +1,7 @@
 import './globals.css';
 import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
+import { Toaster } from 'react-hot-toast';
 import { Inter as FontSans } from 'next/font/google';
 import AppProviders from '@/modules/app/AppProviders';
 import BaseNavbar from '@/components/base/layout/BaseNavbar';
@@ -39,6 +40,8 @@ export default function RootLayout({
         )}
       >
         <AppProviders>
+          <Toaster position="top-center" reverseOrder={false} />
+
           <BaseNavbar />
           {children}
         </AppProviders>

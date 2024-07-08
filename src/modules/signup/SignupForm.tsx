@@ -4,9 +4,10 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { FormField } from '@/components/ui/form';
 import { Form, FormControl, FormItem, FormMessage } from '@/components/ui/form';
+import BaseButton from '@/components/base/buttons/BaseButton';
 
-const SignupForm = ({ form, control, isPassValid }: any) => {
-  const { onSubmit, handleSubmit, watch } = form || {};
+const SignupForm = ({ form, control, isPassValid, onSubmit, isLoading }: any) => {
+  const { handleSubmit, watch } = form || {};
 
   return (
     <Form {...form}>
@@ -37,9 +38,14 @@ const SignupForm = ({ form, control, isPassValid }: any) => {
           )}
         />
 
-        <Button type="submit" className="w-full" disabled={!isPassValid(watch('password'))}>
+        <BaseButton
+          type="submit"
+          className="w-full"
+          disabled={!isPassValid(watch('password'))}
+          isLoading={isLoading}
+        >
           Sign up
-        </Button>
+        </BaseButton>
       </form>
     </Form>
   );

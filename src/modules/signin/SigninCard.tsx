@@ -29,12 +29,7 @@ const SigninCard = () => {
         <CardDescription>Please enter your details.</CardDescription>
       </CardHeader>
       <CardContent>
-        <BaseButton
-          variant="outline"
-          size="sm"
-          className="w-full"
-          icon={<FcGoogle className="h-4 w-4" />}
-        >
+        <BaseButton variant="outline" className="w-full" icon={<FcGoogle className="h-4 w-4" />}>
           Continue with Google
         </BaseButton>
 

@@ -5,9 +5,9 @@ import { Button } from '@/components/ui/button';
 
 let loader = <Loader2 className="mr-2 h-4 w-4 animate-spin" />;
 
-const BaseButton = ({ children, to, isLoading, icon, endIcon, ...rest }: any) => {
+const BaseButton = ({ children, to, isLoading, icon, endIcon, size = 'sm', ...rest }: any) => {
   const template = (
-    <Button {...rest}>
+    <Button size={size} {...rest}>
       {isLoading ? (
         loader
       ) : (
