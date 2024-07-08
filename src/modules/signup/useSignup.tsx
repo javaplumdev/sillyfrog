@@ -12,7 +12,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 const useSignup = () => {
   const router = useRouter();
 
-  const [error, setError] = useState<any>({});
+  const [error, setError] = useState<any>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const onSubmit = async (data: SignupProps) => {

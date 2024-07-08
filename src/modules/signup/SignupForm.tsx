@@ -1,10 +1,9 @@
 import React from 'react';
 
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { FormField } from '@/components/ui/form';
-import { Form, FormControl, FormItem, FormMessage } from '@/components/ui/form';
 import BaseButton from '@/components/base/buttons/BaseButton';
+import { Form, FormControl, FormItem, FormMessage } from '@/components/ui/form';
 
 const SignupForm = ({ form, control, isPassValid, onSubmit, isLoading }: any) => {
   const { handleSubmit, watch } = form || {};
@@ -41,7 +40,7 @@ const SignupForm = ({ form, control, isPassValid, onSubmit, isLoading }: any) =>
         <BaseButton
           type="submit"
           className="w-full"
-          disabled={!isPassValid(watch('password'))}
+          disabled={!isPassValid(watch('password')) || isLoading}
           isLoading={isLoading}
         >
           Sign up

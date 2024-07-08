@@ -2,7 +2,6 @@
 import * as React from 'react';
 import Link from 'next/link';
 
-import { usePasswordChecker } from '@/hooks/usePasswordChecker';
 import {
   Card,
   CardTitle,
@@ -11,14 +10,16 @@ import {
   CardContent,
   CardDescription,
 } from '@/components/ui/card';
-
+import { ERROR_MESSAGES } from '@/constant/errors';
+import BaseAlert from '@/components/base/alerts/BaseAlert';
 import SignupForm from './SignupForm';
 import SignupPassChecker from './SignupPassChecker';
 
 import useSignup from './useSignup';
+import { usePasswordChecker } from '@/hooks/usePasswordChecker';
 
 const SignupCard = () => {
-  const formProps = useSignup();
+  const { error, ...formProps } = useSignup();
   const { isPassValid, ...passCheckerProps } = usePasswordChecker();
 
   return (
@@ -28,6 +29,8 @@ const SignupCard = () => {
         <CardDescription>Please enter your details.</CardDescription>
       </CardHeader>
       <CardContent>
+        {!!error && <BaseAlert description={ERROR_MESSAGES[error.code]} />}
+
         <SignupForm isPassValid={isPassValid} {...formProps} />
         <SignupPassChecker {...formProps} {...passCheckerProps} />
       </CardContent>

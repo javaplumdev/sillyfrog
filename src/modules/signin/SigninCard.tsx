@@ -18,9 +18,11 @@ import { FcGoogle } from 'react-icons/fc';
 import SigninForm from './SigninForm';
 
 import useSignin from './useSignin';
+import BaseAlert from '@/components/base/alerts/BaseAlert';
+import { ERROR_MESSAGES } from '@/constant/errors';
 
 const SigninCard = () => {
-  const formProps = useSignin();
+  const { error, isLoading, ...formProps } = useSignin();
 
   return (
     <Card className="w-full sm:w-[520px]">
@@ -29,13 +31,15 @@ const SigninCard = () => {
         <CardDescription>Please enter your details.</CardDescription>
       </CardHeader>
       <CardContent>
+        {!!error && <BaseAlert description={ERROR_MESSAGES[error.code]} />}
+
         <BaseButton variant="outline" className="w-full" icon={<FcGoogle className="h-4 w-4" />}>
           Continue with Google
         </BaseButton>
 
         <BaseSeparator text="or" />
 
-        <SigninForm {...formProps} />
+        <SigninForm isLoading={isLoading} {...formProps} />
       </CardContent>
 
       {/* card footer */}

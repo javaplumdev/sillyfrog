@@ -2,18 +2,26 @@
 import React from 'react';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
+import { auth } from '@/firebase/firebaseConfig';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const useSignin = () => {
+  const [error, setError] = React.useState<any>('');
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
+    const { email, password } = data || {};
+
     try {
       setIsLoading(true);
 
-      console.log(data);
+      await signInWithEmailAndPassword(auth, email, password);
+
+      // hard refresh
+      window.location.reload();
     } catch (error) {
-      console.log(error);
+      setError(error);
     } finally {
       setIsLoading(false);
     }
@@ -41,7 +49,7 @@ const useSignin = () => {
     },
   });
 
-  return { form, onSubmit, isLoading };
+  return { form, error, onSubmit, isLoading };
 };
 
 export default useSignin;

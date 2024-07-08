@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { FormField } from '@/components/ui/form';
+import BaseButton from '@/components/base/buttons/BaseButton';
 import { Form, FormControl, FormItem, FormMessage } from '@/components/ui/form';
 
-const SigninForm = ({ form }: any) => {
-  const { onSubmit, handleSubmit, watch, control } = form || {};
+const SigninForm = ({ form, onSubmit, isLoading }: any) => {
+  const { handleSubmit, control } = form || {};
 
   return (
     <Form {...form}>
@@ -37,9 +37,9 @@ const SigninForm = ({ form }: any) => {
           )}
         />
 
-        <Button type="submit" className="w-full">
+        <BaseButton type="submit" className="w-full" isLoading={isLoading} disabled={isLoading}>
           Sign in
-        </Button>
+        </BaseButton>
       </form>
     </Form>
   );

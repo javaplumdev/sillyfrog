@@ -1,13 +1,6 @@
 import React from 'react';
 
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
 
 import Weekly from '@/modules/home/weekly/Weekly';
@@ -22,10 +15,12 @@ const BaseSheet = () => {
       <SheetContent side="left">
         <SheetHeader>
           <SheetTitle>Sillyfrog</SheetTitle>
-          <SheetDescription>
+
+          {/* sheet content */}
+          <div>
             <Weekly />
             <Categories />
-          </SheetDescription>
+          </div>
         </SheetHeader>
       </SheetContent>
     </Sheet>
