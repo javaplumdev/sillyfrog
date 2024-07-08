@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 import Link from 'next/link';
-
+import { FcGoogle } from 'react-icons/fc';
 import {
   Card,
   CardTitle,
@@ -13,16 +13,16 @@ import {
 import BaseButton from '@/components/base/buttons/BaseButton';
 import BaseSeparator from '@/components/base/layout/BaseSeparator';
 
-import { FcGoogle } from 'react-icons/fc';
-
 import SigninForm from './SigninForm';
+import { ERROR_MESSAGES } from '@/constant/errors';
+import BaseAlert from '@/components/base/alerts/BaseAlert';
 
 import useSignin from './useSignin';
-import BaseAlert from '@/components/base/alerts/BaseAlert';
-import { ERROR_MESSAGES } from '@/constant/errors';
+import useSigninWithGoogle from './useSigninWithGoogle';
 
 const SigninCard = () => {
   const { error, isLoading, ...formProps } = useSignin();
+  const { googleAuthOnSubmit, googleAuthIsLoading, googleAuthError } = useSigninWithGoogle();
 
   return (
     <Card className="w-full sm:w-[520px]">
@@ -32,8 +32,16 @@ const SigninCard = () => {
       </CardHeader>
       <CardContent>
         {!!error && <BaseAlert description={ERROR_MESSAGES[error.code]} />}
+        {!!googleAuthError && <BaseAlert description={ERROR_MESSAGES[googleAuthError.code]} />}
 
-        <BaseButton variant="outline" className="w-full" icon={<FcGoogle className="h-4 w-4" />}>
+        <BaseButton
+          variant="outline"
+          className="w-full"
+          disabled={googleAuthIsLoading}
+          isLoading={googleAuthIsLoading}
+          icon={<FcGoogle className="h-4 w-4" />}
+          onClick={() => googleAuthOnSubmit()}
+        >
           Continue with Google
         </BaseButton>
 

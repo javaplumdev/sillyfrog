@@ -1,5 +1,5 @@
 // import LandingPage from '@/modules/landing/LandingPage';
-
+import React from 'react';
 import HomePage from '@/modules/home/HomePage';
 
 export default function Home() {
