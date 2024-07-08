@@ -1,9 +1,21 @@
 import React from 'react';
-import useSignin from './useSignin';
-import SigninCard from './SigninCard';
+import Link from 'next/link';
+import { cn } from '@/lib/utils';
+import SignupCard from './SigninCard';
+import { MoveLeft } from 'lucide-react';
 
-const SigninPage = () => {
-  return <SigninCard />;
+const SignupPage = () => {
+  return (
+    <div className={cn('flex flex-col items-center justify-center px-3 mt-24')}>
+      <span className={cn('flex items-center justify-start text-lg p-3 mb-4')}>
+        <MoveLeft className={cn('mr-3')} />{' '}
+        <Link href="/" className="underline">
+          Go back
+        </Link>
+      </span>
+      <SignupCard />
+    </div>
+  );
 };
 
-export default SigninPage;
+export default SignupPage;

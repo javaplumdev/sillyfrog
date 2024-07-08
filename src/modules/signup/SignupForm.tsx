@@ -1,11 +1,9 @@
 import React from 'react';
 
-import Link from 'next/link';
-
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { FormField } from '@/components/ui/form';
-import { Form, FormControl, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Form, FormControl, FormItem, FormMessage } from '@/components/ui/form';
 
 const SignupForm = ({ form, control, isPassValid }: any) => {
   const { onSubmit, handleSubmit, watch } = form || {};
@@ -18,7 +16,6 @@ const SignupForm = ({ form, control, isPassValid }: any) => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input id="email" placeholder="Name of your email" {...field} />
               </FormControl>
@@ -32,7 +29,6 @@ const SignupForm = ({ form, control, isPassValid }: any) => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
               <FormControl>
                 <Input id="password" placeholder="Name of your password" {...field} />
               </FormControl>
