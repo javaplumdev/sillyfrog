@@ -35,7 +35,7 @@ const SignupCard = () => {
       {/* card footer */}
       <CardFooter className="text-gray-800 text-sm mt-6 flex justify-center">
         Already have an account?{' '}
-        <Link href="/signin" className="underline">
+        <Link href="/signin" className="underline ml-1">
           Sign in
         </Link>
       </CardFooter>

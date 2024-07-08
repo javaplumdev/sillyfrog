@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { TriangleAlert } from 'lucide-react';
 import BaseButton from '@/components/base/buttons/BaseButton';
+import { cn } from '@/lib/utils';
 
 export default function Error({
   error,
@@ -20,7 +21,12 @@ export default function Error({
   return (
     <main>
       <section>
-        <div className="layout flex min-h-screen flex-col items-center justify-center text-center text-primary">
+        <div
+          className={cn(
+            'layout flex flex-col items-center justify-center text-center text-primary'
+          )}
+          style={{ height: '80vh' }}
+        >
           <TriangleAlert className="text-red-500" size={50} />
           <h1 className="mt-8 text-3xl md:text-5xl">Oops, something went wrong! :(</h1>
           <p className="my-6">

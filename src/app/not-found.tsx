@@ -9,7 +9,10 @@ const NotFound = () => {
   return (
     <main>
       <section>
-        <div className="flex min-h-screen flex-col items-center justify-center text-center">
+        <div
+          className={cn('flex flex-col items-center justify-center text-center')}
+          style={{ height: '80vh' }}
+        >
           {/* <RiAlarmWarningFill size={60} className="drop-shadow-glow animate-flicker text-red-500" /> */}
           <div className="flex items-center">
             <ShieldX className="text-red-500 mt-6 mr-3" size={40} />
