@@ -1,6 +1,7 @@
 'use client';
 import { auth, googleProvider } from '@/firebase/firebaseConfig';
-import { signInWithRedirect } from 'firebase/auth';
+import { signInWithPopup } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 googleProvider.setCustomParameters({
@@ -8,6 +9,8 @@ googleProvider.setCustomParameters({
 });
 
 const useSigninWithGoogle = () => {
+  const router = useRouter();
+
   const [error, setError] = useState<any>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -15,7 +18,9 @@ const useSigninWithGoogle = () => {
     try {
       setIsLoading(true);
 
-      await signInWithRedirect(auth, googleProvider);
+      const result = await signInWithPopup(auth, googleProvider);
+
+      if (result) router.push('/');
     } catch (error) {
       setError(error);
     } finally {

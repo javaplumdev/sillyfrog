@@ -5,18 +5,16 @@ import SigninPage from '@/modules/signin/SigninPage';
 import BaseLoader from '@/components/base/loader/BaseLoader';
 
 const Page = () => {
-  const { resultFromRedirect, isLoading } = useAuth();
-
-  // ensure redirect function will render once
-  // to avoid unnecessary re-renders
-  React.useEffect(() => {
-    resultFromRedirect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { isLoading } = useAuth();
 
   return (
     <div>
-      {isLoading && <BaseLoader />}
+      {isLoading && (
+        <div className="flex justify-center min-h-screen items-center">
+          <BaseLoader />
+        </div>
+      )}
+
       {!isLoading && <SigninPage />}
     </div>
   );
