@@ -34,6 +34,8 @@ const AuthProvider = ({ children }: any) => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   React.useEffect(() => {
+    setIsLoading(true);
+
     try {
       const unsubscribe = onAuthStateChanged(auth, async (user: any) => {
         const { accessToken, email } = user || {};
@@ -53,6 +55,10 @@ const AuthProvider = ({ children }: any) => {
       return unsubscribe;
     } catch (error) {
       console.error(error);
+    } finally {
+      setInterval(() => {
+        setIsLoading(false);
+      }, 1000);
     }
   }, []);
 

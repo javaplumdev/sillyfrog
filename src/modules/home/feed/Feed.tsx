@@ -1,7 +1,26 @@
 import React from 'react';
 
+import FeedCard from './FeedCard';
+import FeedForm from './FeedForm';
+import FeedFilters from './FeedFilters';
+
+import useAuth from '@/hooks/useAuth';
+import useGetFeed from './useGetFeed';
+import usePostFeed from './usePostFeed';
+
 const Feed = () => {
-  return <div className="bg-blue-300 col-span-12 md:col-span-6 p-2">Feed</div>;
+  const { userData, isAuth } = useAuth();
+
+  const feedProps = useGetFeed();
+  const postFeedProps = usePostFeed();
+
+  return (
+    <div className="col-span-12 md:col-span-6 p-2">
+      {isAuth && <FeedForm />}
+      <FeedFilters />
+      <FeedCard />
+    </div>
+  );
 };
 
 export default Feed;
