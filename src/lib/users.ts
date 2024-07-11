@@ -17,6 +17,6 @@ export const addUserToFirestore = (credentials: any) => {
       photo: fbPhoto || photoURL,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };

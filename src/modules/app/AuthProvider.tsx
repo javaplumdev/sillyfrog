@@ -1,22 +1,24 @@
 'use client';
 import React, { createContext } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 import { cookies } from '@/lib/cookies';
 import { auth } from '@/firebase/firebaseConfig';
 import { addUserToFirestore } from '@/lib/users';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 
 type objType = {
   isAuth: boolean;
   userData: object;
   isLoading: boolean;
+  logOut: () => Promise<void>;
 };
 
 const obj: objType = {
   userData: {},
   isAuth: false,
   isLoading: false,
+  logOut: async () => {},
 };
 
 export const AuthContext = createContext(obj);
@@ -26,7 +28,6 @@ const expirationDate = new Date();
 expirationDate.setTime(expirationDate.getTime() + 24 * 60 * 60 * 1000);
 
 const AuthProvider = ({ children }: any) => {
-  const router = useRouter();
   const pathname = usePathname();
 
   const [userData, setUserData] = React.useState<object>({});
@@ -40,7 +41,7 @@ const AuthProvider = ({ children }: any) => {
       const unsubscribe = onAuthStateChanged(auth, async (user: any) => {
         const { accessToken, email } = user || {};
 
-        let username = email.split('@')[0];
+        let username = (email || '').split('@')[0];
 
         if (user) {
           cookies.set('token', accessToken, { expires: expirationDate });
@@ -68,8 +69,28 @@ const AuthProvider = ({ children }: any) => {
     setIsAuth(!!token);
   }, [pathname]);
 
+  const logOut = async () => {
+    setIsLoading(true);
+
+    try {
+      await signOut(auth);
+
+      cookies.remove('token');
+
+      window.location.replace('/');
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setInterval(() => {
+        setIsLoading(false);
+      }, 1000);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ isAuth, userData, isLoading }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ isAuth, userData, isLoading, logOut }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 

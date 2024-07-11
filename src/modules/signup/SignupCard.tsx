@@ -1,7 +1,8 @@
 'use client';
 import * as React from 'react';
 import Link from 'next/link';
-
+import { FcGoogle } from 'react-icons/fc';
+import { ERROR_MESSAGES } from '@/constant/errors';
 import {
   Card,
   CardTitle,
@@ -10,17 +11,21 @@ import {
   CardContent,
   CardDescription,
 } from '@/components/ui/card';
-import { ERROR_MESSAGES } from '@/constant/errors';
 import BaseAlert from '@/components/base/alerts/BaseAlert';
+import BaseButton from '@/components/base/buttons/BaseButton';
+import BaseSeparator from '@/components/base/layout/BaseSeparator';
+
 import SignupForm from './SignupForm';
 import SignupPassChecker from './SignupPassChecker';
 
 import useSignup from './useSignup';
+import useSigninWithGoogle from '../signin/useSigninWithGoogle';
 import { usePasswordChecker } from '@/hooks/usePasswordChecker';
 
 const SignupCard = () => {
   const { error, ...formProps } = useSignup();
   const { isPassValid, ...passCheckerProps } = usePasswordChecker();
+  const { googleAuthOnSubmit, googleAuthIsLoading, googleAuthError } = useSigninWithGoogle();
 
   return (
     <Card className="w-full sm:w-[520px]">
@@ -31,12 +36,25 @@ const SignupCard = () => {
       <CardContent>
         {!!error && <BaseAlert description={ERROR_MESSAGES[error.code]} />}
 
+        <BaseButton
+          variant="outline"
+          className="w-full"
+          disabled={googleAuthIsLoading}
+          isLoading={googleAuthIsLoading}
+          icon={<FcGoogle className="h-4 w-4" />}
+          onClick={() => googleAuthOnSubmit()}
+        >
+          Continue with Google
+        </BaseButton>
+
+        <BaseSeparator text="or" />
+
         <SignupForm isPassValid={isPassValid} {...formProps} />
         <SignupPassChecker {...formProps} {...passCheckerProps} />
       </CardContent>
 
       {/* card footer */}
-      <CardFooter className="text-gray-800 text-sm mt-6 flex justify-center">
+      <CardFooter className="text-sm mt-6 flex justify-center">
         Already have an account?{' '}
         <Link href="/signin" className="underline ml-1">
           Sign in

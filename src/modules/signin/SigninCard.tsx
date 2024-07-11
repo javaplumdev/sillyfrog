@@ -51,7 +51,7 @@ const SigninCard = () => {
       </CardContent>
 
       {/* card footer */}
-      <CardFooter className="text-gray-800 text-sm mt-6 flex justify-center">
+      <CardFooter className="text-sm mt-6 flex justify-center">
         Don't have an account?{' '}
         <Link href="/signup" className="underline ml-1">
           Sign up
