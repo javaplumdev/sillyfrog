@@ -38,7 +38,7 @@ const BaseNavbar = () => {
         <BaseSheet />
 
         <Link href="/">
-          <h2 className="font-bold text-md ml-2">Sillyfrog</h2>
+          <h2 className="font-bold text-lg ml-2">Sillyfrog</h2>
         </Link>
       </div>
 
@@ -73,7 +73,7 @@ const BaseNavbar = () => {
             <BaseButton to="/signin" variant="ghost" className="mr-2">
               Log in
             </BaseButton>
-            <BaseButton to="/signup">Create account</BaseButton>
+            <BaseButton to="/signup">Join now</BaseButton>
           </>
         )}
 

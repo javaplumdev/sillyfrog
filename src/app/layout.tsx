@@ -1,13 +1,12 @@
 import './globals.css';
 import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
-import useAuth from '@/hooks/useAuth';
 import { Toaster } from 'react-hot-toast';
 import { Inter as FontSans } from 'next/font/google';
 import AppProviders from '@/modules/app/AppProviders';
 import BaseNavbar from '@/components/base/layout/BaseNavbar';
 import BaseFooter from '@/components/base/layout/BaseFooter';
-import UserAuthConfirmationDialog from '@/components/base/dialogs/UserAuthConfirmationDialog';
+import BaseNavFooter from '@/components/base/layout/BaseNavFooter';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -48,6 +47,7 @@ export default function RootLayout({
           <BaseNavbar />
           {children}
 
+          {/* <BaseNavFooter /> */}
           <BaseFooter />
         </AppProviders>
       </body>

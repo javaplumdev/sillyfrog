@@ -29,7 +29,7 @@ const UserAuthConfirmationDialog = ({ isOpen, toggleOpen }: UserAuthConfirmation
             Sign in
           </BaseButton>
           <BaseButton type="submit" to="signup">
-            Create account
+            Join now
           </BaseButton>
         </DialogFooter>
       </DialogContent>
