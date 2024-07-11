@@ -1,18 +1,21 @@
 import React from 'react';
+import useAuth from '@/hooks/useAuth';
 import { Input } from '@/components/ui/input';
 import { FeedFormDialog } from './FeedFormDialog';
-import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 
-const FeedForm = () => {
+const FeedForm = (props: any) => {
+  const { onActionWithAuth } = useAuth();
+  const { isOpenPostFeed, toggleOpenPostFeed } = props;
+
   return (
     <div>
-      <Dialog>
-        <DialogTrigger asChild>
-          <Input type="text" placeholder="Tell us what you feel!" />
-        </DialogTrigger>
+      <Input
+        type="text"
+        placeholder="Tell us what you feel!"
+        onClick={onActionWithAuth(toggleOpenPostFeed)}
+      />
 
-        <FeedFormDialog />
-      </Dialog>
+      <FeedFormDialog isOpen={isOpenPostFeed} toggleOpen={toggleOpenPostFeed} />
     </div>
   );
 };

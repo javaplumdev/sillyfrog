@@ -6,25 +6,36 @@ import { cookies } from '@/lib/cookies';
 import { auth } from '@/firebase/firebaseConfig';
 import { addUserToFirestore } from '@/lib/users';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
+import UserAuthConfirmationDialog from '@/components/base/dialogs/UserAuthConfirmationDialog';
 
 type objType = {
   isAuth: boolean;
   userData: object;
   isLoading: boolean;
+  isAuthConfirmation: boolean;
+
+  // functions
   logOut: () => Promise<void>;
+  toggleIsAuthConfirmation: () => void;
+  onActionWithAuth: (toggle: any) => any;
 };
 
 const obj: objType = {
   userData: {},
   isAuth: false,
   isLoading: false,
+  isAuthConfirmation: false,
+
+  // functions
   logOut: async () => {},
+  onActionWithAuth: () => {},
+  toggleIsAuthConfirmation: () => {},
 };
 
-export const AuthContext = createContext(obj);
+export const AuthContext: React.Context<objType> = createContext(obj);
 
 // expiration date
-const expirationDate = new Date();
+const expirationDate: Date = new Date();
 expirationDate.setTime(expirationDate.getTime() + 24 * 60 * 60 * 1000);
 
 const AuthProvider = ({ children }: any) => {
@@ -34,6 +45,14 @@ const AuthProvider = ({ children }: any) => {
   const [isAuth, setIsAuth] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
+  const [isAuthConfirmation, setIsAuthCofirmation] = React.useState<boolean>(false);
+  const toggleIsAuthConfirmation = () => setIsAuthCofirmation(!isAuthConfirmation);
+
+  // close dialog whenever path changes
+  React.useEffect(() => {
+    setIsAuthCofirmation(false);
+  }, [pathname]);
+
   React.useEffect(() => {
     setIsLoading(true);
 
@@ -41,7 +60,7 @@ const AuthProvider = ({ children }: any) => {
       const unsubscribe = onAuthStateChanged(auth, async (user: any) => {
         const { accessToken, email } = user || {};
 
-        let username = (email || '').split('@')[0];
+        let username: string = (email || '').split('@')[0];
 
         if (user) {
           cookies.set('token', accessToken, { expires: expirationDate });
@@ -64,7 +83,7 @@ const AuthProvider = ({ children }: any) => {
   }, []);
 
   React.useEffect(() => {
-    const token = cookies.get('token');
+    const token: string = cookies.get('token');
 
     setIsAuth(!!token);
   }, [pathname]);
@@ -87,9 +106,28 @@ const AuthProvider = ({ children }: any) => {
     }
   };
 
+  const onActionWithAuth = (toggle: any) => {
+    return isAuth ? toggle : toggleIsAuthConfirmation;
+  };
+
   return (
-    <AuthContext.Provider value={{ isAuth, userData, isLoading, logOut }}>
+    <AuthContext.Provider
+      value={{
+        isAuth,
+        logOut,
+        userData,
+        isLoading,
+        onActionWithAuth,
+        isAuthConfirmation,
+        toggleIsAuthConfirmation,
+      }}
+    >
       {children}
+
+      <UserAuthConfirmationDialog
+        isOpen={isAuthConfirmation}
+        toggleOpen={toggleIsAuthConfirmation}
+      />
     </AuthContext.Provider>
   );
 };

@@ -1,7 +1,11 @@
 import React from 'react';
 
 const usePostFeed = () => {
-  return <div>usePostFeed</div>;
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const toggleOpen = () => setIsOpen(!isOpen);
+
+  return { isOpenPostFeed: isOpen, toggleOpenPostFeed: toggleOpen };
 };
 
 export default usePostFeed;

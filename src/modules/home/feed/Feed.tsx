@@ -16,7 +16,7 @@ const Feed = () => {
 
   return (
     <div className="col-span-12 md:col-span-6 p-2">
-      {isAuth && <FeedForm />}
+      <FeedForm {...postFeedProps} />
       <FeedFilters />
       <FeedCard />
     </div>

@@ -1,4 +1,5 @@
 import {
+  Dialog,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -8,23 +9,30 @@ import {
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 
-export function FeedFormDialog() {
+interface FeedFormDialogProps {
+  isOpen: boolean;
+  toggleOpen: () => void;
+}
+
+export function FeedFormDialog({ isOpen, toggleOpen }: FeedFormDialogProps) {
   return (
-    <DialogContent className="sm:max-w-[425px]">
-      <DialogHeader>
-        <DialogTitle>Post feed</DialogTitle>
-        <DialogDescription>
-          Share what you feel here. Click post when you're done.
-        </DialogDescription>
-      </DialogHeader>
-      <div className="grid gap-4 py-4">
-        <div>
-          <Textarea placeholder="Type your message here." rows={2} />
+    <Dialog open={isOpen} onOpenChange={toggleOpen}>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Post feed</DialogTitle>
+          <DialogDescription>
+            Share what you feel here. Click post when you're done.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+          <div>
+            <Textarea placeholder="Type your message here." rows={2} />
+          </div>
         </div>
-      </div>
-      <DialogFooter>
-        <Button type="submit">Post</Button>
-      </DialogFooter>
-    </DialogContent>
+        <DialogFooter>
+          <Button type="submit">Post</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
