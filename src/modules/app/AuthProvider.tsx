@@ -38,71 +38,51 @@ export const AuthContext: React.Context<objType> = createContext(obj);
 const expirationDate: Date = new Date();
 expirationDate.setTime(expirationDate.getTime() + 24 * 60 * 60 * 1000);
 
-const AuthProvider = ({ children }: any) => {
+const AuthProvider: React.FC<any> = ({ children }) => {
   const pathname = usePathname();
 
   const [userData, setUserData] = React.useState<object>({});
-  const [isAuth, setIsAuth] = React.useState<boolean>(false);
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
-
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [isAuth, setIsAuth] = React.useState<boolean>(!!cookies.get('token'));
   const [isAuthConfirmation, setIsAuthCofirmation] = React.useState<boolean>(false);
+
   const toggleIsAuthConfirmation = () => setIsAuthCofirmation(!isAuthConfirmation);
 
-  // close dialog whenever path changes
   React.useEffect(() => {
     setIsAuthCofirmation(false);
   }, [pathname]);
 
   React.useEffect(() => {
-    setIsLoading(true);
+    const unsubscribe = onAuthStateChanged(auth, async (user: any) => {
+      if (user) {
+        const { accessToken, email } = user;
+        const username: string = (email || '').split('@')[0];
 
-    try {
-      const unsubscribe = onAuthStateChanged(auth, async (user: any) => {
-        const { accessToken, email } = user || {};
+        cookies.set('token', accessToken, { expires: expirationDate });
 
-        let username: string = (email || '').split('@')[0];
+        const updatedUser = { ...user, username }; // adds username
+        setUserData(updatedUser);
+        addUserToFirestore(updatedUser); // Save user to Firestore
+        setIsAuth(true);
+      } else {
+        setIsAuth(false);
+      }
+      setIsLoading(false);
+    });
 
-        if (user) {
-          cookies.set('token', accessToken, { expires: expirationDate });
-
-          const updatedUser = { ...user, username }; // adds username
-
-          setUserData(updatedUser);
-          addUserToFirestore(updatedUser); // save user to firestore
-        }
-      });
-
-      return unsubscribe;
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setInterval(() => {
-        setIsLoading(false);
-      }, 1000);
-    }
+    return () => unsubscribe();
   }, []);
-
-  React.useEffect(() => {
-    const token: string = cookies.get('token');
-
-    setIsAuth(!!token);
-  }, [pathname]);
 
   const logOut = async () => {
     setIsLoading(true);
-
     try {
       await signOut(auth);
-
       cookies.remove('token');
-
       window.location.replace('/');
     } catch (error) {
       console.error(error);
     } finally {
-      setInterval(() => {
-        setIsLoading(false);
-      }, 1000);
+      setIsLoading(false);
     }
   };
 
