@@ -10,23 +10,6 @@ const useSignin = () => {
   const [error, setError] = React.useState<any>('');
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const onSubmit = async (data: any) => {
-    const { email, password } = data || {};
-
-    try {
-      setIsLoading(true);
-
-      await signInWithEmailAndPassword(auth, email, password);
-
-      // hard refresh
-      window.location.reload();
-    } catch (error) {
-      setError(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const formSchema = z.object({
     email: z
       .string()
@@ -48,6 +31,23 @@ const useSignin = () => {
       password: '',
     },
   });
+
+  const onSubmit = async (data: any) => {
+    const { email, password } = data || {};
+
+    try {
+      setIsLoading(true);
+
+      await signInWithEmailAndPassword(auth, email, password);
+
+      // hard refresh
+      window.location.reload();
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return { form, error, onSubmit, isLoading };
 };

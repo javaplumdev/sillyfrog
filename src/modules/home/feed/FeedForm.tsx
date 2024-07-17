@@ -5,7 +5,8 @@ import { FeedFormDialog } from './FeedFormDialog';
 
 const FeedForm = (props: any) => {
   const { onActionWithAuth } = useAuth();
-  const { isOpenPostFeed, toggleOpenPostFeed } = props;
+  const { isOpenPostFeed, toggleOpenPostFeed, postFeedForm, onSubmitPostFeed, isPostingFeed } =
+    props;
 
   return (
     <div>
@@ -15,7 +16,13 @@ const FeedForm = (props: any) => {
         onClick={onActionWithAuth(toggleOpenPostFeed)}
       />
 
-      <FeedFormDialog isOpen={isOpenPostFeed} toggleOpen={toggleOpenPostFeed} />
+      <FeedFormDialog
+        form={postFeedForm}
+        isOpen={isOpenPostFeed}
+        isLoading={isPostingFeed}
+        onSubmit={onSubmitPostFeed}
+        toggleOpen={toggleOpenPostFeed}
+      />
     </div>
   );
 };
