@@ -9,8 +9,8 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import UserAuthConfirmationDialog from '@/components/base/dialogs/UserAuthConfirmationDialog';
 
 type objType = {
+  userData: any;
   isAuth: boolean;
-  userData: object;
   isLoading: boolean;
   isAuthConfirmation: boolean;
 
@@ -21,7 +21,7 @@ type objType = {
 };
 
 const obj: objType = {
-  userData: {},
+  userData: null,
   isAuth: false,
   isLoading: false,
   isAuthConfirmation: false,
@@ -41,7 +41,7 @@ expirationDate.setTime(expirationDate.getTime() + 24 * 60 * 60 * 1000);
 const AuthProvider: React.FC<any> = ({ children }) => {
   const pathname = usePathname();
 
-  const [userData, setUserData] = React.useState<object>({});
+  const [userData, setUserData] = React.useState<any>({});
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [isAuth, setIsAuth] = React.useState<boolean>(!!cookies.get('token'));
   const [isAuthConfirmation, setIsAuthCofirmation] = React.useState<boolean>(false);

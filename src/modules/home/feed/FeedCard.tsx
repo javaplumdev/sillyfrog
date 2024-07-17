@@ -1,6 +1,8 @@
 import React from 'react';
 
-const FeedCard = () => {
+const FeedCard = (props: any) => {
+  const { data } = props;
+
   return <div>FeedCard</div>;
 };
 

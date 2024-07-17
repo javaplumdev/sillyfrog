@@ -1,13 +1,18 @@
 import { z } from 'zod';
 import React from 'react';
+import useAuth from '@/hooks/useAuth';
 import { useForm } from 'react-hook-form';
-import { addDoc } from 'firebase/firestore';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { addDoc, serverTimestamp } from 'firebase/firestore';
 import { collecetionRefFeeds } from '@/firebase/firebaseConfig';
 
 const usePostFeed = () => {
+  const { userData } = useAuth();
+
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+
+  const { displayName, photoURL, uid } = userData || {};
 
   const toggleOpen = () => setIsOpen(!isOpen);
 
@@ -31,7 +36,13 @@ const usePostFeed = () => {
     try {
       setIsLoading(true);
 
-      await addDoc(collecetionRefFeeds, data);
+      await addDoc(collecetionRefFeeds, {
+        ...data,
+        userId: uid,
+        photo: photoURL,
+        name: displayName,
+        timestamp: serverTimestamp(),
+      });
     } catch (error) {
       console.log(error);
     } finally {
