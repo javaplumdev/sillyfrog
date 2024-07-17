@@ -1,7 +1,8 @@
 import React from 'react';
-import { getDocs } from 'firebase/firestore';
-import { collecetionRefFeeds } from '@/firebase/firebaseConfig';
+
 import { useInterval } from '@/lib/interval';
+import { collecetionRefFeeds } from '@/firebase/firebaseConfig';
+import { onSnapshot, orderBy, query } from 'firebase/firestore';
 
 const useGetFeed = () => {
   const [data, setData] = React.useState<any[]>([]);
@@ -15,14 +16,16 @@ const useGetFeed = () => {
     try {
       setIsLoading(true);
 
-      const response: any = await getDocs(collecetionRefFeeds);
+      const q = query(collecetionRefFeeds, orderBy('timestamp', 'desc'));
 
-      const d = (response || []).docs.map((doc: any) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
+      onSnapshot(q, (snapshot) => {
+        const d = (snapshot || []).docs.map((doc: any) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
 
-      setData(d);
+        setData(d);
+      });
     } catch (error) {
       console.log(error);
     } finally {

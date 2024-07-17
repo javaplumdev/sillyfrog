@@ -1,11 +1,9 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export default function BaseAvatar(props: any) {
-  const { data } = props;
+  const { photo = '', name = '' } = props;
 
-  const { photoURL, displayName } = data || {};
-
-  const fallback = (displayName || '')
+  const fallback = (name || '')
     .split(' ')
     .splice(0, 2)
     .map((item: any) => item.charAt(0))
@@ -13,7 +11,7 @@ export default function BaseAvatar(props: any) {
 
   return (
     <Avatar>
-      <AvatarImage src={photoURL} alt={fallback} />
+      <AvatarImage src={photo} alt={fallback} />
       <AvatarFallback>{fallback}</AvatarFallback>
     </Avatar>
   );

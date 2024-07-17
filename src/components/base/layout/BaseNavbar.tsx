@@ -31,6 +31,7 @@ const useLogout = () => {
 const BaseNavbar = () => {
   const { isOpen, toggleOpen } = useLogout();
   const { isAuth, userData, isLoading, logOut } = useAuth();
+  const { photoURL, displayName } = userData || {};
 
   return (
     <div className="container flex justify-between items-center p-0 py-3 px-2">
@@ -50,7 +51,7 @@ const BaseNavbar = () => {
         {!!isAuth && !isLoading && (
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <BaseAvatar data={userData} />
+              <BaseAvatar photo={photoURL} name={displayName} />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
