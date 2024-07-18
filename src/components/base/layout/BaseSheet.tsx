@@ -5,6 +5,7 @@ import { Menu } from 'lucide-react';
 
 import Weekly from '@/modules/home/weekly/Weekly';
 import Categories from '@/modules/home/categories/Categories';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const BaseSheet = () => {
   return (
@@ -12,14 +13,16 @@ const BaseSheet = () => {
       <SheetTrigger>
         <Menu className="block md:hidden" />
       </SheetTrigger>
-      <SheetContent side="left">
+      <SheetContent side="left" className="p-1 m-0">
         <SheetHeader>
           <SheetTitle>Sillyfrog</SheetTitle>
 
           {/* sheet content */}
           <div>
-            <Weekly />
-            <Categories />
+            <ScrollArea className="h-[800px] rounded-md w-full">
+              <Weekly />
+              <Categories />
+            </ScrollArea>
           </div>
         </SheetHeader>
       </SheetContent>

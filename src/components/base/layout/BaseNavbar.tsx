@@ -34,7 +34,9 @@ const BaseNavbar = () => {
   const { photoURL, displayName } = userData || {};
 
   return (
-    <div className="container flex justify-between items-center p-0 py-3 px-2">
+    <div className="container flex justify-between items-center p-0 py-2 px-2 sticky top-0 z-10 backdrop-filter backdrop-blur-lg">
+      {' '}
+      {/*bg-background */}
       <div className="flex items-center">
         <BaseSheet />
 
@@ -42,7 +44,6 @@ const BaseNavbar = () => {
           <h2 className="font-bold text-lg ml-2">Sillyfrog</h2>
         </Link>
       </div>
-
       <div className="w-full md:w-auto flex items-center justify-end">
         {/* Show skeleton when isLoading is true */}
         {isLoading && <BaseSkeleton />}

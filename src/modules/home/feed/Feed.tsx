@@ -12,7 +12,7 @@ const Feed = () => {
   const postFeedProps = usePostFeed();
 
   return (
-    <div className="col-span-12 md:col-span-6 px-2 space-y-4 mb-24">
+    <div className="col-span-12 md:col-span-6 px-2 space-y-4 mb-24 mt-4">
       <FeedForm {...postFeedProps} />
       <FeedFilters />
       <FeedCard {...feedProps} />

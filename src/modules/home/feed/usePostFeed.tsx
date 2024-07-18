@@ -17,10 +17,7 @@ const usePostFeed = () => {
   const toggleOpen = () => setIsOpen(!isOpen);
 
   const formSchema = z.object({
-    feed_content: z
-      .string()
-      .min(1, 'Content is required.')
-      .max(100, 'Content must be at most 100 characters'),
+    feed_content: z.string().min(1, 'Content is required.'),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({

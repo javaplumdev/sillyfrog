@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { useInterval } from '@/lib/interval';
 import { collecetionRefFeeds } from '@/firebase/firebaseConfig';
 import { onSnapshot, orderBy, query } from 'firebase/firestore';
 
@@ -13,9 +12,9 @@ const useGetFeed = () => {
   }, []);
 
   const getData = async () => {
-    try {
-      setIsLoading(true);
+    setIsLoading(true);
 
+    try {
       const q = query(collecetionRefFeeds, orderBy('timestamp', 'desc'));
 
       onSnapshot(q, (snapshot) => {
@@ -29,7 +28,9 @@ const useGetFeed = () => {
     } catch (error) {
       console.log(error);
     } finally {
-      useInterval(setIsLoading(false), 1000);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
     }
   };
 
