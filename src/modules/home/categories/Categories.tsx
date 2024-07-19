@@ -1,17 +1,16 @@
 'use client';
 import React from 'react';
 
+import Link from 'next/link';
 import urlJoin from 'url-join';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import useAuth from '@/hooks/useAuth';
-import BaseButton from '@/components/base/buttons/BaseButton';
-import CategoriesFrog from '../../../assets/feed//3d-fluency-frog.png';
-
 import styles from './styles.module.scss';
 import { buttonVariants } from '@/components/ui/button';
-import Link from 'next/link';
 import { ICONS_EIGHT_ILLUSTRATIONS } from '@/constant/links';
+import BaseButton from '@/components/base/buttons/BaseButton';
+import CategoriesFrog from '../../../assets/feed//3d-fluency-frog.png';
 
 const Categories = () => {
   const { isAuth } = useAuth();
@@ -28,7 +27,7 @@ const Categories = () => {
           <h3 className="font-bold">Join</h3>
           <p>Seems like you are not currently signed in. Hop in now to feel the fun and rants!</p>
 
-          <Link href="/signup" className={buttonVariants({ variant: 'ghost' })}>
+          <Link href="/signup" className={buttonVariants({ variant: 'outline' })}>
             Sign up
           </Link>
         </div>

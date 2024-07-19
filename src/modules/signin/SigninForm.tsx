@@ -4,9 +4,12 @@ import { Input } from '@/components/ui/input';
 import { FormField } from '@/components/ui/form';
 import BaseButton from '@/components/base/buttons/BaseButton';
 import { Form, FormControl, FormItem, FormMessage } from '@/components/ui/form';
+import { Eye, EyeOff } from 'lucide-react';
+import useAuth from '@/hooks/useAuth';
 
 const SigninForm = ({ form, onSubmit, isLoading }: any) => {
   const { handleSubmit, control } = form || {};
+  const { togglePasswordOpen, isPasswordOpen } = useAuth();
 
   return (
     <Form {...form}>
@@ -28,10 +31,22 @@ const SigninForm = ({ form, onSubmit, isLoading }: any) => {
           control={control}
           name="password"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="relative">
               <FormControl>
-                <Input id="password" placeholder="Name of your password" {...field} />
+                <Input
+                  id="password"
+                  placeholder="Name of your password"
+                  type={isPasswordOpen ? 'password' : 'text'}
+                  {...field}
+                />
               </FormControl>
+
+              <div
+                onClick={() => togglePasswordOpen()}
+                className="absolute top-0 right-0 mr-4 cursor-pointer"
+              >
+                {isPasswordOpen ? <EyeOff size="22" /> : <Eye size="22" />}
+              </div>
               <FormMessage />
             </FormItem>
           )}

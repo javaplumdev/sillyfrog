@@ -12,10 +12,12 @@ type objType = {
   userData: any;
   isAuth: boolean;
   isLoading: boolean;
+  isPasswordOpen: boolean;
   isAuthConfirmation: boolean;
 
   // functions
   logOut: () => Promise<void>;
+  togglePasswordOpen: () => void;
   toggleIsAuthConfirmation: () => void;
   onActionWithAuth: (toggle: any) => any;
 };
@@ -24,11 +26,13 @@ const obj: objType = {
   userData: null,
   isAuth: false,
   isLoading: false,
+  isPasswordOpen: true,
   isAuthConfirmation: false,
 
   // functions
   logOut: async () => {},
   onActionWithAuth: () => {},
+  togglePasswordOpen: () => {},
   toggleIsAuthConfirmation: () => {},
 };
 
@@ -45,7 +49,9 @@ const AuthProvider: React.FC<any> = ({ children }) => {
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [isAuth, setIsAuth] = React.useState<boolean>(!!cookies.get('token'));
   const [isAuthConfirmation, setIsAuthCofirmation] = React.useState<boolean>(false);
+  const [isPasswordOpen, setIsPasswordOpen] = React.useState<boolean>(true);
 
+  const togglePasswordOpen = () => setIsPasswordOpen(!isPasswordOpen);
   const toggleIsAuthConfirmation = () => setIsAuthCofirmation(!isAuthConfirmation);
 
   React.useEffect(() => {
@@ -97,8 +103,10 @@ const AuthProvider: React.FC<any> = ({ children }) => {
         logOut,
         userData,
         isLoading,
+        isPasswordOpen,
         onActionWithAuth,
         isAuthConfirmation,
+        togglePasswordOpen,
         toggleIsAuthConfirmation,
       }}
     >
