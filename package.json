@@ -38,6 +38,7 @@
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "universal-cookie": "^7.1.4",
+    "url-join": "^5.0.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

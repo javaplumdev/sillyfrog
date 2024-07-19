@@ -29,6 +29,8 @@ const usePostFeed = () => {
 
   const { reset } = form;
 
+  React.useEffect(() => reset(), [isOpen]);
+
   const onSubmit = async (data: any) => {
     try {
       setIsLoading(true);

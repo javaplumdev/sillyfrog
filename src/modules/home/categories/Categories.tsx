@@ -1,5 +1,7 @@
+'use client';
 import React from 'react';
 
+import urlJoin from 'url-join';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import useAuth from '@/hooks/useAuth';
@@ -7,29 +9,44 @@ import BaseButton from '@/components/base/buttons/BaseButton';
 import CategoriesFrog from '../../../assets/feed//3d-fluency-frog.png';
 
 import styles from './styles.module.scss';
+import { buttonVariants } from '@/components/ui/button';
+import Link from 'next/link';
+import { ICONS_EIGHT_ILLUSTRATIONS } from '@/constant/links';
 
 const Categories = () => {
   const { isAuth } = useAuth();
+  const [isClient, setIsClient] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
     <div className={cn(styles['separator-parent'], 'sticky top-20 flex flex-col space-y-5')}>
-      {!isAuth && (
+      {isClient && !isAuth && (
         <div className={cn(styles['separator-child'], 'flex flex-col space-y-2')}>
           <h3 className="font-bold">Join</h3>
           <p>Seems like you are not currently signed in. Hop in now to feel the fun and rants!</p>
-          <BaseButton variant="outline" to="/signup">
+
+          <Link href="/signup" className={buttonVariants({ variant: 'ghost' })}>
             Sign up
-          </BaseButton>
+          </Link>
         </div>
       )}
 
-      <div className={cn(styles['separator-child'], { 'pt-5': !isAuth })}>
+      <div
+        className={cn(
+          styles['separator-child'],
+          { 'pt-5': !isAuth },
+          'flex flex-col mt-12 md:mt-0'
+        )}
+      >
         <h3 className="font-bold">Having fun?</h3>
-        <div className="flex items-center space-x-3 text-sm">
+        <div className="flex items-center space-x-3 text-sm flex-col sm:flex-row">
           <Image
             priority
             src={CategoriesFrog}
-            alt="Follow us on Twitter"
+            alt="This image is from Icons8!"
             className={cn(styles['image'], 'min-w-screen-sm')}
             width="100"
           />
@@ -40,6 +57,12 @@ const Categories = () => {
             <BaseButton variant="outline">Share</BaseButton>
           </div>
         </div>
+      </div>
+
+      <div className={cn(styles['separator-child'], 'pt-5 text-sm')}>
+        Illustration by{' '}
+        <Link href={urlJoin(ICONS_EIGHT_ILLUSTRATIONS, 'author', 'zD2oqC8lLBBA')}>Icons 8</Link>{' '}
+        from <Link href={urlJoin(ICONS_EIGHT_ILLUSTRATIONS)}>Ouch!</Link>
       </div>
     </div>
   );

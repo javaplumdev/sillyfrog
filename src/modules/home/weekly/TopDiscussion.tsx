@@ -26,11 +26,18 @@ const tags = [
 const TopDiscussion = (props: any) => {
   const { className, ...rest } = props;
   return (
-    <div className={cn(className, 'pt-5 w-full')}>
+    <div className={cn(className, 'pt-5 w-full text-start')}>
       <h3 className="font-bold mb-3">Top Discussions</h3>
       <div className="flex flex-col space-y-3">
         {(tags || []).map((item, index) => {
-          return <p key={`top-discussion-${index}`}>{item}</p>;
+          return (
+            <p
+              key={`top-discussion-${index}`}
+              className="hover:bg-primary hover:text-background rounded p-1 cursor-pointer"
+            >
+              {item}
+            </p>
+          );
         })}
       </div>
       <div className="text-xs my-3">
