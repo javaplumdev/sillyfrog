@@ -1,23 +1,67 @@
 import React from 'react';
+import { isEqual } from 'lodash';
 import { Card } from '@/components/ui/card';
-import BaseAvatar from '@/components/base/avatars/BaseAvatar';
-import { dateLabel, timeDifference } from '@/lib/dates';
-import { ChevronUp, ChevronDown, EllipsisVertical } from 'lucide-react';
-import { MessageCircle, Forward, Bookmark } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { dateLabel, timeDifference } from '@/lib/dates';
+import BaseAvatar from '@/components/base/avatars/BaseAvatar';
+import { MessageCircle, Forward, Bookmark } from 'lucide-react';
+import { ChevronUp, ChevronDown, EllipsisVertical } from 'lucide-react';
 import BaseCardSkeletons from '@/components/base/skeletons/BaseCardSkeletons';
+import {
+  DropdownMenu,
+  DropdownMenuItem,
+  DropdownMenuGroup,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+  DropdownMenuShortcut,
+  DropdownMenuSeparator,
+} from '@/components/ui/dropdown-menu';
+import { Trash, Flag } from 'lucide-react';
+import useAuth from '@/hooks/useAuth';
 
-const UserInfo = ({ name, seconds }: any) => (
-  <div className="flex items-center justify-between w-full">
-    <div className="flex flex-col">
-      <span className="font-bold">{name}</span>
-      <span className="text-xs">
-        {dateLabel(seconds)} - {timeDifference(seconds)}
-      </span>
+const UserInfo = ({ id, name, seconds, toggleDelete, userId }: any) => {
+  const { userData } = useAuth();
+  const { uid } = userData || {};
+  return (
+    <div className="flex items-center justify-between w-full">
+      <div className="flex flex-col">
+        <span className="font-bold">{name}</span>
+        <span className="text-xs">
+          {dateLabel(seconds)} - {timeDifference(seconds)}
+        </span>
+      </div>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <EllipsisVertical size="22" className="cursor-pointer" />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-56">
+          <DropdownMenuGroup>
+            <DropdownMenuItem className="cursor-pointer">
+              <Flag className="mr-2 h-4 w-4" />
+              <span>Report</span>
+              <DropdownMenuShortcut>⇧⌘R</DropdownMenuShortcut>
+            </DropdownMenuItem>
+
+            {isEqual(uid, userId) && (
+              <React.Fragment>
+                <DropdownMenuSeparator />
+
+                <DropdownMenuItem
+                  className="cursor-pointer text-red-500"
+                  onClick={() => toggleDelete(id)}
+                >
+                  <Trash className="mr-2 h-4 w-4" />
+                  <span>Delete</span>
+                  <DropdownMenuShortcut>⇧⌘D</DropdownMenuShortcut>
+                </DropdownMenuItem>
+              </React.Fragment>
+            )}
+          </DropdownMenuGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
-    <EllipsisVertical size="22" />
-  </div>
-);
+  );
+};
 
 const LikeButtons = ({ Icon }: any) => (
   <div className="border-2 rounded-full p-1">
@@ -26,7 +70,7 @@ const LikeButtons = ({ Icon }: any) => (
 );
 
 const FeedCard = (props: any) => {
-  const { data, isLoading } = props;
+  const { data, isLoading, toggleDelete } = props;
 
   return (
     <React.Fragment>
@@ -34,7 +78,7 @@ const FeedCard = (props: any) => {
 
       {!isLoading &&
         (data || []).map((item: any, index: number) => {
-          const { feed_content, name, photo, timestamp } = item || {};
+          const { id, feed_content, name, photo, timestamp, userId } = item || {};
 
           const seconds: number = timestamp ? timestamp.seconds : null;
 
@@ -48,7 +92,13 @@ const FeedCard = (props: any) => {
               <div className="flex flex-col w-full space-y-4">
                 <div className="flex flex-row items-center space-x-2">
                   <BaseAvatar photo={photo} name={name} />
-                  <UserInfo name={name} seconds={seconds} />
+                  <UserInfo
+                    id={id}
+                    name={name}
+                    userId={userId}
+                    seconds={seconds}
+                    toggleDelete={toggleDelete}
+                  />
                 </div>
                 <div className="break-all">{feed_content}</div>
 
