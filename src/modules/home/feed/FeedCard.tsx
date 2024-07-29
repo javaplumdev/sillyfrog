@@ -1,5 +1,7 @@
 import React from 'react';
 import { isEqual } from 'lodash';
+import useAuth from '@/hooks/useAuth';
+import { Trash, Flag } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { dateLabel, timeDifference } from '@/lib/dates';
@@ -16,8 +18,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
-import { Trash, Flag } from 'lucide-react';
-import useAuth from '@/hooks/useAuth';
+import { cn } from '@/lib/utils';
 
 const UserInfo = ({ id, name, seconds, toggleDelete, userId }: any) => {
   const { userData } = useAuth();
@@ -63,14 +64,33 @@ const UserInfo = ({ id, name, seconds, toggleDelete, userId }: any) => {
   );
 };
 
-const LikeButtons = ({ Icon }: any) => (
-  <div className="border-2 rounded-full p-1">
-    <Icon size="18" />
-  </div>
-);
+const LikeButtons = ({ Icon, onClick, id, data, type }: any) => {
+  const { onActionWithAuth, userData } = useAuth();
+  const { uid } = userData || {};
+  const isLike = (data || []).find(({ user }: any) => user === uid);
+
+  return (
+    <div
+      className={cn(
+        'border rounded-full p-1 cursor-pointer',
+        {
+          'text-white': !!isLike && type === 'like',
+          'bg-secondary': !!isLike && type === 'like',
+        },
+        {
+          'text-white': !!isLike && type === 'dislike',
+          'bg-secondary': !!isLike && type === 'dislike',
+        }
+      )}
+      onClick={onActionWithAuth(() => onClick(id, data))}
+    >
+      <Icon size="16" />
+    </div>
+  );
+};
 
 const FeedCard = (props: any) => {
-  const { data, isLoading, toggleDelete } = props;
+  const { data, isLoading, toggleDelete, onLike, onDislike } = props;
 
   return (
     <React.Fragment>
@@ -78,16 +98,23 @@ const FeedCard = (props: any) => {
 
       {!isLoading &&
         (data || []).map((item: any, index: number) => {
-          const { id, feed_content, name, photo, timestamp, userId } = item || {};
+          const { id, feed_content, name, photo, timestamp, userId, likes, dislikes } = item || {};
 
           const seconds: number = timestamp ? timestamp.seconds : null;
 
           return (
             <Card key={`feed-${index}`} className="p-3 flex flex-row space-x-3">
-              <div className="space-y-1 items-center flex flex-col text-sm">
-                <LikeButtons Icon={ChevronUp} />
-                <span>0</span>
-                <LikeButtons Icon={ChevronDown} />
+              <div className="space-y-1 items-center flex flex-col text-xs">
+                <LikeButtons type="like" Icon={ChevronUp} onClick={onLike} data={likes} {...item} />
+                <span>{(likes || []).length}</span>
+                <LikeButtons
+                  type="dislike"
+                  data={dislikes}
+                  Icon={ChevronDown}
+                  onClick={onDislike}
+                  {...item}
+                />
+                <span>{(dislikes || []).length}</span>
               </div>
               <div className="flex flex-col w-full space-y-4">
                 <div className="flex flex-row items-center space-x-2">

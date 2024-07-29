@@ -92,8 +92,8 @@ const AuthProvider: React.FC<any> = ({ children }) => {
     }
   };
 
-  const onActionWithAuth = (toggle: any) => {
-    return isAuth ? toggle : toggleIsAuthConfirmation;
+  const onActionWithAuth = (action: any) => {
+    return isAuth ? action : toggleIsAuthConfirmation;
   };
 
   return (
