@@ -36,6 +36,7 @@ const FeedCard = (props: any) => {
                 'hover:bg-gray-600': theme === 'dark',
                 'hover:border-gray-600': theme === 'dark',
                 'hover:bg-gray-100': theme === 'light',
+                'hover:border-gray-100': theme === 'light',
               })}
               onClick={() => router.push(`/post/${postId}`)}
             >
@@ -58,7 +59,7 @@ const FeedCard = (props: any) => {
                   onClick={onDislike}
                   {...item}
                 />
-                <span>{(dislikes || []).length}</span>
+                {/* <span>{(dislikes || []).length}</span> */}
               </div>
               <div className="flex flex-col w-full space-y-4">
                 <div
