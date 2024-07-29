@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import useAuth from '@/hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -39,6 +40,7 @@ const usePostFeed = () => {
         ...data,
         userId: uid,
         photo: photoURL,
+        postId: uuidv4(),
         name: displayName,
         timestamp: serverTimestamp(),
       });
