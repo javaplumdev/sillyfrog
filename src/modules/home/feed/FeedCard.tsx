@@ -1,22 +1,22 @@
 import React from 'react';
-import Link from 'next/link';
 import { useTheme } from 'next-themes';
-import FeedCardUserInfo from './FeedCardUserInfo';
+import { useRouter } from 'next/navigation';
 import { ChevronUp, ChevronDown } from 'lucide-react';
-import FeedCardLikeButtons from './FeedCardLikeButtons';
-import { MessageCircle, Forward, Bookmark } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import BaseAvatar from '@/components/base/avatars/BaseAvatar';
 import BaseCardSkeletons from '@/components/base/skeletons/BaseCardSkeletons';
-import { useRouter } from 'next/navigation';
+
+import FeedCardUserInfo from './FeedCardUserInfo';
+import FeedCardLikeButtons from './FeedCardLikeButtons';
+import FeedCardInteractions from './FeedCardInteractions';
 
 const FeedCard = (props: any) => {
   const router = useRouter();
   const { theme } = useTheme();
-  const { data, isLoading, toggleDelete, onLike, onDislike, countSkeleton = 5 } = props;
+
+  const { data, isLoading, toggleDelete, onLike, onDislike, onSave, countSkeleton = 5 } = props;
 
   return (
     <React.Fragment>
@@ -24,8 +24,18 @@ const FeedCard = (props: any) => {
 
       {!isLoading &&
         (data || []).map((item: any, index: number) => {
-          const { id, feed_content, name, photo, timestamp, userId, likes, dislikes, postId } =
-            item || {};
+          const {
+            id,
+            name,
+            photo,
+            saves,
+            likes,
+            userId,
+            postId,
+            dislikes,
+            timestamp,
+            feed_content,
+          } = item || {};
 
           const seconds: number = timestamp ? timestamp.seconds : null;
 
@@ -77,24 +87,7 @@ const FeedCard = (props: any) => {
                 </div>
                 <div className="break-all">{feed_content}</div>
 
-                <div
-                  className="flex flex-row space-x-1.5"
-                  onClick={(event) => event.stopPropagation()}
-                >
-                  <Link href={`/post/${postId}`}>
-                    <Badge variant="secondary" className="px-3 py-1">
-                      <MessageCircle size="18" className="mr-1" /> <span>0</span>
-                    </Badge>
-                  </Link>
-
-                  <Badge variant="secondary" className="px-3 py-1">
-                    <Bookmark size="18" className="mr-1" /> <span>0</span>
-                  </Badge>
-
-                  <Badge variant="secondary" className="px-3 py-1">
-                    <Forward size="18" />
-                  </Badge>
-                </div>
+                <FeedCardInteractions id={id} postId={postId} data={saves} onSave={onSave} />
               </div>
             </Card>
           );
