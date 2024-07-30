@@ -29,7 +29,7 @@ export function FeedFormDialog({
         <DialogHeader>
           <DialogTitle>Post feed</DialogTitle>
           <DialogDescription>
-            Share what you feel here. Click post when you're done.
+            Share what you feel here. Click post when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">

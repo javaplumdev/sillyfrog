@@ -30,7 +30,10 @@ const usePostFeed = () => {
 
   const { reset } = form;
 
-  React.useEffect(() => reset(), [isOpen]);
+  React.useEffect(() => {
+    reset();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
   const onSubmit = async (data: any) => {
     try {

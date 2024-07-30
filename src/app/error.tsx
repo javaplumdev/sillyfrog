@@ -30,8 +30,8 @@ export default function Error({
           <TriangleAlert className="text-red-500" size={50} />
           <h1 className="mt-8 text-3xl md:text-5xl">Oops, something went wrong! :(</h1>
           <p className="my-6">
-            Sorry, we're having technical issues. Please try again, sometimes it works. If the issue
-            still persists, please contact us.
+            Sorry, we&apos;re having technical issues. Please try again, sometimes it works. If the
+            issue still persists, please contact us.
           </p>
           <BaseButton className="mt-4" onClick={() => onRefresh()}>
             Try again

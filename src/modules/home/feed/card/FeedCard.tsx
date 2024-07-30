@@ -16,7 +16,16 @@ const FeedCard = (props: any) => {
   const router = useRouter();
   const { theme } = useTheme();
 
-  const { data, isLoading, toggleDelete, onLike, onDislike, onSave, countSkeleton = 5 } = props;
+  const {
+    data,
+    onLike,
+    onSave,
+    isLoading,
+    onDislike,
+    toggleShare,
+    toggleDelete,
+    countSkeleton = 5,
+  } = props;
 
   return (
     <React.Fragment>
@@ -87,7 +96,13 @@ const FeedCard = (props: any) => {
                 </div>
                 <div className="break-all">{feed_content}</div>
 
-                <FeedCardInteractions id={id} postId={postId} data={saves} onSave={onSave} />
+                <FeedCardInteractions
+                  id={id}
+                  data={saves}
+                  postId={postId}
+                  onSave={onSave}
+                  toggleShare={toggleShare}
+                />
               </div>
             </Card>
           );

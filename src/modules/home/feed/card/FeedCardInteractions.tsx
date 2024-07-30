@@ -5,8 +5,8 @@ import { Badge } from '@/components/ui/badge';
 import { MessageCircle, Forward, Bookmark } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const FeedCardInteractions = ({ id, postId, data, onSave }: any) => {
-  const { onActionWithAuth, userData, isAuth } = useAuth();
+const FeedCardInteractions = ({ id, postId, data, onSave, toggleShare }: any) => {
+  const { onActionWithAuth, userData } = useAuth();
   const { uid } = userData || {};
 
   const isSave = (data || []).find(({ user }: any) => user === uid);
@@ -28,7 +28,7 @@ const FeedCardInteractions = ({ id, postId, data, onSave }: any) => {
         <span>{(data || []).length}</span>
       </Badge>
 
-      <Badge variant="secondary" className="px-3 py-1">
+      <Badge variant="secondary" className="px-3 py-1" onClick={() => toggleShare(postId)}>
         <Forward size="18" />
       </Badge>
     </div>

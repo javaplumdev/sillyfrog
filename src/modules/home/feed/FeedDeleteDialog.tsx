@@ -1,3 +1,4 @@
+import React from 'react';
 import BaseButton from '@/components/base/buttons/BaseButton';
 import {
   Dialog,
@@ -6,9 +7,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import React from 'react';
 
-const FeedDeleteDialog = (props: any) => {
+const FeedDeleteDialog: React.FC<DialogProps> = (props) => {
   const { isOpen, toggleOpen, isLoading, onSubmit } = props;
 
   return (

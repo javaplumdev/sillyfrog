@@ -10,8 +10,8 @@ const useDeleteFeed = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [idToDelete, setIdToDelete] = React.useState<string>('');
 
-  const toggleOpen = (id: string) => {
-    setIdToDelete(id);
+  const toggleOpen = (id?: string) => {
+    setIdToDelete(id || '');
     setIsOpen(!isOpen);
   };
 

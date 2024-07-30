@@ -3,10 +3,12 @@ import React from 'react';
 import FeedCard from './card/FeedCard';
 import FeedForm from './forms/FeedForm';
 import FeedFilters from './filters/FeedFilters';
+import FeedShareDialog from './FeedShareDialog';
 import FeedDeleteDialog from './FeedDeleteDialog';
 
 import useSave from './useSave';
 import useLike from './useLike';
+import useShare from './useShare';
 import useGetFeed from './useGetFeed';
 import useDislike from './useDislike';
 import usePostFeed from './usePostFeed';
@@ -19,6 +21,7 @@ const Feed = () => {
   const dislikeProps = useDislike();
   const postFeedProps = usePostFeed();
   const { onDelete, isDeleting, toggleDelete, isDeleteOpen } = useDeleteFeed();
+  const { onShare, toggleShare, isSharing, isShareOpen, ...shareProps } = useShare();
 
   return (
     <div className="col-span-12 md:col-span-6 px-2 space-y-4 mb-24 mt-4">
@@ -29,6 +32,7 @@ const Feed = () => {
         {...likeProps}
         {...feedProps}
         {...dislikeProps}
+        toggleShare={toggleShare}
         toggleDelete={toggleDelete}
       />
 
@@ -37,6 +41,14 @@ const Feed = () => {
         isOpen={isDeleteOpen}
         isLoading={isDeleting}
         toggleOpen={toggleDelete}
+      />
+
+      <FeedShareDialog
+        onSubmit={onShare}
+        isOpen={isShareOpen}
+        isLoading={isSharing}
+        toggleOpen={toggleShare}
+        {...shareProps}
       />
     </div>
   );
