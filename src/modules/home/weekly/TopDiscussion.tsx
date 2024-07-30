@@ -24,7 +24,7 @@ const tags = [
 ];
 
 const TopDiscussion = (props: any) => {
-  const { className, ...rest } = props;
+  const { className } = props;
   return (
     <div className={cn(className, 'pt-5 w-full text-start')}>
       <h3 className="font-bold mb-3">Top Discussions</h3>

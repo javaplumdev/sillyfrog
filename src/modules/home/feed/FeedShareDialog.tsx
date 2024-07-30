@@ -7,6 +7,7 @@ import urlJoin from 'url-join';
 
 const FeedShareDialog: React.FC<any> = (props) => {
   const { id, baseUrl, isOpen, toggleOpen, isLoading, onSubmit, isCopied } = props;
+  const url = id ? urlJoin(baseUrl, `/post/${id}`) : baseUrl;
 
   return (
     <BaseDialog
@@ -16,7 +17,7 @@ const FeedShareDialog: React.FC<any> = (props) => {
       description="Share this post with your friends if you find this one interesting!"
     >
       <div className="flex flex-row">
-        <Input type="text" value={urlJoin(baseUrl + '/post' + `/${id}`)} disabled />
+        <Input type="text" value={urlJoin(url)} disabled />
         <BaseButton isLoading={isLoading} disabled={isLoading} onClick={() => onSubmit()}>
           {isCopied ? 'Copied' : 'Copy'}
         </BaseButton>

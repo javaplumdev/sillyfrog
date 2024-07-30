@@ -33,18 +33,8 @@ const FeedCard = (props: any) => {
 
       {!isLoading &&
         (data || []).map((item: any, index: number) => {
-          const {
-            id,
-            name,
-            photo,
-            saves,
-            likes,
-            userId,
-            postId,
-            dislikes,
-            timestamp,
-            feed_content,
-          } = item || {};
+          const { id, name, photo, saves, likes, postId, dislikes, timestamp, feed_content } =
+            item || {};
 
           const seconds: number = timestamp ? timestamp.seconds : null;
 
@@ -85,14 +75,8 @@ const FeedCard = (props: any) => {
                   className="flex flex-row items-center space-x-2"
                   onClick={(event) => event.stopPropagation()}
                 >
-                  <BaseAvatar photo={photo} name={name} />
-                  <FeedCardUserInfo
-                    id={id}
-                    name={name}
-                    userId={userId}
-                    seconds={seconds}
-                    toggleDelete={toggleDelete}
-                  />
+                  <BaseAvatar {...item} />
+                  <FeedCardUserInfo seconds={seconds} toggleDelete={toggleDelete} {...item} />
                 </div>
                 <div className="break-all">{feed_content}</div>
 

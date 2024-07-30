@@ -25,7 +25,7 @@ import { usePasswordChecker } from '@/hooks/usePasswordChecker';
 const SignupCard = () => {
   const { error, ...formProps } = useSignup();
   const { isPassValid, ...passCheckerProps } = usePasswordChecker();
-  const { googleAuthOnSubmit, googleAuthIsLoading, googleAuthError } = useSigninWithGoogle();
+  const { googleAuthOnSubmit, googleAuthIsLoading } = useSigninWithGoogle();
 
   return (
     <Card className="w-full sm:w-[520px]">

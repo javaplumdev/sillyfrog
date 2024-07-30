@@ -13,7 +13,7 @@ const usePostFeed = () => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  const { displayName, photoURL, uid } = userData || {};
+  const { displayName, photoURL, uid, email } = userData || {};
 
   const toggleOpen = () => setIsOpen(!isOpen);
 
@@ -44,7 +44,7 @@ const usePostFeed = () => {
         userId: uid,
         photo: photoURL,
         postId: uuidv4(),
-        name: displayName,
+        name: displayName || email,
         timestamp: serverTimestamp(),
       });
     } catch (error) {

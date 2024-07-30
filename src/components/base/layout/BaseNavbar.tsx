@@ -19,6 +19,7 @@ import BaseAvatar from '../avatars/BaseAvatar';
 import BaseSkeleton from '../skeletons/BaseSkeleton';
 import ModeToggle from '../theme/ModeToggle';
 import BaseConfirmationDialog from '../dialogs/BaseConfirmationDialog';
+import { anonAvatar } from '@/constant/keys';
 
 const useLogout = () => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
@@ -35,7 +36,6 @@ const BaseNavbar = () => {
 
   return (
     <div className="container flex justify-between items-center p-0 py-2 px-2 sticky top-0 z-10 backdrop-filter backdrop-blur-lg">
-      {' '}
       {/*bg-background */}
       <div className="flex items-center">
         <BaseSheet />
@@ -52,15 +52,12 @@ const BaseNavbar = () => {
         {!!isAuth && !isLoading && (
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <BaseAvatar photo={photoURL} name={displayName} />
+              <BaseAvatar photo={photoURL ? photoURL : anonAvatar} name={displayName} />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>Profile</DropdownMenuItem>
-
-              <DropdownMenuItem>Billing</DropdownMenuItem>
-
               <DropdownMenuItem onClick={() => toggleOpen()}>
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Log out</span>

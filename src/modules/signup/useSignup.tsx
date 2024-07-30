@@ -1,16 +1,17 @@
 'use client';
 import { useState } from 'react';
 import { z } from 'zod';
-import { toast } from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 import { SignupProps } from '@/types/signup';
 import { auth } from '@/firebase/firebaseConfig';
+import { useToast } from '@/components/ui/use-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 const useSignup = () => {
   const router = useRouter();
+  const { toast } = useToast();
 
   const [error, setError] = useState<any>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -23,7 +24,7 @@ const useSignup = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
 
-      toast.success('Successfully created!');
+      toast({ description: 'Successfully created! You may not log in your account.' });
 
       router.push('/signin');
     } catch (error) {

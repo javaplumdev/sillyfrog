@@ -30,3 +30,6 @@ export const clientSecret = process.env.NEXT_PUBLIC_CLIENT_SECRET;
 
 // grant type
 export const grantType = process.env.NEXT_PUBLIC_GRANT_TYPE;
+
+// anon user avatar
+export const anonAvatar = process.env.NEXT_PUBLIC_ANON_USER_AVATAR;

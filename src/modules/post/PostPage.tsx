@@ -3,13 +3,9 @@
 import React from 'react';
 import { useView } from './ViewProvider';
 import FeedCard from '../home/feed/card/FeedCard';
-import { isEmpty } from 'lodash';
-import NotFound from '@/app/not-found';
 
 const PostPage = () => {
   const { data, isLoading } = useView();
-
-  if (isEmpty(data)) return <NotFound />;
 
   return (
     <div className="grid grid-cols-12 gap-3 px-2">

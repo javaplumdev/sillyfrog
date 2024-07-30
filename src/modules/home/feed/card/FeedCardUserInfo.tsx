@@ -17,6 +17,7 @@ import {
 const FeedCardUserInfo = ({ id, name, seconds, toggleDelete, userId }: any) => {
   const { userData } = useAuth();
   const { uid } = userData || {};
+
   return (
     <div className="flex items-center justify-between w-full">
       <div className="flex flex-col">

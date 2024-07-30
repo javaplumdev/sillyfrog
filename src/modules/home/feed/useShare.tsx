@@ -17,8 +17,8 @@ const useShare = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const toggleOpen = (id: string) => {
-    setId(id);
+  const toggleOpen = (id?: string) => {
+    setId(id || '');
     setIsOpen(!isOpen);
     setIsCopied(false);
   };
@@ -27,7 +27,8 @@ const useShare = () => {
     setIsLoading(true);
 
     try {
-      navigator.clipboard.writeText(urlJoin(baseUrl, '/post', `/${id}`));
+      const url = id ? urlJoin(baseUrl, `/post/${id}`) : baseUrl;
+      navigator.clipboard.writeText(url);
     } catch (e) {
       console.log(e);
     } finally {
