@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useView } from './ViewProvider';
-import FeedCard from '../home/feed/FeedCard';
+import FeedCard from '../home/feed/card/FeedCard';
 import { isEmpty } from 'lodash';
 import NotFound from '@/app/not-found';
 

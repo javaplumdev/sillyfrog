@@ -1,8 +1,8 @@
 import React from 'react';
 
-import FeedCard from './FeedCard';
-import FeedForm from './FeedForm';
-import FeedFilters from './FeedFilters';
+import FeedCard from './card/FeedCard';
+import FeedForm from './forms/FeedForm';
+import FeedFilters from './filters/FeedFilters';
 import FeedDeleteDialog from './FeedDeleteDialog';
 
 import useSave from './useSave';
