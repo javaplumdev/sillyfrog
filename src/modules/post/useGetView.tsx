@@ -4,7 +4,7 @@ import React from 'react';
 import { toast } from 'sonner';
 import { useParams } from 'next/navigation';
 import { db } from '@/firebase/firebaseConfig';
-import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 
 const useGetView = () => {
   const { id } = useParams();
@@ -20,21 +20,10 @@ const useGetView = () => {
     try {
       setIsLoading(true);
 
-      // const docRef = doc(db, 'feed', id as string);
-      // const snapshot = await getDoc(docRef);
+      const docRef = doc(db, 'feed', id as string);
+      const snapshot = await getDoc(docRef);
 
-      // setData(snapshot.data() as any);
-
-      const q = query(collection(db, 'feed'), where('postId', '==', id));
-
-      onSnapshot(q, (snapshot) => {
-        const d = (snapshot || []).docs.map((doc: any) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-
-        setData(d);
-      });
+      setData(snapshot.data() as any);
     } catch (error) {
       toast.error(error as string);
     } finally {

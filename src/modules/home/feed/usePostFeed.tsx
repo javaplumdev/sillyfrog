@@ -4,10 +4,10 @@ import { toast } from 'sonner';
 import { v4 as uuidv4 } from 'uuid';
 import useAuth from '@/hooks/useAuth';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { addDoc, serverTimestamp } from 'firebase/firestore';
-import { collecetionRefFeeds } from '@/firebase/firebaseConfig';
 import { useRouter } from 'next/navigation';
+import { db } from '@/firebase/firebaseConfig';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 
 const usePostFeed = () => {
   const router = useRouter();
@@ -44,7 +44,9 @@ const usePostFeed = () => {
     try {
       setIsLoading(true);
 
-      await addDoc(collecetionRefFeeds, {
+      router.push(`/post/${postId}`);
+
+      await setDoc(doc(db, 'feed', postId), {
         ...data,
         userId: uid,
         photo: photoURL,
@@ -53,14 +55,16 @@ const usePostFeed = () => {
         timestamp: serverTimestamp(),
       });
 
-      router.push(`/post/${postId}`);
       toast.success('Post created!');
     } catch (error) {
       toast.error(error as string);
     } finally {
       setIsOpen(false);
-      setIsLoading(false);
       reset();
+
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
     }
   };
 

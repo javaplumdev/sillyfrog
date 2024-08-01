@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { MessageCircle, Forward, Bookmark } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const FeedCardInteractions = ({ id, postId, data, onSave, toggleShare }: any) => {
+const FeedCardInteractions = ({ id, data, onSave, toggleShare }: any) => {
   const { onActionWithAuth, userData } = useAuth();
   const { uid } = userData || {};
 
@@ -13,7 +13,7 @@ const FeedCardInteractions = ({ id, postId, data, onSave, toggleShare }: any) =>
 
   return (
     <div className="flex flex-row space-x-1.5" onClick={(event) => event.stopPropagation()}>
-      <Link href={`/post/${postId}`}>
+      <Link href={`/post/${id}`}>
         <Badge variant="secondary" className="px-3 py-1">
           <MessageCircle size="18" className="mr-1" /> <span>0</span>
         </Badge>
@@ -28,7 +28,7 @@ const FeedCardInteractions = ({ id, postId, data, onSave, toggleShare }: any) =>
         <span>{(data || []).length}</span>
       </Badge>
 
-      <Badge variant="secondary" className="px-3 py-1" onClick={() => toggleShare(postId)}>
+      <Badge variant="secondary" className="px-3 py-1" onClick={() => toggleShare(id)}>
         <Forward size="18" />
       </Badge>
     </div>

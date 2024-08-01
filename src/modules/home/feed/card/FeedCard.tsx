@@ -33,8 +33,7 @@ const FeedCard = (props: any) => {
 
       {!isLoading &&
         (data || []).map((item: any, index: number) => {
-          const { id, name, photo, saves, likes, postId, dislikes, timestamp, feed_content } =
-            item || {};
+          const { saves, likes, postId, dislikes, timestamp, feed_content } = item || {};
 
           const seconds: number = timestamp ? timestamp.seconds : null;
 
@@ -81,9 +80,8 @@ const FeedCard = (props: any) => {
                 <div className="break-all">{feed_content}</div>
 
                 <FeedCardInteractions
-                  id={id}
+                  id={postId}
                   data={saves}
-                  postId={postId}
                   onSave={onSave}
                   toggleShare={toggleShare}
                 />
