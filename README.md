@@ -26,7 +26,7 @@ A user friendly social media app for interacting with users and have fun in gene
    - cd sillyfrog-v2
    - nvm use v20.10.0
    - pnpm install
-   - npm run dev
+   - pnpm run dev
 
 ## Usage
 
