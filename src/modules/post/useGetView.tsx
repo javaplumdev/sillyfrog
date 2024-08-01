@@ -1,9 +1,10 @@
 'use client';
 
 import React from 'react';
+import { toast } from 'sonner';
 import { useParams } from 'next/navigation';
 import { db } from '@/firebase/firebaseConfig';
-import { collection, doc, getDoc, onSnapshot, query, where } from 'firebase/firestore';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
 
 const useGetView = () => {
   const { id } = useParams();
@@ -35,7 +36,7 @@ const useGetView = () => {
         setData(d);
       });
     } catch (error) {
-      console.log(error);
+      toast.error(error as string);
     } finally {
       setTimeout(() => {
         setIsLoading(false);

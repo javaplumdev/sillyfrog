@@ -28,7 +28,7 @@ const useShare = () => {
       const url = id ? urlJoin(baseUrl, `post/${id}`) : baseUrl;
       navigator.clipboard.writeText(url);
     } catch (e) {
-      console.log(e);
+      toast.error(e as string);
     } finally {
       setIsLoading(false);
       setIsCopied(true);

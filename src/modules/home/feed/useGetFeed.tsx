@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { toast } from 'sonner';
 import { collecetionRefFeeds } from '@/firebase/firebaseConfig';
 import { onSnapshot, orderBy, query } from 'firebase/firestore';
 
@@ -26,7 +26,7 @@ const useGetFeed = () => {
         setData(d);
       });
     } catch (error) {
-      console.log(error);
+      toast.error('Event has not been created');
     } finally {
       setTimeout(() => {
         setIsLoading(false);

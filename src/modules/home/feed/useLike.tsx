@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { toast } from 'sonner';
 import useAuth from '@/hooks/useAuth';
 import { db } from '@/firebase/firebaseConfig';
 import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
@@ -21,7 +22,7 @@ const useLike = () => {
         likes: isLike ? arrayRemove({ user: uid }) : arrayUnion({ user: uid }),
       });
     } catch (e) {
-      console.log(e);
+      toast.error(e as string);
     } finally {
       setIsLoading(false);
     }

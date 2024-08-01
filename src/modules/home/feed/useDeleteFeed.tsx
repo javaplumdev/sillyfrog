@@ -18,7 +18,7 @@ const useDeleteFeed = () => {
       const feedDoc = doc(db, 'feed', idToDelete);
       await deleteDoc(feedDoc);
     } catch (err) {
-      console.log(err);
+      toast.error(err as string);
     } finally {
       setIsLoading(false);
       setIsOpen(false);

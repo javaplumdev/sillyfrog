@@ -56,7 +56,7 @@ const usePostFeed = () => {
       router.push(`/post/${postId}`);
       toast.success('Post created!');
     } catch (error) {
-      console.log(error);
+      toast.error(error as string);
     } finally {
       setIsOpen(false);
       setIsLoading(false);
