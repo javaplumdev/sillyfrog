@@ -28,12 +28,12 @@ const Feed = () => {
       <FeedForm {...postFeedProps} />
       <FeedFilters />
       <FeedCard
+        toggleShare={toggleShare}
+        toggleDelete={toggleDelete}
         {...saveProps}
         {...likeProps}
         {...feedProps}
         {...dislikeProps}
-        toggleShare={toggleShare}
-        toggleDelete={toggleDelete}
       />
 
       <FeedDeleteDialog

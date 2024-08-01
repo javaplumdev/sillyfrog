@@ -1,10 +1,8 @@
 import React from 'react';
 import urlJoin from 'url-join';
-import { useToast } from '@/components/ui/use-toast';
+import { toast } from 'sonner';
 
 const useShare = () => {
-  const { toast } = useToast();
-
   const [id, setId] = React.useState<string>('');
   const [baseUrl, setBaseUrl] = React.useState<string>('');
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
@@ -27,7 +25,7 @@ const useShare = () => {
     setIsLoading(true);
 
     try {
-      const url = id ? urlJoin(baseUrl, `/post/${id}`) : baseUrl;
+      const url = id ? urlJoin(baseUrl, `post/${id}`) : baseUrl;
       navigator.clipboard.writeText(url);
     } catch (e) {
       console.log(e);
@@ -35,7 +33,7 @@ const useShare = () => {
       setIsLoading(false);
       setIsCopied(true);
 
-      toast({ description: 'Link copied!' });
+      toast.success('Link copied!');
     }
   };
 

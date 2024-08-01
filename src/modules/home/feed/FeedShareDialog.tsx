@@ -7,7 +7,7 @@ import urlJoin from 'url-join';
 
 const FeedShareDialog: React.FC<any> = (props) => {
   const { id, baseUrl, isOpen, toggleOpen, isLoading, onSubmit, isCopied } = props;
-  const url = id ? urlJoin(baseUrl, `/post/${id}`) : baseUrl;
+  const url = id ? urlJoin(baseUrl, `post/${id}`) : baseUrl;
 
   return (
     <BaseDialog

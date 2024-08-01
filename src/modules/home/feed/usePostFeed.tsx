@@ -1,13 +1,16 @@
 import { z } from 'zod';
 import React from 'react';
+import { toast } from 'sonner';
 import { v4 as uuidv4 } from 'uuid';
 import useAuth from '@/hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { addDoc, serverTimestamp } from 'firebase/firestore';
 import { collecetionRefFeeds } from '@/firebase/firebaseConfig';
+import { useRouter } from 'next/navigation';
 
 const usePostFeed = () => {
+  const router = useRouter();
   const { userData } = useAuth();
 
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
@@ -36,6 +39,8 @@ const usePostFeed = () => {
   }, [isOpen]);
 
   const onSubmit = async (data: any) => {
+    const postId = uuidv4();
+
     try {
       setIsLoading(true);
 
@@ -43,10 +48,13 @@ const usePostFeed = () => {
         ...data,
         userId: uid,
         photo: photoURL,
-        postId: uuidv4(),
+        postId: postId,
         name: displayName || email,
         timestamp: serverTimestamp(),
       });
+
+      router.push(`/post/${postId}`);
+      toast.success('Post created!');
     } catch (error) {
       console.log(error);
     } finally {

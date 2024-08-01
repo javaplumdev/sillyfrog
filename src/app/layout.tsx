@@ -1,4 +1,5 @@
 import './globals.css';
+
 import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 // import { Toaster } from 'react-hot-toast';
@@ -6,8 +7,7 @@ import { Inter as FontSans } from 'next/font/google';
 import AppProviders from '@/modules/app/AppProviders';
 import BaseNavbar from '@/components/base/layout/BaseNavbar';
 import BaseFooter from '@/components/base/layout/BaseFooter';
-import BaseNavFooter from '@/components/base/layout/BaseNavFooter';
-import { Toaster } from '@/components/ui/toaster';
+import { Toaster } from '@/components/ui/sonner';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -43,12 +43,10 @@ export default function RootLayout({
         )}
       >
         <AppProviders>
-          {/* <Toaster position="top-center" reverseOrder={false} /> */}
-
           <BaseNavbar />
           <main> {children}</main>
 
-          <Toaster />
+          <Toaster position="top-center" expand={false} richColors />
 
           {/* <BaseNavFooter /> */}
           <BaseFooter />

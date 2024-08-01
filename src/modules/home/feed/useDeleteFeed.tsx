@@ -1,11 +1,9 @@
 import React from 'react';
 import { db } from '@/firebase/firebaseConfig';
 import { deleteDoc, doc } from 'firebase/firestore';
-import { useToast } from '@/components/ui/use-toast';
+import { toast } from 'sonner';
 
 const useDeleteFeed = () => {
-  const { toast } = useToast();
-
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [idToDelete, setIdToDelete] = React.useState<string>('');
@@ -25,7 +23,7 @@ const useDeleteFeed = () => {
       setIsLoading(false);
       setIsOpen(false);
 
-      toast({ description: 'Successfully deleted.' });
+      toast.success('Successfully deleted.');
     }
   };
 
