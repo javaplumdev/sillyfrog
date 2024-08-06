@@ -1,21 +1,23 @@
 import React from 'react';
+
+import PostCard from './PostCard';
 import { useView } from './ViewProvider';
 import PostComments from './PostComments';
-import PostCard from './PostCard';
+import usePostComment from './usePostComment';
+import useGetComments from './useGetComments';
 
 const PostView = () => {
   const { data, isLoading } = useView();
+  const { reload, ...commentListProps } = useGetComments();
+  const commentProps = usePostComment(reload);
 
   const { timestamp } = data || {};
-
   const seconds: number = timestamp ? timestamp.seconds : null;
 
   return (
     <div className="flex flex-col space-y-2">
-      {/* <FeedCard data={data} isLoading={isLoading} countSkeleton={1} /> */}
-      <div>{JSON.stringify(data, null, 4)}</div>
       <PostCard data={data} isLoading={isLoading} seconds={seconds} />
-      <PostComments data={data} seconds={seconds} />
+      <PostComments {...commentProps} {...commentListProps} />
     </div>
   );
 };

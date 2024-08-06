@@ -84,6 +84,7 @@ const FeedCard = (props: any) => {
                   data={saves}
                   onSave={onSave}
                   toggleShare={toggleShare}
+                  {...item}
                 />
               </div>
             </Card>
