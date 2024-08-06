@@ -4,12 +4,12 @@ import React from 'react';
 import useGetView from './useGetView';
 
 interface ViewTypes {
-  data: [];
+  data: any;
   isLoading: boolean;
 }
 
 const ViewProps: ViewTypes = {
-  data: [],
+  data: null,
   isLoading: false,
 };
 

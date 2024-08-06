@@ -1,8 +1,6 @@
 import React from 'react';
-import PostPage from '@/modules/post/PostPage';
+import PostPage from '@/modules/post/Post';
 
-const Page = () => {
-  return <PostPage />;
-};
+const Page = () => <PostPage />;
 
 export default Page;

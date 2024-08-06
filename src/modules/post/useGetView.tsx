@@ -2,19 +2,21 @@
 
 import React from 'react';
 import { toast } from 'sonner';
-import { useParams } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import { db } from '@/firebase/firebaseConfig';
 import { doc, getDoc } from 'firebase/firestore';
 
 const useGetView = () => {
+  const location = usePathname();
+
   const { id } = useParams();
-  const [data, setData] = React.useState<any>([]);
+  const [data, setData] = React.useState<any>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [location]);
 
   const getData = async () => {
     try {

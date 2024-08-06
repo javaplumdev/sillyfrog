@@ -43,9 +43,6 @@ const useSignin = () => {
 
       await signInWithEmailAndPassword(auth, email, password);
 
-      // hard refresh
-      window.location.reload();
-
       router.push('/');
     } catch (error) {
       setError(error);
