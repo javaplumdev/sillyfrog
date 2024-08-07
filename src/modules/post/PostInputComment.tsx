@@ -40,14 +40,15 @@ const PostInputComment = (props: any) => {
               }}
             />
 
-            <BaseButton
-              type="submit"
-              disabled={!isAuth}
-              onClick={onActionWithAuth(() => console.log('here'))}
-              className="rounded-full absolute absolute top-5 right-0 mr-4"
-            >
-              <ArrowUp size={16} />
-            </BaseButton>
+            {!!isAuth && (
+              <BaseButton
+                type="submit"
+                onClick={onActionWithAuth(() => console.log('here'))}
+                className="rounded-full absolute absolute top-5 right-0 mr-4"
+              >
+                <ArrowUp size={16} />
+              </BaseButton>
+            )}
           </form>
         </Form>
       </div>
