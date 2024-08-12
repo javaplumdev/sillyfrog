@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 const FeedCardUserInfo = ({ id, name, seconds, toggleDelete, userId }: any) => {
-  const { userData } = useAuth();
+  const { userData, isAuth } = useAuth();
   const { uid } = userData || {};
 
   return (
@@ -38,7 +38,7 @@ const FeedCardUserInfo = ({ id, name, seconds, toggleDelete, userId }: any) => {
               <DropdownMenuShortcut>⇧⌘R</DropdownMenuShortcut>
             </DropdownMenuItem>
 
-            {isEqual(uid, userId) && (
+            {isEqual(uid, userId) && isAuth && (
               <React.Fragment>
                 <DropdownMenuSeparator />
 

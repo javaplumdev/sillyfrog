@@ -11,8 +11,8 @@ const PostView = () => {
   const { reload, ...commentListProps } = useGetComments();
   const commentProps = usePostComment(reload);
 
-  const { timestamp } = data || {};
-  const seconds: number = timestamp ? timestamp.seconds : null;
+  const { timestamp = { seconds: 0 } } = data || {};
+  const seconds: number = timestamp.seconds;
 
   return (
     <div className="flex flex-col space-y-2">
