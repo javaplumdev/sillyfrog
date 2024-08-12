@@ -1,7 +1,11 @@
 import React from 'react';
 import { toast } from 'sonner';
 import { collecetionRefFeeds } from '@/firebase/firebaseConfig';
-import { DocumentData, onSnapshot, orderBy, Query, query } from 'firebase/firestore';
+import { DocumentData, onSnapshot, orderBy, Query, query, QuerySnapshot } from 'firebase/firestore';
+
+type DataProps = {
+  id: string;
+};
 
 const useGetFeed = () => {
   const [data, setData] = React.useState<{ id: string }[]>([]);
@@ -20,8 +24,11 @@ const useGetFeed = () => {
         orderBy('timestamp', 'desc')
       );
 
-      onSnapshot(q, (snapshot) => {
-        const d = (snapshot || []).docs.map(({ data, id }) => ({ ...data(), id: id }));
+      onSnapshot(q, (snapshot: QuerySnapshot<DocumentData>) => {
+        const d: DataProps[] = snapshot.docs.map((doc) => ({
+          ...(doc.data() as DataProps),
+          id: doc.id,
+        }));
 
         setData(d);
       });
