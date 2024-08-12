@@ -27,28 +27,26 @@ const PostInputComment = (props: any) => {
                   <FormItem>
                     <FormControl>
                       <Textarea
-                        onClick={onActionWithAuth(() => console.log('here'))}
+                        onClick={onActionWithAuth(() => {})}
                         id="comment"
                         placeholder="Type your comment here."
                         className="border-none"
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage />
+                    {isAuth && <FormMessage />}
                   </FormItem>
                 );
               }}
             />
 
-            {!!isAuth && (
-              <BaseButton
-                type="submit"
-                onClick={onActionWithAuth(() => console.log('here'))}
-                className="rounded-full absolute absolute top-5 right-0 mr-4"
-              >
-                <ArrowUp size={16} />
-              </BaseButton>
-            )}
+            <BaseButton
+              type="submit"
+              onClick={onActionWithAuth(() => {})}
+              className="rounded-full absolute absolute top-5 right-0 mr-4"
+            >
+              <ArrowUp size={16} />
+            </BaseButton>
           </form>
         </Form>
       </div>
