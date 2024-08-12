@@ -1,6 +1,6 @@
 import React from 'react';
 import { toast } from 'sonner';
-import { collecetionRefFeeds } from '@/firebase/firebaseConfig';
+import { collectionRefFeeds } from '@/firebase/firebaseConfig';
 import { DocumentData, onSnapshot, orderBy, Query, query, QuerySnapshot } from 'firebase/firestore';
 
 type DataProps = {
@@ -20,7 +20,7 @@ const useGetFeed = () => {
 
     try {
       const q: Query<DocumentData, DocumentData> = query(
-        collecetionRefFeeds,
+        collectionRefFeeds,
         orderBy('timestamp', 'desc')
       );
 
