@@ -6,23 +6,28 @@ import useAuth from '@/hooks/useAuth';
 import { db } from '@/firebase/firebaseConfig';
 import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
 
+interface SaveData {
+  id: string;
+  user: string;
+}
+
 const useSave = () => {
   const { userData } = useAuth();
   const { uid } = userData || {};
 
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  const onSubmit = async (id: string, data: any) => {
+  const onSubmit = async (id: string, data: SaveData[]) => {
     setIsLoading(true);
 
     try {
-      const isSave = (data || []).find(({ user }: any) => user === uid);
+      const isSave = (data || []).find(({ user }: { user: string }) => user === uid);
 
       await updateDoc(doc(db, 'feed', id), {
         saves: isSave ? arrayRemove({ user: uid }) : arrayUnion({ user: uid }),
       });
-    } catch (e) {
-      toast.error(e as string);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'An unknown error occurred');
     } finally {
       setIsLoading(false);
     }

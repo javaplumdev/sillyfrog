@@ -23,8 +23,7 @@ const tags = [
   '📚 #EducationReform',
 ];
 
-const TopDiscussion = (props: any) => {
-  const { className } = props;
+const TopDiscussion: React.FC<{ className: string }> = ({ className }) => {
   return (
     <div className={cn(className, 'pt-5 w-full text-start')}>
       <h3 className="font-bold mb-3">Top Discussions</h3>

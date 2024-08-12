@@ -13,7 +13,16 @@ import FeedCardUserInfo from './FeedCardUserInfo';
 import FeedCardLikeButtons from './FeedCardLikeButtons';
 import FeedCardInteractions from './FeedCardInteractions';
 
-const FeedCard = (props: any) => {
+const FeedCard: React.FC<{
+  data: FeedList;
+  onLike: () => void;
+  onSave: () => void;
+  isLoading: boolean;
+  onDislike: () => void;
+  toggleShare: () => void;
+  toggleDelete: () => void;
+  countSkeleton: number;
+}> = (props) => {
   const router = useRouter();
   const { theme } = useTheme();
 
@@ -33,7 +42,7 @@ const FeedCard = (props: any) => {
       {!!isLoading && <BaseCardSkeletons count={countSkeleton} />}
 
       {!isLoading &&
-        (data || []).map((item: any, index: number) => {
+        (data || []).map((item: Feed, index: number) => {
           const { saves, likes, postId, dislikes, timestamp, feed_content } = item || {};
 
           const seconds: number = timestamp ? timestamp.seconds : null;

@@ -14,7 +14,21 @@ import {
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
 
-const FeedCardUserInfo = ({ id, name, seconds, toggleDelete, userId }: any) => {
+type FeedCardUserInfoProps = {
+  id?: string;
+  name?: string;
+  seconds: number;
+  userId?: string;
+  toggleDelete: (id: string) => void;
+};
+
+const FeedCardUserInfo: React.FC<FeedCardUserInfoProps> = ({
+  id,
+  name,
+  userId,
+  seconds,
+  toggleDelete,
+}) => {
   const { userData, isAuth } = useAuth();
   const { uid } = userData || {};
 
@@ -44,7 +58,7 @@ const FeedCardUserInfo = ({ id, name, seconds, toggleDelete, userId }: any) => {
 
                 <DropdownMenuItem
                   className="cursor-pointer text-red-500"
-                  onClick={() => toggleDelete(id)}
+                  onClick={() => toggleDelete(id || '')}
                 >
                   <Trash className="mr-2 h-4 w-4" />
                   <span>Delete</span>

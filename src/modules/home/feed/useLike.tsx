@@ -12,11 +12,11 @@ const useLike = () => {
 
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  const onSubmit = async (id: string, data: any) => {
+  const onSubmit = async (id: string, data: { id: string; user: string }[]) => {
     setIsLoading(true);
 
     try {
-      const isLike = (data || []).find(({ user }: any) => user === uid);
+      const isLike = (data || []).find(({ user }: { user: string }) => user === uid);
 
       await updateDoc(doc(db, 'feed', id), {
         likes: isLike ? arrayRemove({ user: uid }) : arrayUnion({ user: uid }),

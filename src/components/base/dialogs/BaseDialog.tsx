@@ -7,7 +7,13 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog';
 
-const BaseDialog: React.FC<any> = (props) => {
+const BaseDialog: React.FC<{
+  title: string;
+  isOpen: boolean;
+  description: string;
+  toggleOpen: () => void;
+  children: React.ReactNode;
+}> = (props) => {
   const { isOpen, toggleOpen, children, title, description = '' } = props;
 
   return (

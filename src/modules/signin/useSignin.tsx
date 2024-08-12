@@ -10,7 +10,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 const useSignin = () => {
   const router = useRouter();
 
-  const [error, setError] = React.useState<any>('');
+  const [error, setError] = React.useState<string>('');
   const [isLoading, setIsLoading] = React.useState(false);
 
   const formSchema = z.object({
@@ -35,7 +35,7 @@ const useSignin = () => {
     },
   });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: { email: string; password: string }) => {
     const { email, password } = data || {};
 
     try {

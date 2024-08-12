@@ -1,7 +1,7 @@
 import React from 'react';
-import { db } from '@/firebase/firebaseConfig';
-import { deleteDoc, doc } from 'firebase/firestore';
 import { toast } from 'sonner';
+import { db } from '@/firebase/firebaseConfig';
+import { deleteDoc, doc, DocumentData, DocumentReference } from 'firebase/firestore';
 
 const useDeleteFeed = () => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
@@ -15,7 +15,7 @@ const useDeleteFeed = () => {
 
   const onSubmit = async () => {
     try {
-      const feedDoc = doc(db, 'feed', idToDelete);
+      const feedDoc: DocumentReference<DocumentData, DocumentData> = doc(db, 'feed', idToDelete);
       await deleteDoc(feedDoc);
     } catch (err) {
       toast.error(err as string);

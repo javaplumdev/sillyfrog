@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   description: 'A Sillyfrog siognup page',
 };
 
-const layout = ({ children }: any) => {
+const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return <div>{children}</div>;
 };
 
-export default layout;
+export default Layout;

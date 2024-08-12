@@ -6,8 +6,13 @@ import BaseButton from '@/components/base/buttons/BaseButton';
 import { Form, FormControl, FormItem, FormMessage } from '@/components/ui/form';
 import { Eye, EyeOff } from 'lucide-react';
 import useAuth from '@/hooks/useAuth';
+import { Control, FieldValues } from 'react-hook-form';
 
-const SigninForm = ({ form, onSubmit, isLoading }: any) => {
+const SigninForm: React.FC<{
+  form: { handleSubmit: any; control: Control<FieldValues> };
+  isLoading: boolean;
+  onSubmit: () => void;
+}> = ({ form, onSubmit, isLoading }) => {
   const { handleSubmit, control } = form || {};
   const { togglePasswordOpen, isPasswordOpen } = useAuth();
 

@@ -11,7 +11,7 @@ googleProvider.setCustomParameters({
 const useSigninWithGoogle = () => {
   const router = useRouter();
 
-  const [error, setError] = useState<any>(false);
+  const [error, setError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const onSubmit = async () => {

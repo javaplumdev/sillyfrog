@@ -10,7 +10,7 @@ const useGetView = () => {
   const location = usePathname();
 
   const { id } = useParams();
-  const [data, setData] = React.useState<any>(null);
+  const [data, setData] = React.useState<null>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   React.useEffect(() => {
@@ -27,7 +27,7 @@ const useGetView = () => {
 
       setData(snapshot.data() as any);
     } catch (error) {
-      toast.error(error as string);
+      toast.error(error instanceof Error ? error.message : 'An unknown error occurred');
     } finally {
       setTimeout(() => {
         setIsLoading(false);

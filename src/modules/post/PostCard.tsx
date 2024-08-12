@@ -7,8 +7,21 @@ import FeedCardLikeButtons from '../home/feed/card/FeedCardLikeButtons';
 import FeedCardInteractions from '../home/feed/card/FeedCardInteractions';
 import BaseCardSkeletons from '@/components/base/skeletons/BaseCardSkeletons';
 
-const PostCard = (props: any) => {
-  const { data, isLoading, seconds } = props;
+export type DataProps = {
+  saves?: [];
+  likes?: [];
+  dislikes?: [];
+  name?: string;
+  photo?: string;
+  postId?: string;
+  feed_content?: string;
+};
+
+const PostCard: React.FC<{
+  seconds: number;
+  data: DataProps | any;
+  isLoading: boolean;
+}> = ({ data, isLoading, seconds }) => {
   const { saves, likes, postId, dislikes, feed_content } = data || {};
 
   return (

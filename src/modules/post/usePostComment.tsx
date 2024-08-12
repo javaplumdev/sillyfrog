@@ -27,7 +27,7 @@ const usePostComment = (callback: () => void) => {
 
   const { reset } = form;
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: { comment: string }) => {
     setIsLoading(true);
     const commentId = uuidv4();
     const { comment } = data || {};
@@ -50,8 +50,8 @@ const usePostComment = (callback: () => void) => {
       });
 
       if (callback) callback();
-    } catch (err: any) {
-      toast.error(err.message);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'An unknown error occurred');
     } finally {
       setIsLoading(false);
       reset();

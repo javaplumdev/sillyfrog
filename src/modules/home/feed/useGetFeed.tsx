@@ -1,10 +1,10 @@
 import React from 'react';
 import { toast } from 'sonner';
 import { collecetionRefFeeds } from '@/firebase/firebaseConfig';
-import { onSnapshot, orderBy, query } from 'firebase/firestore';
+import { DocumentData, onSnapshot, orderBy, Query, query } from 'firebase/firestore';
 
 const useGetFeed = () => {
-  const [data, setData] = React.useState<any[]>([]);
+  const [data, setData] = React.useState<{ id: string }[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   React.useEffect(() => {
@@ -15,22 +15,20 @@ const useGetFeed = () => {
     setIsLoading(true);
 
     try {
-      const q = query(collecetionRefFeeds, orderBy('timestamp', 'desc'));
+      const q: Query<DocumentData, DocumentData> = query(
+        collecetionRefFeeds,
+        orderBy('timestamp', 'desc')
+      );
 
       onSnapshot(q, (snapshot) => {
-        const d = (snapshot || []).docs.map((doc: any) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
+        const d = (snapshot || []).docs.map(({ data, id }) => ({ ...data(), id: id }));
 
         setData(d);
       });
     } catch (error) {
       toast.error('Event has not been created');
     } finally {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
+      setTimeout(() => setIsLoading(false), 1000);
     }
   };
 

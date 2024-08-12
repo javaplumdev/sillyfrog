@@ -4,7 +4,7 @@ import React from 'react';
 import useGetView from './useGetView';
 
 interface ViewTypes {
-  data: any;
+  data: null;
   isLoading: boolean;
 }
 
@@ -15,7 +15,7 @@ const ViewProps: ViewTypes = {
 
 const ViewContext = React.createContext(ViewProps);
 
-export const ViewProvider = ({ children }: any) => {
+export const ViewProvider = ({ children }: { children: React.ReactNode }) => {
   const { data, isLoading } = useGetView();
 
   return <ViewContext.Provider value={{ data, isLoading }}>{children}</ViewContext.Provider>;

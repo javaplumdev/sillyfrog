@@ -2,10 +2,10 @@ import React from 'react';
 import BaseButton from '@/components/base/buttons/BaseButton';
 import {
   Dialog,
+  DialogTitle,
+  DialogHeader,
   DialogContent,
   DialogDescription,
-  DialogHeader,
-  DialogTitle,
 } from '@/components/ui/dialog';
 
 const FeedDeleteDialog: React.FC<DialogProps> = (props) => {

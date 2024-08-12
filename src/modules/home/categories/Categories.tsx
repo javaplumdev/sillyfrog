@@ -66,8 +66,10 @@ const Categories = () => {
 
         <div className={cn(styles['separator-child'], 'pt-5 text-sm')}>
           Illustration by{' '}
-          <Link href={urlJoin(ICONS_EIGHT_ILLUSTRATIONS, 'author', 'zD2oqC8lLBBA')}>Icons 8</Link>{' '}
-          from <Link href={urlJoin(ICONS_EIGHT_ILLUSTRATIONS)}>Ouch!</Link>
+          <Link href={urlJoin(ICONS_EIGHT_ILLUSTRATIONS || '', 'author', 'zD2oqC8lLBBA')}>
+            Icons 8
+          </Link>{' '}
+          from <Link href={urlJoin(ICONS_EIGHT_ILLUSTRATIONS || '')}>Ouch!</Link>
         </div>
       </div>
 

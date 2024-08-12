@@ -38,7 +38,7 @@ const usePostFeed = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: { feed_content: string }) => {
     const postId = uuidv4();
 
     try {

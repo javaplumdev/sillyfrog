@@ -6,9 +6,14 @@ import { Textarea } from '@/components/ui/textarea';
 import BaseAvatar from '@/components/base/avatars/BaseAvatar';
 import BaseButton from '@/components/base/buttons/BaseButton';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import { FieldValues, UseFormReturn } from 'react-hook-form';
 
-const PostInputComment = (props: any) => {
-  const { form, onSubmit } = props;
+type PostInputCommentProps = {
+  onSubmit: () => void;
+  form: UseFormReturn<FieldValues, any, undefined>;
+};
+
+const PostInputComment: React.FC<PostInputCommentProps> = ({ form, onSubmit }) => {
   const { userData, isAuth, onActionWithAuth } = useAuth();
 
   const { handleSubmit } = form || {};

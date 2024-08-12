@@ -5,10 +5,29 @@ import useAuth from '@/hooks/useAuth';
 import { Badge } from '@/components/ui/badge';
 import { MessageCircle, Forward, Bookmark } from 'lucide-react';
 
-const FeedCardInteractions = ({ id, data, onSave, toggleShare, comments }: any) => {
+interface FeedDataProps {
+  data: { user: string };
+  user: string;
+}
+
+interface FeedCardInteractionsProps {
+  id?: string | undefined;
+  data?: any;
+  onSave: (id: string, data: FeedDataProps[]) => void;
+  toggleShare: (id: string) => void;
+  comments?: [];
+}
+
+const FeedCardInteractions: React.FC<FeedCardInteractionsProps> = ({
+  id,
+  data,
+  onSave,
+  comments,
+  toggleShare,
+}) => {
   const { onActionWithAuth, userData } = useAuth();
   const { uid } = userData || {};
-  const isSave = (data || []).find(({ user }: any) => user === uid);
+  const isSave = (data || []).find(({ user }: FeedDataProps) => user === uid);
 
   return (
     <div className="flex flex-row space-x-1.5" onClick={(event) => event.stopPropagation()}>

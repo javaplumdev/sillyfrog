@@ -1,7 +1,7 @@
 import React from 'react';
 import { ViewProvider } from '@/modules/post/ViewProvider';
 
-const layout = ({ children }: any) => {
+const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <ViewProvider>
       <div className="sm:container mx-auto sm:px-0">{children}</div>
@@ -9,4 +9,4 @@ const layout = ({ children }: any) => {
   );
 };
 
-export default layout;
+export default Layout;

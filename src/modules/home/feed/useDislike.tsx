@@ -12,11 +12,11 @@ const useDislike = () => {
 
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  const onSubmit = async (id: string, data: any) => {
+  const onSubmit = async (id: string, data: { id: string; user: string }[]) => {
     setIsLoading(true);
 
     try {
-      const isDislike = (data || []).find(({ user }: any) => user === uid);
+      const isDislike = (data || []).find(({ user }: { user: string }) => user === uid);
 
       await updateDoc(doc(db, 'feed', id), {
         dislikes: isDislike ? arrayRemove({ user: uid }) : arrayUnion({ user: uid }),

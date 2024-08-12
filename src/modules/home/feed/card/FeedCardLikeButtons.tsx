@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { ElementType } from 'react';
 import { cn } from '@/lib/utils';
 import useAuth from '@/hooks/useAuth';
 import { Badge } from '@/components/ui/badge';
 
-const FeedCardLikeButtons = ({ Icon, onClick, id, data, type }: any) => {
+type DataProps = { user: string };
+
+type FeedCardLikeButtonsProps = {
+  id: string;
+  type?: string;
+  data?: [] | undefined;
+  Icon: ElementType;
+  onClick: (id: string, data: DataProps[]) => void;
+};
+
+const FeedCardLikeButtons: React.FC<FeedCardLikeButtonsProps> = ({
+  id,
+  data,
+  type,
+  Icon,
+  onClick,
+}) => {
   const { onActionWithAuth, userData } = useAuth();
   const { uid } = userData || {};
-  const isLike = (data || []).find(({ user }: any) => user === uid);
+  const isLike = (data || []).find(({ user }: DataProps) => user === uid);
 
   return (
     <Badge
@@ -15,7 +31,7 @@ const FeedCardLikeButtons = ({ Icon, onClick, id, data, type }: any) => {
         'text-emerald-500': !!isLike && type === 'like',
         'text-red-500': !!isLike && type === 'dislike',
       })}
-      onClick={onActionWithAuth(() => onClick(id, data))}
+      onClick={onActionWithAuth(() => onClick(id, data || []))}
     >
       <Icon size="18" />
     </Badge>

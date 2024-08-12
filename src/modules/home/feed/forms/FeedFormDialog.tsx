@@ -1,3 +1,4 @@
+import { UseFormReturn } from 'react-hook-form';
 import {
   Dialog,
   DialogContent,
@@ -6,13 +7,8 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
-import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import BaseButton from '@/components/base/buttons/BaseButton';
-
-interface FeedFormDialogProps {
-  isOpen: boolean;
-  toggleOpen: () => void;
-}
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 
 export function FeedFormDialog({
   form,
@@ -20,7 +16,13 @@ export function FeedFormDialog({
   onSubmit,
   isLoading,
   toggleOpen,
-}: FeedFormDialogProps & any) {
+}: {
+  form: UseFormReturn<{ feed_content: string }, any, undefined>;
+  isOpen: boolean;
+  isLoading: boolean;
+  onSubmit: () => void;
+  toggleOpen: () => void;
+}) {
   const { handleSubmit, control } = form || {};
 
   return (

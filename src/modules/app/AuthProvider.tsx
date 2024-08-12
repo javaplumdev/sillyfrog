@@ -8,8 +8,17 @@ import { addUserToFirestore } from '@/lib/users';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import UserAuthConfirmationDialog from '@/components/base/dialogs/UserAuthConfirmationDialog';
 
+let userDataInitValues = { uid: '', photoURL: '', displayName: '', email: '' };
+
+type userDataProps = {
+  uid: string;
+  photoURL: string;
+  displayName: string;
+  email: string;
+};
+
 type objType = {
-  userData: any;
+  userData: userDataProps;
   isAuth: boolean;
   isLoading: boolean;
   isPasswordOpen: boolean;
@@ -19,11 +28,11 @@ type objType = {
   logOut: () => Promise<void>;
   togglePasswordOpen: () => void;
   toggleIsAuthConfirmation: () => void;
-  onActionWithAuth: (toggle: any) => any;
+  onActionWithAuth: (action: () => void) => any;
 };
 
 const obj: objType = {
-  userData: null,
+  userData: userDataInitValues,
   isAuth: false,
   isLoading: false,
   isPasswordOpen: true,
@@ -42,14 +51,14 @@ export const AuthContext: React.Context<objType> = createContext(obj);
 const expirationDate: Date = new Date();
 expirationDate.setTime(expirationDate.getTime() + 24 * 60 * 60 * 1000);
 
-const AuthProvider: React.FC<any> = ({ children }) => {
+const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const pathname = usePathname();
 
-  const [userData, setUserData] = React.useState<any>({});
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
-  const [isAuth, setIsAuth] = React.useState<boolean>(!!cookies.get('token'));
-  const [isAuthConfirmation, setIsAuthCofirmation] = React.useState<boolean>(false);
   const [isPasswordOpen, setIsPasswordOpen] = React.useState<boolean>(true);
+  const [isAuth, setIsAuth] = React.useState<boolean>(!!cookies.get('token'));
+  const [userData, setUserData] = React.useState<userDataProps>(userDataInitValues);
+  const [isAuthConfirmation, setIsAuthCofirmation] = React.useState<boolean>(false);
 
   const togglePasswordOpen = () => setIsPasswordOpen(!isPasswordOpen);
   const toggleIsAuthConfirmation = () => setIsAuthCofirmation(!isAuthConfirmation);
@@ -92,7 +101,7 @@ const AuthProvider: React.FC<any> = ({ children }) => {
     }
   };
 
-  const onActionWithAuth = (action: any) => {
+  const onActionWithAuth = (action: () => any) => {
     return isAuth ? action : toggleIsAuthConfirmation;
   };
 

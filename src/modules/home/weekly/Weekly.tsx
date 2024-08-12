@@ -27,9 +27,7 @@ const tags = [
   // '#EducationReform',
 ];
 
-const Weekly = (props: any) => {
-  const { isLoading } = props;
-
+const Weekly: React.FC<{ isLoading: boolean }> = ({ isLoading }) => {
   return (
     <div
       className={cn(

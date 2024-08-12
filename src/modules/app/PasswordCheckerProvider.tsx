@@ -13,7 +13,7 @@ const obj: PasswordCheckerProps = {
 
 export const PasswordCheckerContext = createContext(obj);
 
-const PasswordCheckerProvider = ({ children }: any) => {
+const PasswordCheckerProvider = ({ children }: { children: React.ReactNode }) => {
   const passwordReq = (password: string): { text: string; match: boolean }[] => {
     return [
       {

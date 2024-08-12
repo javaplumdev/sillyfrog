@@ -1,13 +1,14 @@
 import { setDoc, doc } from 'firebase/firestore';
 import { collectionRefUsers } from '@/firebase/firebaseConfig';
 
-export type UserType = {
-  email: string;
-  password: string;
-};
-
 // create user items in firestore
-export const addUserToFirestore = (credentials: any) => {
+export const addUserToFirestore = (credentials: {
+  uid: string;
+  email: string;
+  fbPhoto: string;
+  photoURL: string;
+  displayName: string;
+}) => {
   const { uid, displayName, email, photoURL, fbPhoto } = credentials || {};
 
   try {

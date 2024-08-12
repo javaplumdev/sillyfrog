@@ -4,11 +4,16 @@ import useAuth from '@/hooks/useAuth';
 import { Input } from '@/components/ui/input';
 import { FeedFormDialog } from './FeedFormDialog';
 import BaseAvatar from '@/components/base/avatars/BaseAvatar';
+import { UseFormReturn } from 'react-hook-form';
 
-const FeedForm = (props: any) => {
+const FeedForm: React.FC<{
+  isPostingFeed: boolean;
+  isOpenPostFeed: boolean;
+  onSubmitPostFeed: () => void;
+  toggleOpenPostFeed: () => void;
+  postFeedForm: UseFormReturn<{ feed_content: string }, any, undefined>;
+}> = ({ isPostingFeed, isOpenPostFeed, postFeedForm, onSubmitPostFeed, toggleOpenPostFeed }) => {
   const { onActionWithAuth, userData } = useAuth();
-  const { isOpenPostFeed, toggleOpenPostFeed, postFeedForm, onSubmitPostFeed, isPostingFeed } =
-    props;
 
   const { photoURL, displayName } = userData || {};
 

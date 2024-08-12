@@ -1,11 +1,18 @@
 import React from 'react';
+import urlJoin from 'url-join';
 import { Input } from '@/components/ui/input';
-
 import BaseButton from '@/components/base/buttons/BaseButton';
 import BaseDialog from '@/components/base/dialogs/BaseDialog';
-import urlJoin from 'url-join';
 
-const FeedShareDialog: React.FC<any> = (props) => {
+const FeedShareDialog: React.FC<{
+  id: string;
+  baseUrl: string;
+  isOpen: boolean;
+  isCopied: boolean;
+  isLoading: boolean;
+  toggleOpen: () => void;
+  onSubmit: () => void;
+}> = (props) => {
   const { id, baseUrl, isOpen, toggleOpen, isLoading, onSubmit, isCopied } = props;
   const url = id ? urlJoin(baseUrl, `post/${id}`) : baseUrl;
 

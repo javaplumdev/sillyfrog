@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 
-export default function ModeToggle({ className, ...rest }: any) {
+const ModeToggle: React.FC<{ className: string }> = ({ className, ...rest }) => {
   const { setTheme } = useTheme();
 
   return (
@@ -32,4 +32,6 @@ export default function ModeToggle({ className, ...rest }: any) {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};
+
+export default ModeToggle;

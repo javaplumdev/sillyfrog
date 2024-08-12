@@ -1,12 +1,14 @@
 import React from 'react';
 import { toast } from 'sonner';
 import { useParams } from 'next/navigation';
-import { getDocs, query, where } from 'firebase/firestore';
+import { DocumentData, getDocs, Query, query, QuerySnapshot, where } from 'firebase/firestore';
 import { collectionRefComments } from '@/firebase/firebaseConfig';
+
+type DataProps = { id: string };
 
 const useGetComments = () => {
   const { id } = useParams();
-  const [data, setData] = React.useState<any>([]);
+  const [data, setData] = React.useState<DataProps[]>([{ id: '' }]);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   React.useEffect(() => {
@@ -17,13 +19,16 @@ const useGetComments = () => {
     setIsLoading(true);
 
     try {
-      const q = query(collectionRefComments, where('postId', '==', id));
-      const data = await getDocs(q);
-      const filteredData: any = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      const q: Query<DocumentData, DocumentData> = query(
+        collectionRefComments,
+        where('postId', '==', id)
+      );
+      const data: QuerySnapshot<DocumentData, DocumentData> = await getDocs(q);
+      const filteredData: DataProps[] = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 
       setData(filteredData);
-    } catch (e: any) {
-      toast.error(e.message);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'An unknown error occurred');
     } finally {
       setIsLoading(false);
     }
