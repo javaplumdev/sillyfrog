@@ -1,5 +1,5 @@
 interface DialogProps {
-  children?: any;
+  children?: React.ReactNode;
   title?: string;
   isOpen: boolean;
   isLoading: boolean;

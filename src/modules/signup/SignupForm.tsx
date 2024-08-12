@@ -5,8 +5,23 @@ import { Input } from '@/components/ui/input';
 import { FormField } from '@/components/ui/form';
 import BaseButton from '@/components/base/buttons/BaseButton';
 import { Form, FormControl, FormItem, FormMessage } from '@/components/ui/form';
+import { Control, FieldValues } from 'react-hook-form';
 
-const SignupForm = ({ form, control, isPassValid, onSubmit, isLoading }: any) => {
+type SignupFormProps = {
+  form: any;
+  isLoading: boolean;
+  onSubmit: () => void;
+  control: Control<FieldValues>;
+  isPassValid: (data: boolean) => boolean;
+};
+
+const SignupForm: React.FC<SignupFormProps> = ({
+  form,
+  control,
+  isPassValid,
+  onSubmit,
+  isLoading,
+}) => {
   const { handleSubmit, watch } = form || {};
   const { togglePasswordOpen, isPasswordOpen } = useAuth();
 

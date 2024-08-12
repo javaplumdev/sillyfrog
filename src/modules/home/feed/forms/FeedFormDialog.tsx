@@ -17,11 +17,11 @@ export function FeedFormDialog({
   isLoading,
   toggleOpen,
 }: {
-  form: UseFormReturn<{ feed_content: string }, any, undefined>;
   isOpen: boolean;
   isLoading: boolean;
   onSubmit: () => void;
   toggleOpen: () => void;
+  form: UseFormReturn<{ feed_content: string }, {}, undefined>;
 }) {
   const { handleSubmit, control } = form || {};
 

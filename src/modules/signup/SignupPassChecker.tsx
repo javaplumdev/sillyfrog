@@ -1,13 +1,22 @@
 import React from 'react';
 import { Check, X } from 'lucide-react';
 
-const SignupPassChecker = ({ form, passwordReq }: any) => {
+interface PasswordRequirement {
+  text: string;
+  match: boolean;
+}
+
+interface SignupPassCheckerProps {
+  form: { watch: (field: string) => string };
+  passwordReq: (password: string) => PasswordRequirement[];
+}
+
+const SignupPassChecker: React.FC<SignupPassCheckerProps> = ({ form, passwordReq }) => {
   const { watch } = form || {};
 
   return (
     <div className="text-sm mt-5">
-      {passwordReq(watch('password')).map((item: any, index: number) => {
-        const { text, match } = item || {};
+      {passwordReq(watch('password')).map(({ text, match }: PasswordRequirement, index: number) => {
         return (
           <div key={index} className="flex items-center mt-1">
             <div className="mr-1">

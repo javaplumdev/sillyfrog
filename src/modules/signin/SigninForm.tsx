@@ -6,10 +6,10 @@ import BaseButton from '@/components/base/buttons/BaseButton';
 import { Form, FormControl, FormItem, FormMessage } from '@/components/ui/form';
 import { Eye, EyeOff } from 'lucide-react';
 import useAuth from '@/hooks/useAuth';
-import { Control, FieldValues } from 'react-hook-form';
+import { Control, FieldValues, UseFormReturn } from 'react-hook-form';
 
 const SigninForm: React.FC<{
-  form: { handleSubmit: any; control: Control<FieldValues> };
+  form: UseFormReturn<FieldValues, {}, undefined>;
   isLoading: boolean;
   onSubmit: () => void;
 }> = ({ form, onSubmit, isLoading }) => {

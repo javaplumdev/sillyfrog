@@ -10,7 +10,7 @@ import { FieldValues, UseFormReturn } from 'react-hook-form';
 
 type PostInputCommentProps = {
   onSubmit: () => void;
-  form: UseFormReturn<FieldValues, any, undefined>;
+  form: UseFormReturn<FieldValues, {}, undefined>;
 };
 
 const PostInputComment: React.FC<PostInputCommentProps> = ({ form, onSubmit }) => {

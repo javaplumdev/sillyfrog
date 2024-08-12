@@ -11,10 +11,10 @@ interface FeedDataProps {
 }
 
 interface FeedCardInteractionsProps {
-  id?: string | undefined;
+  id?: string;
   data?: any;
-  onSave: (id: string, data: FeedDataProps[]) => void;
-  toggleShare: (id: string) => void;
+  onSave: (id?: string, data?: FeedDataProps[]) => void;
+  toggleShare: (id?: string) => void;
   comments?: [];
 }
 
