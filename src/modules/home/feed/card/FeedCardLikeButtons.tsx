@@ -13,7 +13,7 @@ type FeedCardLikeButtonsProps = {
   onClick: (id: string, data: DataProps[]) => void;
 };
 
-const FeedCardLikeButtons: React.FC<FeedCardLikeButtonsProps> = ({
+const FeedCardLikeButtons: React.FC<FeedCardLikeButtonsProps & any> = ({
   id,
   data,
   type,

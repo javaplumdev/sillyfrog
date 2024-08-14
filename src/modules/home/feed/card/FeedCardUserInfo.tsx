@@ -17,8 +17,9 @@ import {
 type FeedCardUserInfoProps = {
   id?: string;
   name?: string;
-  seconds: number;
+  number?: number | null;
   userId?: string;
+  seconds: number | null;
   toggleDelete: (id: string) => void;
 };
 
@@ -32,12 +33,14 @@ const FeedCardUserInfo: React.FC<FeedCardUserInfoProps> = ({
   const { userData, isAuth } = useAuth();
   const { uid } = userData || {};
 
+  const sec = seconds || 0;
+
   return (
     <div className="flex items-center justify-between w-full">
       <div className="flex flex-col">
         <span className="font-bold">{name}</span>
         <span className="text-xs">
-          {dateLabel(seconds)} - {timeDifference(seconds)}
+          {dateLabel(sec)} - {timeDifference(sec)}
         </span>
       </div>
       <DropdownMenu>
