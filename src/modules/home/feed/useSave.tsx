@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import { toast } from 'sonner';
 import useAuth from '@/hooks/useAuth';
 import { db } from '@/firebase/firebaseConfig';
 import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import { sonnerToast } from '@/lib/toast';
 
 interface SaveData {
   id: string;
@@ -27,7 +27,7 @@ const useSave = () => {
         saves: isSave ? arrayRemove({ user: uid }) : arrayUnion({ user: uid }),
       });
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'An unknown error occurred');
+      sonnerToast('error', error instanceof Error && error.message);
     } finally {
       setIsLoading(false);
     }

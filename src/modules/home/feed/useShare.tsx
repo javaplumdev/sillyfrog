@@ -1,7 +1,7 @@
 import React from 'react';
 import urlJoin from 'url-join';
-import { toast } from 'sonner';
 import { useParams } from 'next/navigation';
+import { sonnerToast } from '@/lib/toast';
 
 const useShare = () => {
   const { id: paramsId } = useParams();
@@ -30,13 +30,13 @@ const useShare = () => {
     try {
       const url = id ? urlJoin(baseUrl, `post/${id}`) : baseUrl;
       navigator.clipboard.writeText(url);
-    } catch (e) {
-      toast.error(e as string);
+    } catch (error) {
+      sonnerToast('error', error instanceof Error && error.message);
     } finally {
       setIsLoading(false);
       setIsCopied(true);
 
-      toast.success('Link copied!');
+      sonnerToast('success', 'Link copied!');
     }
   };
 

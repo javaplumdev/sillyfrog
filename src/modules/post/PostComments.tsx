@@ -2,22 +2,22 @@
 
 import React from 'react';
 import PostInputComment from './PostInputComment';
-import BaseAvatar from '@/components/base/avatars/BaseAvatar';
 import FeedCardUserInfo from '../home/feed/card/FeedCardUserInfo';
 
-import styles from './style.module.scss';
 import { cn } from '@/lib/utils';
+import styles from './style.module.scss';
+import BaseAvatar from '@/components/base/avatars/BaseAvatar';
 import BaseSkeleton from '@/components/base/skeletons/BaseSkeleton';
 import BaseCardSkeletons from '@/components/base/skeletons/BaseCardSkeletons';
 
 type DataProps = { content: string; photo: string; name: string; timestamp: { seconds: number } };
 
-const PostComments: React.FC<
-  {
-    data: DataProps[];
-    isLoading: boolean;
-  } & any
-> = ({ data = [], isLoading, ...rest }) => {
+type PostCommentsProps = {
+  data: DataProps[];
+  isLoading: boolean;
+} & any;
+
+const PostComments: React.FC<PostCommentsProps> = ({ data = [], isLoading, ...rest }) => {
   return (
     <div className="pt-3 flex flex-col space-y-4">
       <div className="text-md font-bold flex space-x-2 items-center">

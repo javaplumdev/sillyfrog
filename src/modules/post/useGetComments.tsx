@@ -1,8 +1,8 @@
 import React from 'react';
-import { toast } from 'sonner';
+import { sonnerToast } from '@/lib/toast';
 import { useParams } from 'next/navigation';
-import { DocumentData, getDocs, Query, query, QuerySnapshot, where } from 'firebase/firestore';
 import { collectionRefComments } from '@/firebase/firebaseConfig';
+import { DocumentData, getDocs, Query, query, QuerySnapshot, where } from 'firebase/firestore';
 
 type DataProps = { id: string };
 
@@ -29,7 +29,7 @@ const useGetComments = () => {
 
       setData(filteredData);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'An unknown error occurred');
+      sonnerToast('error', error instanceof Error && error.message);
     } finally {
       setTimeout(() => setIsLoading(false), 1000);
     }

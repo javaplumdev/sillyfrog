@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import React from 'react';
-import { toast } from 'sonner';
 import { v4 as uuidv4 } from 'uuid';
 import useAuth from '@/hooks/useAuth';
+import { sonnerToast } from '@/lib/toast';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { db } from '@/firebase/firebaseConfig';
@@ -55,9 +55,9 @@ const usePostFeed = () => {
         timestamp: serverTimestamp(),
       });
 
-      toast.success('Post created!');
+      sonnerToast('success', 'Post Created!');
     } catch (error) {
-      toast.error(error as string);
+      sonnerToast('error', error instanceof Error && error.message);
     } finally {
       setIsOpen(false);
       reset();

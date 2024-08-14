@@ -1,7 +1,7 @@
 import React from 'react';
-import { toast } from 'sonner';
 import { collectionRefFeeds } from '@/firebase/firebaseConfig';
 import { DocumentData, onSnapshot, orderBy, Query, query, QuerySnapshot } from 'firebase/firestore';
+import { sonnerToast } from '@/lib/toast';
 
 type DataProps = {
   id: string;
@@ -33,7 +33,7 @@ const useGetFeed = () => {
         setData(d);
       });
     } catch (error) {
-      toast.error('Event has not been created');
+      sonnerToast('error', error instanceof Error && error.message);
     } finally {
       setTimeout(() => setIsLoading(false), 1000);
     }

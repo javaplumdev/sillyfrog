@@ -1,8 +1,8 @@
 'use client';
 import { useState } from 'react';
 import { z } from 'zod';
-import { toast } from 'sonner';
 import { useForm } from 'react-hook-form';
+import { sonnerToast } from '@/lib/toast';
 import { useRouter } from 'next/navigation';
 import { SignupProps } from '@/types/signup';
 import { auth } from '@/firebase/firebaseConfig';
@@ -23,7 +23,7 @@ const useSignup = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
 
-      toast.success('Successfully created! You may not log in your account.');
+      sonnerToast('success', 'Successfully created! You may not log in your account.');
 
       router.push('/signin');
     } catch (error) {

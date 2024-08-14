@@ -7,6 +7,8 @@ import FeedCardLikeButtons from '../home/feed/card/FeedCardLikeButtons';
 import FeedCardInteractions from '../home/feed/card/FeedCardInteractions';
 import BaseCardSkeletons from '@/components/base/skeletons/BaseCardSkeletons';
 
+type dataPayload = { id: string; user: string };
+
 export type DataProps = {
   saves?: [];
   likes?: [];
@@ -21,9 +23,12 @@ const PostCard: React.FC<{
   seconds: number;
   data: DataProps | any;
   isLoading: boolean;
+  isDisliking: boolean;
   toggleShare: () => void;
   toggleDelete: () => void;
-}> = ({ data, isLoading, seconds, toggleDelete, toggleShare }) => {
+  onLike: (id: string, data: dataPayload[]) => Promise<void>;
+  onDislike: (id: string, data: dataPayload[]) => Promise<void>;
+}> = ({ data, isLoading, seconds, toggleDelete, toggleShare, onDislike, onLike }) => {
   const { saves, likes, postId, dislikes, feed_content } = data || {};
 
   return (
@@ -38,9 +43,21 @@ const PostCard: React.FC<{
           <div className="my-3">{feed_content}</div>
 
           <div className="flex space-x-2 items-center">
-            <FeedCardLikeButtons type="like" Icon={ChevronUp} data={likes} {...data} />
+            <FeedCardLikeButtons
+              type="like"
+              data={likes}
+              Icon={ChevronUp}
+              onClick={onLike}
+              {...data}
+            />
             <span>{(likes || []).length}</span>
-            <FeedCardLikeButtons type="dislike" data={dislikes} Icon={ChevronDown} {...data} />
+            <FeedCardLikeButtons
+              type="dislike"
+              data={dislikes}
+              Icon={ChevronDown}
+              onClick={onDislike}
+              {...data}
+            />
             <FeedCardInteractions id={postId} data={saves} toggleShare={toggleShare} {...data} />
           </div>
         </div>

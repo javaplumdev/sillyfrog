@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import { toast } from 'sonner';
 import { useParams, usePathname } from 'next/navigation';
+import { sonnerToast } from '@/lib/toast';
 import { db } from '@/firebase/firebaseConfig';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, onSnapshot } from 'firebase/firestore';
 
 const useGetView = () => {
   const location = usePathname();
@@ -23,11 +23,12 @@ const useGetView = () => {
       setIsLoading(true);
 
       const docRef = doc(db, 'feed', id as string);
-      const snapshot = await getDoc(docRef);
 
-      setData(snapshot.data() as any);
+      onSnapshot(docRef, (snapshot) => {
+        setData(snapshot.data() as any);
+      });
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'An unknown error occurred');
+      sonnerToast('error', error instanceof Error && error.message);
     } finally {
       setTimeout(() => {
         setIsLoading(false);
@@ -35,7 +36,7 @@ const useGetView = () => {
     }
   };
 
-  return { data, isLoading };
+  return { data, isLoading, reload: getData };
 };
 
 export default useGetView;

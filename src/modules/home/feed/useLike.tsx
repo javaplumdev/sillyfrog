@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import { toast } from 'sonner';
 import useAuth from '@/hooks/useAuth';
 import { db } from '@/firebase/firebaseConfig';
 import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import { sonnerToast } from '@/lib/toast';
 
 const useLike = () => {
   const { userData } = useAuth();
@@ -21,8 +21,8 @@ const useLike = () => {
       await updateDoc(doc(db, 'feed', id), {
         likes: isLike ? arrayRemove({ user: uid }) : arrayUnion({ user: uid }),
       });
-    } catch (e) {
-      toast.error(e as string);
+    } catch (error) {
+      sonnerToast('error', error instanceof Error && error.message);
     } finally {
       setIsLoading(false);
     }
