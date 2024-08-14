@@ -12,7 +12,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 const useSignup = () => {
   const router = useRouter();
 
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const onSubmit = async (data: SignupProps) => {
@@ -27,7 +27,7 @@ const useSignup = () => {
 
       router.push('/signin');
     } catch (error) {
-      setError(error);
+      setError(error instanceof Error ? error.message : 'An unknown error occurred');
     } finally {
       setIsLoading(false);
     }

@@ -11,7 +11,7 @@ googleProvider.setCustomParameters({
 const useSigninWithGoogle = () => {
   const router = useRouter();
 
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const onSubmit = async () => {
@@ -22,7 +22,7 @@ const useSigninWithGoogle = () => {
 
       if (result) router.push('/');
     } catch (error) {
-      setError(error);
+      setError(error instanceof Error ? error.message : 'An unknown error occurred');
     } finally {
       setIsLoading(false);
     }
