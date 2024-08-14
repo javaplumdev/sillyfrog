@@ -11,7 +11,7 @@ import Error from 'next/error';
 const useSignin = () => {
   const router = useRouter();
 
-  const [error, setError] = React.useState<string | null>(null);
+  const [error, setError] = React.useState<string | any>(null);
   const [isLoading, setIsLoading] = React.useState(false);
 
   const formSchema = z.object({

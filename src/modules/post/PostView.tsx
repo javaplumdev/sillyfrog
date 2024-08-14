@@ -7,7 +7,7 @@ import usePostComment from './usePostComment';
 import useGetComments from './useGetComments';
 
 const PostView = () => {
-  const { data, isLoading } = useView();
+  const { data, ...rest } = useView();
   const { reload, ...commentListProps } = useGetComments();
   const commentProps = usePostComment(reload);
 
@@ -16,7 +16,7 @@ const PostView = () => {
 
   return (
     <div className="flex flex-col space-y-2">
-      <PostCard data={data} isLoading={isLoading} seconds={seconds} />
+      <PostCard data={data} seconds={seconds} {...rest} />
       <PostComments {...commentProps} {...commentListProps} />
     </div>
   );

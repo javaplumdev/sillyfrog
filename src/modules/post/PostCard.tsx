@@ -21,7 +21,9 @@ const PostCard: React.FC<{
   seconds: number;
   data: DataProps | any;
   isLoading: boolean;
-}> = ({ data, isLoading, seconds }) => {
+  toggleShare: () => void;
+  toggleDelete: () => void;
+}> = ({ data, isLoading, seconds, toggleDelete, toggleShare }) => {
   const { saves, likes, postId, dislikes, feed_content } = data || {};
 
   return (
@@ -31,7 +33,7 @@ const PostCard: React.FC<{
         <div className="flex flex-col space-y-6">
           <div className="flex flex-row items-center space-x-2 w-full">
             <BaseAvatar {...data} />
-            <FeedCardUserInfo seconds={seconds} {...data} />
+            <FeedCardUserInfo seconds={seconds} toggleDelete={toggleDelete} {...data} />
           </div>
           <div className="my-3">{feed_content}</div>
 
@@ -39,7 +41,7 @@ const PostCard: React.FC<{
             <FeedCardLikeButtons type="like" Icon={ChevronUp} data={likes} {...data} />
             <span>{(likes || []).length}</span>
             <FeedCardLikeButtons type="dislike" data={dislikes} Icon={ChevronDown} {...data} />
-            <FeedCardInteractions id={postId} data={saves} {...data} />
+            <FeedCardInteractions id={postId} data={saves} toggleShare={toggleShare} {...data} />
           </div>
         </div>
       )}

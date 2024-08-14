@@ -8,7 +8,7 @@ type DataProps = { id: string };
 
 const useGetComments = () => {
   const { id } = useParams();
-  const [data, setData] = React.useState<DataProps[]>([{ id: '' }]);
+  const [data, setData] = React.useState<DataProps[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   React.useEffect(() => {
@@ -31,7 +31,7 @@ const useGetComments = () => {
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'An unknown error occurred');
     } finally {
-      setIsLoading(false);
+      setTimeout(() => setIsLoading(false), 1000);
     }
   };
 

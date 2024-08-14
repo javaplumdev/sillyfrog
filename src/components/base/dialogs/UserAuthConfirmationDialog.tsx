@@ -13,7 +13,10 @@ interface UserAuthConfirmationDialogProps {
   toggleOpen: () => void;
 }
 
-const UserAuthConfirmationDialog = ({ isOpen, toggleOpen }: UserAuthConfirmationDialogProps) => {
+const UserAuthConfirmationDialog: React.FC<UserAuthConfirmationDialogProps> = ({
+  isOpen,
+  toggleOpen,
+}) => {
   return (
     <Dialog open={isOpen} onOpenChange={toggleOpen}>
       <DialogContent className="sm:max-w-[425px]">

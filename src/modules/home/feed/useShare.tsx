@@ -1,9 +1,12 @@
 import React from 'react';
 import urlJoin from 'url-join';
 import { toast } from 'sonner';
+import { useParams } from 'next/navigation';
 
 const useShare = () => {
-  const [id, setId] = React.useState<string>('');
+  const { id: paramsId } = useParams();
+
+  const [id, setId] = React.useState<string>((paramsId as string) || '');
   const [baseUrl, setBaseUrl] = React.useState<string>('');
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   const [isCopied, setIsCopied] = React.useState<boolean>(false);
@@ -16,7 +19,7 @@ const useShare = () => {
   }, []);
 
   const toggleOpen = (id?: string) => {
-    setId(id || '');
+    setId((id || paramsId) as string);
     setIsOpen(!isOpen);
     setIsCopied(false);
   };
