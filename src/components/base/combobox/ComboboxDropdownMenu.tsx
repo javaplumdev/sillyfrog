@@ -17,25 +17,41 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { UseFormReturn } from 'react-hook-form';
+import useGetLabels from './useGetLabels';
+import BaseLoader from '../loader/BaseLoader';
 
-const _labels = ['question', 'ribbit'];
-
-type ValueProps = {
-  feed_content: string;
-  label: string;
-};
+type ValueProps = { feed_content: string; label: string };
 
 export default function ComboboxDropdownMenu({
   setValue,
   getValues, // <--- actual data to be passed on firebase
 }: UseFormReturn<ValueProps, {}, undefined>) {
   const [open, setOpen] = React.useState<boolean>(false);
-
-  // input value
   const [label, setLabel] = React.useState<string>('');
 
+  const { data, isLoading } = useGetLabels(label);
+
   // values
-  const [labels, setLabels] = React.useState<string[]>(_labels);
+  const [labels, setLabels] = React.useState<string[]>([]);
+
+  React.useEffect(() => {
+    setLabels(data);
+  }, [data]);
+
+  const handleSearch = (search: string) => {
+    setLabel(search);
+
+    if (search.trim() === '') {
+      setLabels(data);
+    } else {
+      const lowered = search.toLowerCase();
+      const filtered = data.filter(({ label }: { label: string }) =>
+        label.toLowerCase().includes(lowered)
+      );
+
+      setLabels(filtered);
+    }
+  };
 
   return (
     <div>
@@ -50,6 +66,7 @@ export default function ComboboxDropdownMenu({
           onOpenChange={() => {
             setOpen(!open);
             setLabel('');
+            setLabels(data);
           }}
         >
           <DropdownMenuTrigger asChild>
@@ -68,16 +85,16 @@ export default function ComboboxDropdownMenu({
                     <Input
                       type="text"
                       value={label}
-                      placeholder="Filter / Add label..."
-                      onChange={(e) => setLabel(e.target.value)}
+                      placeholder="Search / Add label..."
+                      onChange={(e) => handleSearch(e.target.value)}
                     />
                     <BaseButton
                       icon={<Plus size="18" />}
                       onClick={() => {
                         if (label.trim() === '') return;
 
-                        setLabels((prev) => [...prev, label.trim()]);
-                        setLabel(''); // Clear the input field
+                        setOpen(false);
+                        setLabel(''); // clear the input field
                       }}
                     >
                       Add
@@ -85,22 +102,28 @@ export default function ComboboxDropdownMenu({
                   </div>
 
                   <div className="text-sm">
-                    {(labels || []).map((item: string, index: number) => {
-                      if (isEmpty(labels)) return 'No results found';
+                    <div className="text-center">
+                      {!!isLoading && <BaseLoader />}
 
-                      return (
-                        <div
-                          key={index}
-                          className="flex flex-col p-2 hover:bg-accent hover:text-accent-foreground hover:cursor-pointer rounded-md"
-                          onClick={() => {
-                            setValue('label', item);
-                            setOpen(false);
-                          }}
-                        >
-                          {item}
-                        </div>
-                      );
-                    })}
+                      {isEmpty(labels) && <div className="p-2">No results found</div>}
+                    </div>
+
+                    {!isLoading &&
+                      (labels || []).map(({ label }: any, index: number) => {
+                        return (
+                          <div
+                            key={index}
+                            className="flex flex-col p-2 hover:bg-accent hover:text-accent-foreground hover:cursor-pointer rounded-md"
+                            onClick={() => {
+                              setValue('label', label);
+                              setOpen(false);
+                              setLabels(data);
+                            }}
+                          >
+                            {label}
+                          </div>
+                        );
+                      })}
                   </div>
                 </div>
               </DropdownMenuSub>
