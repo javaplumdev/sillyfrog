@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import useAuth from '@/hooks/useAuth';
 import { sonnerToast } from '@/lib/toast';
 import { useForm } from 'react-hook-form';
+import { getTimestamp } from '@/lib/dates';
 import { useRouter } from 'next/navigation';
 import { db } from '@/firebase/firebaseConfig';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -22,12 +23,14 @@ const usePostFeed = () => {
 
   const formSchema = z.object({
     feed_content: z.string().min(1, 'Content is required.'),
+    label: z.string(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       feed_content: '',
+      label: 'ribbit',
     },
   });
 
@@ -38,7 +41,7 @@ const usePostFeed = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
-  const onSubmit = async (data: { feed_content: string }) => {
+  const onSubmit = async (data: { feed_content: string; label: string }) => {
     const postId = uuidv4();
 
     try {
@@ -52,7 +55,7 @@ const usePostFeed = () => {
         photo: photoURL,
         postId: postId,
         name: displayName || email,
-        timestamp: serverTimestamp(),
+        timestamp: getTimestamp() || serverTimestamp(),
       });
 
       sonnerToast('success', 'Post Created!');
@@ -62,9 +65,7 @@ const usePostFeed = () => {
       setIsOpen(false);
       reset();
 
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
+      setTimeout(() => setIsLoading(false), 1000);
     }
   };
 

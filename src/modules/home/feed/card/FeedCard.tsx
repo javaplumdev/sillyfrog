@@ -45,9 +45,16 @@ const FeedCard: React.FC<
 
       {!isLoading &&
         (data || []).map((item: Feed, index: number) => {
-          const { saves, likes, postId, dislikes, timestamp, feed_content } = item || {};
+          const {
+            saves,
+            likes,
+            postId,
+            dislikes,
+            feed_content,
+            timestamp = { seconds: 0 },
+          } = item || {};
 
-          const seconds: number | null = timestamp ? timestamp.seconds : null;
+          const seconds: number = timestamp.seconds || 0;
 
           return (
             <Card

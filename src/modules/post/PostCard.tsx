@@ -27,8 +27,9 @@ const PostCard: React.FC<{
   toggleShare: () => void;
   toggleDelete: () => void;
   onLike: (id: string, data: dataPayload[]) => Promise<void>;
+  onSave: (id: string, data: dataPayload[]) => Promise<void>;
   onDislike: (id: string, data: dataPayload[]) => Promise<void>;
-}> = ({ data, isLoading, seconds, toggleDelete, toggleShare, onDislike, onLike }) => {
+}> = ({ data, isLoading, seconds, toggleDelete, toggleShare, onDislike, onLike, onSave }) => {
   const { saves, likes, postId, dislikes, feed_content } = data || {};
 
   return (
@@ -58,7 +59,13 @@ const PostCard: React.FC<{
               onClick={onDislike}
               {...data}
             />
-            <FeedCardInteractions id={postId} data={saves} toggleShare={toggleShare} {...data} />
+            <FeedCardInteractions
+              id={postId}
+              data={saves}
+              onSave={onSave}
+              toggleShare={toggleShare}
+              {...data}
+            />
           </div>
         </div>
       )}

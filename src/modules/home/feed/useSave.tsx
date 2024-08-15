@@ -2,9 +2,10 @@
 
 import React from 'react';
 import useAuth from '@/hooks/useAuth';
+import { sonnerToast } from '@/lib/toast';
+import { useParams } from 'next/navigation';
 import { db } from '@/firebase/firebaseConfig';
 import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
-import { sonnerToast } from '@/lib/toast';
 
 interface SaveData {
   id: string;
@@ -12,6 +13,7 @@ interface SaveData {
 }
 
 const useSave = () => {
+  const { id: paramsId } = useParams();
   const { userData } = useAuth();
   const { uid } = userData || {};
 
@@ -20,10 +22,12 @@ const useSave = () => {
   const onSubmit = async (id: string, data: SaveData[]) => {
     setIsLoading(true);
 
+    let ids = id || paramsId;
+
     try {
       const isSave = (data || []).find(({ user }: { user: string }) => user === uid);
 
-      await updateDoc(doc(db, 'feed', id), {
+      await updateDoc(doc(db, 'feed', ids as string), {
         saves: isSave ? arrayRemove({ user: uid }) : arrayUnion({ user: uid }),
       });
     } catch (error) {

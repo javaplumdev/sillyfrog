@@ -12,7 +12,7 @@ const FeedForm: React.FC<
     isOpenPostFeed: boolean;
     onSubmitPostFeed: () => void;
     toggleOpenPostFeed: () => void;
-    postFeedForm: UseFormReturn<{ feed_content: string }, {}, undefined>;
+    postFeedForm: UseFormReturn<{ feed_content: string; label: string }, {}, undefined>;
   } & any
 > = ({ isPostingFeed, isOpenPostFeed, postFeedForm, onSubmitPostFeed, toggleOpenPostFeed }) => {
   const { onActionWithAuth, userData } = useAuth();

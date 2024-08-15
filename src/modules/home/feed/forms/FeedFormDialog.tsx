@@ -1,13 +1,14 @@
 import { UseFormReturn } from 'react-hook-form';
 import {
   Dialog,
+  DialogTitle,
+  DialogHeader,
   DialogContent,
   DialogDescription,
-  DialogHeader,
-  DialogTitle,
 } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import BaseButton from '@/components/base/buttons/BaseButton';
+import ComboboxDropdownMenu from '@/components/base/combobox/ComboboxDropdownMenu';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 
 export function FeedFormDialog({
@@ -21,13 +22,13 @@ export function FeedFormDialog({
   isLoading: boolean;
   onSubmit: () => void;
   toggleOpen: () => void;
-  form: UseFormReturn<{ feed_content: string }, {}, undefined>;
+  form: UseFormReturn<{ feed_content: string; label: string }, {}, undefined>;
 }) {
   const { handleSubmit, control } = form || {};
 
   return (
     <Dialog open={isOpen} onOpenChange={toggleOpen}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="max-w-[425px] sm:max-w-[600px]">
         <DialogHeader>
           <DialogTitle>Post feed</DialogTitle>
           <DialogDescription>
@@ -54,6 +55,8 @@ export function FeedFormDialog({
                   </FormItem>
                 )}
               />
+
+              <ComboboxDropdownMenu {...form} />
 
               <BaseButton
                 type="submit"
