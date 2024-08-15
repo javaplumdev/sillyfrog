@@ -25,14 +25,12 @@ const useGetView = () => {
       const docRef = doc(db, 'feed', id as string);
 
       onSnapshot(docRef, (snapshot) => {
-        setData(snapshot.data() as any);
+        setData(snapshot.data({ serverTimestamps: 'estimate' }) as any);
       });
     } catch (error) {
       sonnerToast('error', error instanceof Error && error.message);
     } finally {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
+      setTimeout(() => setIsLoading(false), 500);
     }
   };
 

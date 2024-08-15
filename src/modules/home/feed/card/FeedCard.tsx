@@ -12,6 +12,7 @@ import BaseCardSkeletons from '@/components/base/skeletons/BaseCardSkeletons';
 import FeedCardUserInfo from './FeedCardUserInfo';
 import FeedCardLikeButtons from './FeedCardLikeButtons';
 import FeedCardInteractions from './FeedCardInteractions';
+import { Badge } from '@/components/ui/badge';
 
 const FeedCard: React.FC<
   {
@@ -48,6 +49,7 @@ const FeedCard: React.FC<
           const {
             saves,
             likes,
+            label,
             postId,
             dislikes,
             feed_content,
@@ -97,7 +99,9 @@ const FeedCard: React.FC<
                   <FeedCardUserInfo seconds={seconds} toggleDelete={toggleDelete} {...item} />
                 </div>
                 <div className="break-all">{feed_content}</div>
-
+                <Badge className="inline-block max-w-max bg-secondary text-foreground">
+                  {label}
+                </Badge>
                 <FeedCardInteractions
                   id={postId}
                   data={saves}

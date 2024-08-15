@@ -25,17 +25,17 @@ const useGetFeed = () => {
       );
 
       onSnapshot(q, (snapshot: QuerySnapshot<DocumentData>) => {
-        const d: DataProps[] = snapshot.docs.map((doc) => ({
-          ...(doc.data() as DataProps),
+        const data = snapshot.docs.map((doc) => ({
+          ...(doc.data({ serverTimestamps: 'estimate' }) as DataProps),
           id: doc.id,
         }));
 
-        setData(d);
+        setData(data);
       });
     } catch (error) {
       sonnerToast('error', error instanceof Error && error.message);
     } finally {
-      setTimeout(() => setIsLoading(false), 1000);
+      setTimeout(() => setIsLoading(false), 500);
     }
   };
 

@@ -9,10 +9,12 @@ import { useRouter } from 'next/navigation';
 import { db } from '@/firebase/firebaseConfig';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import useAddLabels from '@/components/base/combobox/useAddLabels';
 
 const usePostFeed = () => {
   const router = useRouter();
   const { userData } = useAuth();
+  const { onAdd } = useAddLabels();
 
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -41,7 +43,7 @@ const usePostFeed = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
-  const onSubmit = async (data: { feed_content: string; label: string }) => {
+  const onSubmit = async ({ label, ...data }: { feed_content: string; label: string }) => {
     const postId = uuidv4();
 
     try {
@@ -51,12 +53,15 @@ const usePostFeed = () => {
 
       await setDoc(doc(db, 'feed', postId), {
         ...data,
+        label: label,
         userId: uid,
         photo: photoURL,
         postId: postId,
         name: displayName || email,
-        timestamp: getTimestamp() || serverTimestamp(),
+        timestamp: serverTimestamp() || getTimestamp(),
       });
+
+      onAdd(label);
 
       sonnerToast('success', 'Post Created!');
     } catch (error) {

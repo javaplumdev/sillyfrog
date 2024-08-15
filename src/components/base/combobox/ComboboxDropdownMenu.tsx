@@ -3,22 +3,24 @@
 import * as React from 'react';
 import { isEmpty } from 'lodash';
 import { Plus, Tags } from 'lucide-react';
+import { UseFormReturn } from 'react-hook-form';
 
+import BaseLoader from '../loader/BaseLoader';
 import BaseButton from '../buttons/BaseButton';
+import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
-  DropdownMenuContent,
+  DropdownMenuSub,
   DropdownMenuGroup,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuSub,
+  DropdownMenuContent,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
-import { UseFormReturn } from 'react-hook-form';
 import useGetLabels from './useGetLabels';
-import BaseLoader from '../loader/BaseLoader';
+import useAddLabels from './useAddLabels';
+import { sonnerToast } from '@/lib/toast';
 
 type ValueProps = { feed_content: string; label: string };
 
@@ -26,17 +28,16 @@ export default function ComboboxDropdownMenu({
   setValue,
   getValues, // <--- actual data to be passed on firebase
 }: UseFormReturn<ValueProps, {}, undefined>) {
-  const [open, setOpen] = React.useState<boolean>(false);
   const [label, setLabel] = React.useState<string>('');
-
-  const { data, isLoading } = useGetLabels(label);
-
-  // values
+  const [open, setOpen] = React.useState<boolean>(false);
   const [labels, setLabels] = React.useState<string[]>([]);
 
-  React.useEffect(() => {
-    setLabels(data);
-  }, [data]);
+  const { data, isLoading } = useGetLabels(label);
+  const { isAdding } = useAddLabels();
+
+  // values
+
+  React.useEffect(() => setLabels(data), [data]);
 
   const handleSearch = (search: string) => {
     setLabel(search);
@@ -89,12 +90,24 @@ export default function ComboboxDropdownMenu({
                       onChange={(e) => handleSearch(e.target.value)}
                     />
                     <BaseButton
+                      disabled={isAdding}
                       icon={<Plus size="18" />}
                       onClick={() => {
                         if (label.trim() === '') return;
 
+                        const exists = data.find(
+                          ({ label: text }: { label: string }) => text === label
+                        );
+
+                        if (exists)
+                          return sonnerToast(
+                            'error',
+                            `"${label}" already exists. Select label if you wish to add`
+                          );
+
+                        setLabel('');
                         setOpen(false);
-                        setLabel(''); // clear the input field
+                        setValue('label', label);
                       }}
                     >
                       Add
@@ -109,7 +122,7 @@ export default function ComboboxDropdownMenu({
                     </div>
 
                     {!isLoading &&
-                      (labels || []).map(({ label }: any, index: number) => {
+                      (labels || []).slice(0, 6).map(({ label }: any, index: number) => {
                         return (
                           <div
                             key={index}

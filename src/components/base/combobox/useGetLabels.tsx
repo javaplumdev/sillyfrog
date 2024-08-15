@@ -1,5 +1,4 @@
 import React from 'react';
-import Error from 'next/error';
 import { sonnerToast } from '@/lib/toast';
 import { collectionRefLabels } from '@/firebase/firebaseConfig';
 import {
@@ -29,8 +28,7 @@ const useGetLabels = (search: string) => {
         collectionRefLabels,
         where('label', '>=', search),
         where('label', '<=', search + '\uf8ff'),
-        orderBy('label'),
-        limit(10)
+        orderBy('label')
       );
 
       onSnapshot(q, (snapshot: QuerySnapshot<DocumentData>) => {
@@ -42,7 +40,7 @@ const useGetLabels = (search: string) => {
         setData(d);
       });
     } catch (error) {
-      sonnerToast('error', error instanceof Error && 'An unknown error occurred');
+      sonnerToast('error', error instanceof Error && error.message);
     } finally {
       setTimeout(() => setIsLoading(false), 500);
     }
