@@ -6,11 +6,12 @@ import { useRouter } from 'next/navigation';
 import { auth } from '@/firebase/firebaseConfig';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import Error from 'next/error';
 
 const useSignin = () => {
   const router = useRouter();
 
-  const [error, setError] = React.useState<string>('');
+  const [error, setError] = React.useState<string | any>(null);
   const [isLoading, setIsLoading] = React.useState(false);
 
   const formSchema = z.object({
@@ -45,7 +46,7 @@ const useSignin = () => {
 
       router.push('/');
     } catch (error) {
-      setError(error);
+      setError((error as Error & any).message || 'An unknown error occurred');
     } finally {
       setIsLoading(false);
     }

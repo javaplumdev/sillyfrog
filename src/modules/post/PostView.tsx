@@ -1,14 +1,23 @@
 import React from 'react';
 
 import PostCard from './PostCard';
-import { useView } from './ViewProvider';
 import PostComments from './PostComments';
+
+import { useView } from './ViewProvider';
+import useLike from '../home/feed/useLike';
+import useSave from '../home/feed/useSave';
 import usePostComment from './usePostComment';
 import useGetComments from './useGetComments';
+import useDislike from '../home/feed/useDislike';
 
 const PostView = () => {
-  const { data, isLoading } = useView();
+  const { data, ...rest } = useView();
+
   const { reload, ...commentListProps } = useGetComments();
+
+  const likeProps = useLike();
+  const saveProps = useSave();
+  const dislikeProps = useDislike();
   const commentProps = usePostComment(reload);
 
   const { timestamp = { seconds: 0 } } = data || {};
@@ -16,7 +25,14 @@ const PostView = () => {
 
   return (
     <div className="flex flex-col space-y-2">
-      <PostCard data={data} isLoading={isLoading} seconds={seconds} />
+      <PostCard
+        data={data}
+        seconds={seconds}
+        {...likeProps}
+        {...saveProps}
+        {...dislikeProps}
+        {...rest}
+      />
       <PostComments {...commentProps} {...commentListProps} />
     </div>
   );

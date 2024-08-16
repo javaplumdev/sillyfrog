@@ -1,7 +1,7 @@
 import React from 'react';
-import { toast } from 'sonner';
 import { collectionRefFeeds } from '@/firebase/firebaseConfig';
 import { DocumentData, onSnapshot, orderBy, Query, query, QuerySnapshot } from 'firebase/firestore';
+import { sonnerToast } from '@/lib/toast';
 
 type DataProps = {
   id: string;
@@ -25,17 +25,17 @@ const useGetFeed = () => {
       );
 
       onSnapshot(q, (snapshot: QuerySnapshot<DocumentData>) => {
-        const d: DataProps[] = snapshot.docs.map((doc) => ({
-          ...(doc.data() as DataProps),
+        const data = snapshot.docs.map((doc) => ({
+          ...(doc.data({ serverTimestamps: 'estimate' }) as DataProps),
           id: doc.id,
         }));
 
-        setData(d);
+        setData(data);
       });
     } catch (error) {
-      toast.error('Event has not been created');
+      sonnerToast('error', error instanceof Error && error.message);
     } finally {
-      setTimeout(() => setIsLoading(false), 1000);
+      setTimeout(() => setIsLoading(false), 500);
     }
   };
 

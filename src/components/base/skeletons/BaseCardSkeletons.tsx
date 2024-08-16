@@ -3,15 +3,13 @@ import { range } from 'lodash';
 import { Skeleton } from '@/components/ui/skeleton';
 
 interface BaseSkeletonsProps {
-  count: number;
+  count?: number;
 }
 
 const BaseCardSkeletons: React.FC<BaseSkeletonsProps> = (props) => {
-  const { count } = props;
+  const { count = 1 } = props;
 
-  function mapItems(num: number) {
-    return range(1, num + 1);
-  }
+  const mapItems = (num: number) => range(1, num + 1);
 
   const skeletonsToMap = mapItems(count);
 

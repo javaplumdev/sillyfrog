@@ -13,7 +13,7 @@ type PostInputCommentProps = {
   form: UseFormReturn<FieldValues, {}, undefined>;
 };
 
-const PostInputComment: React.FC<PostInputCommentProps> = ({ form, onSubmit }) => {
+const PostInputComment: React.FC<PostInputCommentProps & any> = ({ form, onSubmit }) => {
   const { userData, isAuth, onActionWithAuth } = useAuth();
 
   const { handleSubmit } = form || {};

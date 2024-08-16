@@ -12,17 +12,20 @@ import BaseCardSkeletons from '@/components/base/skeletons/BaseCardSkeletons';
 import FeedCardUserInfo from './FeedCardUserInfo';
 import FeedCardLikeButtons from './FeedCardLikeButtons';
 import FeedCardInteractions from './FeedCardInteractions';
+import { Badge } from '@/components/ui/badge';
 
-const FeedCard: React.FC<{
-  data: FeedList;
-  onLike: () => void;
-  onSave: () => void;
-  isLoading: boolean;
-  onDislike: () => void;
-  toggleShare: () => void;
-  toggleDelete: () => void;
-  countSkeleton: number;
-}> = (props) => {
+const FeedCard: React.FC<
+  {
+    data: FeedList;
+    onLike: () => void;
+    onSave: () => void;
+    isLoading: boolean;
+    onDislike: () => void;
+    toggleShare: () => void;
+    toggleDelete: () => void;
+    countSkeleton: number;
+  } & any
+> = (props) => {
   const router = useRouter();
   const { theme } = useTheme();
 
@@ -43,9 +46,17 @@ const FeedCard: React.FC<{
 
       {!isLoading &&
         (data || []).map((item: Feed, index: number) => {
-          const { saves, likes, postId, dislikes, timestamp, feed_content } = item || {};
+          const {
+            saves,
+            likes,
+            label,
+            postId,
+            dislikes,
+            feed_content,
+            timestamp = { seconds: 0 },
+          } = item || {};
 
-          const seconds: number = timestamp ? timestamp.seconds : null;
+          const seconds: number = timestamp.seconds || 0;
 
           return (
             <Card
@@ -88,7 +99,9 @@ const FeedCard: React.FC<{
                   <FeedCardUserInfo seconds={seconds} toggleDelete={toggleDelete} {...item} />
                 </div>
                 <div className="break-all">{feed_content}</div>
-
+                <Badge className="inline-block max-w-max bg-secondary text-foreground">
+                  {label}
+                </Badge>
                 <FeedCardInteractions
                   id={postId}
                   data={saves}

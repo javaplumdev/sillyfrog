@@ -35,7 +35,7 @@ const PasswordCheckerProvider = ({ children }: { children: React.ReactNode }) =>
     ];
   };
 
-  const isPassValid = (password: string): boolean => {
+  const isPassValid = (password: boolean | any): boolean => {
     return passwordReq(password).every((item) => item.match === true);
   };
 

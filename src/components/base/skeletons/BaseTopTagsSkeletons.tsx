@@ -9,9 +9,7 @@ interface BaseSkeletonsProps {
 const BaseTopTagsSkeletons: React.FC<BaseSkeletonsProps> = (props) => {
   const { count } = props;
 
-  function mapItems(num: number) {
-    return range(1, num + 1);
-  }
+  const mapItems = (num: number) => range(1, num + 1);
 
   const skeletonsToMap = mapItems(count);
 
