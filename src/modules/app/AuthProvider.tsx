@@ -8,13 +8,14 @@ import { addUserToFirestore } from '@/lib/users';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import UserAuthConfirmationDialog from '@/components/base/dialogs/UserAuthConfirmationDialog';
 
-let userDataInitValues = { uid: '', photoURL: '', displayName: '', email: '' };
+let userDataInitValues = { uid: '', photoURL: '', displayName: '', email: '', username: '' };
 
 type userDataProps = {
   uid: string;
   photoURL: string;
   displayName: string;
   email: string;
+  username: string;
 };
 
 type objType = {

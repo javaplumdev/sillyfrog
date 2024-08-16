@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 import { auth } from '@/firebase/firebaseConfig';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import Error from 'next/error';
 
 const useSignin = () => {
   const router = useRouter();
@@ -46,7 +45,7 @@ const useSignin = () => {
 
       router.push('/');
     } catch (error) {
-      setError((error as Error & any).message || 'An unknown error occurred');
+      setError(error instanceof Error ? error : 'An unknown error occurred');
     } finally {
       setIsLoading(false);
     }

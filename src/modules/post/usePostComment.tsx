@@ -14,7 +14,7 @@ const usePostComment = (callback: () => void) => {
   const { userData } = useAuth();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  const { uid, displayName, photoURL } = userData || {};
+  const { uid, displayName, photoURL, username } = userData || {};
 
   const formSchema = z.object({
     comment: z.string().min(1, 'Comment is required!'),
@@ -37,7 +37,7 @@ const usePostComment = (callback: () => void) => {
       postId: id,
       photo: photoURL,
       content: comment,
-      name: displayName,
+      name: displayName || username,
       commentId: commentId,
       timestamp: serverTimestamp(),
     };
