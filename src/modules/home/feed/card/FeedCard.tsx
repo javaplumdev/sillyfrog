@@ -59,6 +59,7 @@ const FeedCard: React.FC<FeedCardProps> = (props) => {
 
       <Virtuoso
         data={data}
+        useWindowScroll
         endReached={_loadMore}
         style={{ height: '100vh' }}
         increaseViewportBy={200}
