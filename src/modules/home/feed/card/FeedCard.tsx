@@ -1,34 +1,35 @@
 'use client';
 import React from 'react';
+
 import { useTheme } from 'next-themes';
+import { Virtuoso } from 'react-virtuoso';
 import { useRouter } from 'next/navigation';
+
 import { ChevronUp, ChevronDown } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import BaseAvatar from '@/components/base/avatars/BaseAvatar';
 import BaseCardSkeletons from '@/components/base/skeletons/BaseCardSkeletons';
 
 import FeedCardUserInfo from './FeedCardUserInfo';
 import FeedCardLikeButtons from './FeedCardLikeButtons';
 import FeedCardInteractions from './FeedCardInteractions';
-import { Badge } from '@/components/ui/badge';
 
-const FeedCard: React.FC<
-  {
-    data: FeedList;
-    onLike: () => void;
-    onSave: () => void;
-    isLoading: boolean;
-    onDislike: () => void;
-    toggleShare: () => void;
-    toggleDelete: () => void;
-    countSkeleton: number;
-  } & any
-> = (props) => {
-  const router = useRouter();
-  const { theme } = useTheme();
+type FeedCardProps = {
+  data: FeedList;
+  loadMore: () => void;
+  onLike: () => void;
+  onSave: () => void;
+  isLoading: boolean;
+  onDislike: () => void;
+  toggleShare: () => void;
+  toggleDelete: () => void;
+  countSkeleton: number;
+} & any;
 
+const FeedCard: React.FC<FeedCardProps> = (props) => {
   const {
     data,
     onLike,
@@ -38,14 +39,30 @@ const FeedCard: React.FC<
     toggleShare,
     toggleDelete,
     countSkeleton = 5,
+    loadMore,
+    hasMore,
   } = props;
+  const router = useRouter();
+  const { theme } = useTheme();
+
+  const _loadMore = React.useCallback(
+    () =>
+      setTimeout(() => {
+        if (hasMore) loadMore();
+      }, 500),
+    [data]
+  );
 
   return (
     <React.Fragment>
       {!!isLoading && <BaseCardSkeletons count={countSkeleton} />}
 
-      {!isLoading &&
-        (data || []).map((item: Feed, index: number) => {
+      <Virtuoso
+        data={data}
+        endReached={_loadMore}
+        style={{ height: '100vh' }}
+        increaseViewportBy={200}
+        itemContent={(index, item) => {
           const {
             saves,
             likes,
@@ -61,7 +78,7 @@ const FeedCard: React.FC<
           return (
             <Card
               key={`feed-${index}`}
-              className={cn('p-3 flex flex-row space-x-3 hover:cursor-pointer', {
+              className={cn('p-3 flex flex-row space-x-3 hover:cursor-pointer mb-3', {
                 'hover:bg-gray-600': theme === 'dark',
                 'hover:border-gray-600': theme === 'dark',
                 'hover:bg-gray-100': theme === 'light',
@@ -112,7 +129,8 @@ const FeedCard: React.FC<
               </div>
             </Card>
           );
-        })}
+        }}
+      />
     </React.Fragment>
   );
 };
