@@ -46,7 +46,7 @@ export default function RootLayout({
           <BaseNavbar />
           <main> {children}</main>
 
-          <Toaster position="top-center" expand={false} richColors />
+          <Toaster position="bottom-center" expand={false} richColors />
 
           {/* <BaseNavFooter /> */}
           <BaseFooter />
