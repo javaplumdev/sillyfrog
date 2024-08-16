@@ -32,7 +32,7 @@ const FeedCardInteractions: React.FC<FeedCardInteractionsProps> = ({
   return (
     <div className="flex flex-row space-x-1.5" onClick={(event) => event.stopPropagation()}>
       <Link href={`/post/${id}`}>
-        <Badge variant="secondary" className="px-3 py-1">
+        <Badge variant="secondary" className="px-3 py-1 cursor-pointer">
           <MessageCircle size="18" className="mr-1" /> <span>{(comments || []).length}</span>
         </Badge>
       </Link>
@@ -42,11 +42,15 @@ const FeedCardInteractions: React.FC<FeedCardInteractionsProps> = ({
         className="px-3 py-1"
         onClick={onActionWithAuth(() => onSave(id, data))}
       >
-        <Bookmark size="18" className={cn('mr-1', { 'text-amber-500': !!isSave })} />{' '}
+        <Bookmark size="18" className={cn('mr-1 cursor-pointer', { 'text-amber-500': !!isSave })} />{' '}
         <span>{(data || []).length}</span>
       </Badge>
 
-      <Badge variant="secondary" className="px-3 py-1" onClick={() => toggleShare(id)}>
+      <Badge
+        variant="secondary"
+        className="px-3 py-1 cursor-pointer"
+        onClick={() => toggleShare(id)}
+      >
         <Forward size="18" />
       </Badge>
     </div>

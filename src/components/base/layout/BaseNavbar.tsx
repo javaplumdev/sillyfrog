@@ -19,7 +19,7 @@ import BaseAvatar from '../avatars/BaseAvatar';
 import BaseSkeleton from '../skeletons/BaseSkeleton';
 import ModeToggle from '../theme/ModeToggle';
 import BaseConfirmationDialog from '../dialogs/BaseConfirmationDialog';
-import { anonAvatar } from '@/constant/keys';
+// import { anonAvatar } from '@/constant/keys';
 
 const useLogout = () => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
@@ -32,7 +32,7 @@ const useLogout = () => {
 const BaseNavbar = () => {
   const { isOpen, toggleOpen } = useLogout();
   const { isAuth, userData, isLoading, logOut } = useAuth();
-  const { photoURL, displayName } = userData || {};
+  const { photoURL, displayName, username } = userData || {};
 
   return (
     <div className="container flex justify-between items-center p-0 py-2 px-2 sticky top-0 z-10 backdrop-filter backdrop-blur-lg">
@@ -52,7 +52,7 @@ const BaseNavbar = () => {
         {!!isAuth && !isLoading && (
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <BaseAvatar photo={photoURL ? photoURL : anonAvatar} name={displayName} />
+              <BaseAvatar photo={photoURL} name={displayName || username} />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>

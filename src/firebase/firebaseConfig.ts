@@ -43,4 +43,5 @@ export const googleProvider = new GoogleAuthProvider();
 // Firestore collections
 export const collectionRefUsers = collection(db, 'users');
 export const collectionRefFeeds = collection(db, 'feed');
+export const collectionRefLabels = collection(db, 'labels');
 export const collectionRefComments = collection(db, 'comments');

@@ -1,6 +1,5 @@
 import { z } from 'zod';
 import React from 'react';
-import { toast } from 'sonner';
 import { v4 as uuidv4 } from 'uuid';
 import useAuth from '@/hooks/useAuth';
 import { useForm } from 'react-hook-form';
@@ -8,13 +7,14 @@ import { useParams } from 'next/navigation';
 import { collectionRefComments, db } from '@/firebase/firebaseConfig';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { arrayUnion, doc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
+import { sonnerToast } from '@/lib/toast';
 
 const usePostComment = (callback: () => void) => {
   const { id } = useParams();
   const { userData } = useAuth();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  const { uid, displayName, photoURL } = userData || {};
+  const { uid, displayName, photoURL, username } = userData || {};
 
   const formSchema = z.object({
     comment: z.string().min(1, 'Comment is required!'),
@@ -37,7 +37,7 @@ const usePostComment = (callback: () => void) => {
       postId: id,
       photo: photoURL,
       content: comment,
-      name: displayName,
+      name: displayName || username,
       commentId: commentId,
       timestamp: serverTimestamp(),
     };
@@ -51,7 +51,7 @@ const usePostComment = (callback: () => void) => {
 
       if (callback) callback();
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'An unknown error occurred');
+      sonnerToast('error', error instanceof Error && error.message);
     } finally {
       setIsLoading(false);
       reset();

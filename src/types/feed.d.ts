@@ -5,6 +5,7 @@ type Feed = {
   dislikes: [];
   timestamp: { seconds: number };
   feed_content: string;
+  label: string;
 };
 
 type FeedList = {

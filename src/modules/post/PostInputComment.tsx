@@ -13,15 +13,15 @@ type PostInputCommentProps = {
   form: UseFormReturn<FieldValues, {}, undefined>;
 };
 
-const PostInputComment: React.FC<PostInputCommentProps> = ({ form, onSubmit }) => {
+const PostInputComment: React.FC<PostInputCommentProps & any> = ({ form, onSubmit }) => {
   const { userData, isAuth, onActionWithAuth } = useAuth();
 
   const { handleSubmit } = form || {};
-  const { photoURL, displayName } = userData || {};
+  const { photoURL, displayName, username } = userData || {};
 
   return (
     <div className="flex space-x-2 border-b-2 pb-4">
-      <BaseAvatar photo={photoURL} name={displayName} />
+      <BaseAvatar photo={photoURL} name={displayName || username} />
       <div className="relative w-full">
         <Form {...form}>
           <form onSubmit={handleSubmit(onSubmit)}>

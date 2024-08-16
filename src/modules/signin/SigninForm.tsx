@@ -8,11 +8,13 @@ import { Eye, EyeOff } from 'lucide-react';
 import useAuth from '@/hooks/useAuth';
 import { Control, FieldValues, UseFormReturn } from 'react-hook-form';
 
-const SigninForm: React.FC<{
-  form: UseFormReturn<FieldValues, {}, undefined>;
-  isLoading: boolean;
-  onSubmit: () => void;
-}> = ({ form, onSubmit, isLoading }) => {
+const SigninForm: React.FC<
+  {
+    form: UseFormReturn<FieldValues, {}, undefined>;
+    isLoading: boolean;
+    onSubmit: () => void;
+  } & any
+> = ({ form, onSubmit, isLoading }) => {
   const { handleSubmit, control } = form || {};
   const { togglePasswordOpen, isPasswordOpen } = useAuth();
 

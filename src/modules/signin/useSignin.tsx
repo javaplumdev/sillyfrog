@@ -10,7 +10,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 const useSignin = () => {
   const router = useRouter();
 
-  const [error, setError] = React.useState<string>('');
+  const [error, setError] = React.useState<string | any>(null);
   const [isLoading, setIsLoading] = React.useState(false);
 
   const formSchema = z.object({
@@ -45,7 +45,7 @@ const useSignin = () => {
 
       router.push('/');
     } catch (error) {
-      setError(error);
+      setError(error instanceof Error ? error : 'An unknown error occurred');
     } finally {
       setIsLoading(false);
     }

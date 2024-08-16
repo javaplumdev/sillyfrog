@@ -6,22 +6,24 @@ import { FeedFormDialog } from './FeedFormDialog';
 import BaseAvatar from '@/components/base/avatars/BaseAvatar';
 import { UseFormReturn } from 'react-hook-form';
 
-const FeedForm: React.FC<{
-  isPostingFeed: boolean;
-  isOpenPostFeed: boolean;
-  onSubmitPostFeed: () => void;
-  toggleOpenPostFeed: () => void;
-  postFeedForm: UseFormReturn<{ feed_content: string }, {}, undefined>;
-}> = ({ isPostingFeed, isOpenPostFeed, postFeedForm, onSubmitPostFeed, toggleOpenPostFeed }) => {
+const FeedForm: React.FC<
+  {
+    isPostingFeed: boolean;
+    isOpenPostFeed: boolean;
+    onSubmitPostFeed: () => void;
+    toggleOpenPostFeed: () => void;
+    postFeedForm: UseFormReturn<{ feed_content: string; label: string }, {}, undefined>;
+  } & any
+> = ({ isPostingFeed, isOpenPostFeed, postFeedForm, onSubmitPostFeed, toggleOpenPostFeed }) => {
   const { onActionWithAuth, userData } = useAuth();
 
-  const { photoURL, displayName } = userData || {};
+  const { photoURL, displayName, username } = userData || {};
 
   return (
     <div>
       <div className="flex space-x-2">
         {/* {isAuth && <BaseAvatar photo={photoURL} name={displayName} />} */}
-        <BaseAvatar photo={photoURL} name={displayName} />
+        <BaseAvatar photo={photoURL} name={displayName || username} />
 
         <Input
           type="text"

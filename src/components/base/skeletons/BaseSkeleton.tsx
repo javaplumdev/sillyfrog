@@ -1,9 +1,13 @@
+import React from 'react';
+import { cn } from '@/lib/utils';
 import { Skeleton } from '@/components/ui/skeleton';
 
-export default function BaseSkeleton() {
+const BaseSkeleton: React.FC<{ className?: string }> = ({ className = 'h-8 w-[200px]' }) => {
   return (
     <div>
-      <Skeleton className="h-8 w-[200px]" />
+      <Skeleton className={cn(className)} />
     </div>
   );
-}
+};
+
+export default BaseSkeleton;

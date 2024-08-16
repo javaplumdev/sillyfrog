@@ -10,10 +10,10 @@ type FeedCardLikeButtonsProps = {
   type?: string;
   data?: [] | undefined;
   Icon: ElementType;
-  onClick: (id: string, data: DataProps[]) => void;
+  onClick: (id: string, data: DataProps[]) => Promise<void>;
 };
 
-const FeedCardLikeButtons: React.FC<FeedCardLikeButtonsProps> = ({
+const FeedCardLikeButtons: React.FC<FeedCardLikeButtonsProps & any> = ({
   id,
   data,
   type,

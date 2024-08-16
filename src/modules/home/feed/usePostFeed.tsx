@@ -1,17 +1,20 @@
 import { z } from 'zod';
 import React from 'react';
-import { toast } from 'sonner';
 import { v4 as uuidv4 } from 'uuid';
 import useAuth from '@/hooks/useAuth';
+import { sonnerToast } from '@/lib/toast';
 import { useForm } from 'react-hook-form';
+import { getTimestamp } from '@/lib/dates';
 import { useRouter } from 'next/navigation';
 import { db } from '@/firebase/firebaseConfig';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import useAddLabels from '@/components/base/combobox/useAddLabels';
 
 const usePostFeed = () => {
   const router = useRouter();
   const { userData } = useAuth();
+  const { onAdd } = useAddLabels();
 
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -22,12 +25,14 @@ const usePostFeed = () => {
 
   const formSchema = z.object({
     feed_content: z.string().min(1, 'Content is required.'),
+    label: z.string(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       feed_content: '',
+      label: 'ribbit',
     },
   });
 
@@ -38,7 +43,7 @@ const usePostFeed = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
-  const onSubmit = async (data: { feed_content: string }) => {
+  const onSubmit = async ({ label, ...data }: { feed_content: string; label: string }) => {
     const postId = uuidv4();
 
     try {
@@ -48,23 +53,24 @@ const usePostFeed = () => {
 
       await setDoc(doc(db, 'feed', postId), {
         ...data,
+        label: label,
         userId: uid,
         photo: photoURL,
         postId: postId,
         name: displayName || email,
-        timestamp: serverTimestamp(),
+        timestamp: serverTimestamp() || getTimestamp(),
       });
 
-      toast.success('Post created!');
+      onAdd(label);
+
+      sonnerToast('success', 'Post Created!');
     } catch (error) {
-      toast.error(error as string);
+      sonnerToast('error', error instanceof Error && error.message);
     } finally {
       setIsOpen(false);
       reset();
 
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
+      setTimeout(() => setIsLoading(false), 1000);
     }
   };
 

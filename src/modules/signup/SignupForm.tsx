@@ -11,11 +11,11 @@ type SignupFormProps = {
   form: any;
   isLoading: boolean;
   onSubmit: () => void;
-  control: Control<FieldValues>;
-  isPassValid: (data: boolean) => boolean;
+  control?: Control<FieldValues>;
+  isPassValid: (data: any) => boolean;
 };
 
-const SignupForm: React.FC<SignupFormProps> = ({
+const SignupForm: React.FC<SignupFormProps & any> = ({
   form,
   control,
   isPassValid,
