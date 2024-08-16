@@ -17,13 +17,13 @@ const FeedForm: React.FC<
 > = ({ isPostingFeed, isOpenPostFeed, postFeedForm, onSubmitPostFeed, toggleOpenPostFeed }) => {
   const { onActionWithAuth, userData } = useAuth();
 
-  const { photoURL, displayName } = userData || {};
+  const { photoURL, displayName, username } = userData || {};
 
   return (
     <div>
       <div className="flex space-x-2">
         {/* {isAuth && <BaseAvatar photo={photoURL} name={displayName} />} */}
-        <BaseAvatar photo={photoURL} name={displayName} />
+        <BaseAvatar photo={photoURL} name={displayName || username} />
 
         <Input
           type="text"

@@ -22,7 +22,7 @@ const useSigninWithGoogle = () => {
 
       if (result) router.push('/');
     } catch (error) {
-      setError(error instanceof Error ? error.message : 'An unknown error occurred');
+      setError(error instanceof Error ? error : 'An unknown error occurred');
     } finally {
       setIsLoading(false);
     }
