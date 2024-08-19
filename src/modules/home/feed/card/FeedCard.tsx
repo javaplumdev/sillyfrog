@@ -50,6 +50,7 @@ const FeedCard: React.FC<FeedCardProps> = (props) => {
       setTimeout(() => {
         if (hasMore) loadMore();
       }, 500),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [data]
   );
 

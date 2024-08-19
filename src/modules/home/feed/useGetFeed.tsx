@@ -29,6 +29,7 @@ const useGetFeed = () => {
 
   React.useEffect(() => {
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [_query]);
 
   const getData = async () => {
@@ -36,7 +37,7 @@ const useGetFeed = () => {
 
     const constraints = [
       _query === 'latest' ? orderBy('timestamp', 'desc') : undefined,
-      _query === 'top' ? orderBy('populariry', 'desc') : undefined,
+      // _query === 'top' ? orderBy('populariry', 'desc') : undefined,
       limit(30),
     ].filter(Boolean);
 

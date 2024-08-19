@@ -10,11 +10,13 @@ import { db } from '@/firebase/firebaseConfig';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import useAddLabels from '@/components/base/combobox/useAddLabels';
+import useGetLabels from '@/components/base/combobox/useGetLabels';
 
 const usePostFeed = () => {
   const router = useRouter();
   const { userData } = useAuth();
   const { onAdd } = useAddLabels();
+  const { data: labels } = useGetLabels('');
 
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -46,6 +48,9 @@ const usePostFeed = () => {
   const onSubmit = async ({ label, ...data }: { feed_content: string; label: string }) => {
     const postId = uuidv4();
 
+    // check if the label passed already exists in lists of labels
+    const isIncluded = (labels || []).some((item: { label: string }) => item.label === label);
+
     try {
       setIsLoading(true);
 
@@ -61,7 +66,8 @@ const usePostFeed = () => {
         timestamp: serverTimestamp() || getTimestamp(),
       });
 
-      onAdd(label);
+      // we will not add the passed label if it already exists
+      if (!isIncluded) onAdd(label);
 
       sonnerToast('success', 'Post Created!');
     } catch (error) {
@@ -70,7 +76,7 @@ const usePostFeed = () => {
       setIsOpen(false);
       reset();
 
-      setTimeout(() => setIsLoading(false), 1000);
+      setTimeout(() => setIsLoading(false), 500);
     }
   };
 
