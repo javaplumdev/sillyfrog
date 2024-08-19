@@ -1,12 +1,11 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
 const FeedFilters: React.FC = () => {
   const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
   const [name, setName] = useState<string>('');
   const query = searchParams.get('query') || '';
@@ -29,7 +28,7 @@ const FeedFilters: React.FC = () => {
     <div className="flex justify-between items-center">
       <h1 className="font-bold">Feed</h1>
       <div className="flex items-center space-x-3">
-        {['', 'latest', 'top'].map((filter) => (
+        {['', 'latest'].map((filter) => (
           <h3
             key={filter}
             className={cn('cursor-pointer', {

@@ -26,7 +26,7 @@ const PostView = () => {
 
   return (
     <div className="flex flex-col space-y-2">
-      <PostNav data={data as any} />
+      <PostNav data={data as any} {...rest} />
       <PostCard
         data={data}
         seconds={seconds}

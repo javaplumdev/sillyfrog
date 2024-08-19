@@ -10,7 +10,9 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 
-const BaseBreadcrumb = (props: { data: { path: string; name: string }[] }) => {
+type BaseBreadcrumbProps = { data: { path: string; name: string }[]; isLoading: boolean };
+
+const BaseBreadcrumb: React.FC<BaseBreadcrumbProps> = (props) => {
   const { data } = props;
 
   return (
