@@ -9,18 +9,19 @@ const FeedFilters: React.FC = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [name, setName] = useState<string>('');
-  const query = searchParams.get('query');
+  const query = searchParams.get('query') || '';
 
   useEffect(() => {
+    const newParams = new URLSearchParams(searchParams.toString());
     if (name) {
-      const newParams = new URLSearchParams(searchParams.toString());
       newParams.set('query', name);
-      router.push(`?${newParams.toString()}`);
+    } else {
+      newParams.delete('query');
     }
+    router.push(`?${newParams.toString()}`);
   }, [name, router, searchParams]);
 
   const handleFilterClick = (filterName: string) => {
-    if (filterName === '') router.replace(pathname);
     setName(filterName);
   };
 
@@ -36,7 +37,7 @@ const FeedFilters: React.FC = () => {
             })}
             onClick={() => handleFilterClick(filter)}
           >
-            {filter ? filter.charAt(0).toUpperCase() + filter.slice(1) : 'All'}
+            {filter ? filter.charAt(0).toUpperCase() + filter.slice(1) : 'Relevant'}
           </h3>
         ))}
       </div>
