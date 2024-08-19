@@ -2,7 +2,9 @@ import React from 'react';
 import BaseBreadcrumb from '@/components/base/breadcrumbs/BaseBreadcrumb';
 import { useParams } from 'next/navigation';
 
-const PostNav = ({ data }: { data: { feed_content: string } }) => {
+type PostNavProps = { data: { feed_content: string }; isLoading: boolean };
+
+const PostNav: React.FC<PostNavProps> = ({ data, isLoading }) => {
   const { id } = useParams();
   const { feed_content } = data || {};
 
@@ -13,7 +15,7 @@ const PostNav = ({ data }: { data: { feed_content: string } }) => {
     { path: `/post/${id}`, name: name },
   ];
 
-  return <BaseBreadcrumb data={nav} />;
+  return <BaseBreadcrumb data={nav} isLoading={isLoading} />;
 };
 
 export default PostNav;

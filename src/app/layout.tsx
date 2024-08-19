@@ -49,7 +49,7 @@ export default function RootLayout({
           <Toaster position="bottom-center" expand={false} richColors />
 
           {/* <BaseNavFooter /> */}
-          <BaseFooter />
+          {/* <BaseFooter /> */}
         </AppProviders>
       </body>
     </html>

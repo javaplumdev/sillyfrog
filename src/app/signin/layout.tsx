@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     template: `%s | Sillyfrog`,
     default: 'Signin',
   },
-  description: 'A Sillyfrog siognup page',
+  description: 'A Sillyfrog signin page',
 };
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {

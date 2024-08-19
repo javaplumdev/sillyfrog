@@ -9,33 +9,43 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import BaseSkeleton from '../skeletons/BaseSkeleton';
 
-const BaseBreadcrumb = (props: { data: { path: string; name: string }[] }) => {
-  const { data } = props;
+type BaseBreadcrumbProps = { data: { path: string; name: string }[]; isLoading: boolean };
+
+const BaseBreadcrumb: React.FC<BaseBreadcrumbProps> = (props) => {
+  const { data, isLoading } = props;
+  const _path: string = usePathname();
+
+  const isActive = (path: string) => path === _path;
 
   return (
-    <Breadcrumb className="my-3">
-      <BreadcrumbList>
-        {data.map(({ path, name }, index: number) => {
-          const _path: string = usePathname();
-          const isActive = path === _path;
+    <React.Fragment>
+      {!!isLoading && <BaseSkeleton />}
 
-          return (
-            <React.Fragment key={index}>
-              {index !== 0 && <BreadcrumbSeparator />}
-              <BreadcrumbItem>
-                {isActive && <BreadcrumbPage>{name}</BreadcrumbPage>}
-                {path && !isActive && (
-                  <Link href={path} className="flex items-center space-x-2">
-                    {name.toLowerCase() === 'feed' && <Newspaper size="18" />} <span>{name}</span>
-                  </Link>
-                )}
-              </BreadcrumbItem>
-            </React.Fragment>
-          );
-        })}
-      </BreadcrumbList>
-    </Breadcrumb>
+      {!isLoading && (
+        <Breadcrumb className="my-3">
+          <BreadcrumbList>
+            {data.map(({ path, name }, index: number) => {
+              return (
+                <React.Fragment key={index}>
+                  {index !== 0 && <BreadcrumbSeparator />}
+                  <BreadcrumbItem>
+                    {isActive(path) && <BreadcrumbPage>{name}</BreadcrumbPage>}
+                    {path && !isActive(path) && (
+                      <Link href={path} className="flex items-center space-x-2">
+                        {name.toLowerCase() === 'feed' && <Newspaper size="18" />}{' '}
+                        <span>{name}</span>
+                      </Link>
+                    )}
+                  </BreadcrumbItem>
+                </React.Fragment>
+              );
+            })}
+          </BreadcrumbList>
+        </Breadcrumb>
+      )}
+    </React.Fragment>
   );
 };
 

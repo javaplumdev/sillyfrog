@@ -1,15 +1,26 @@
 'use client';
-import React from 'react';
 
-const FeedFilters = () => {
+import { cn } from '@/lib/utils';
+import { useQuery } from '@/hooks/useQuery';
+
+const FeedFilters: React.FC = () => {
+  const { onHandleQuery, name, query } = useQuery();
+
   return (
-    <div className="flex flex-row justify-between items-center">
+    <div className="flex justify-between items-center">
       <h1 className="font-bold">Feed</h1>
-
-      <div className="flex space-x-3">
-        <h3 className="font-bold">All</h3>
-        <h3>Latest</h3>
-        <h3>Top</h3>
+      <div className="flex items-center space-x-3">
+        {['', 'latest'].map((filter) => (
+          <h3
+            key={filter}
+            className={cn('cursor-pointer', {
+              'font-extrabold': filter === name || filter === query,
+            })}
+            onClick={() => onHandleQuery(filter)}
+          >
+            {filter ? filter.charAt(0).toUpperCase() + filter.slice(1) : 'Relevant'}
+          </h3>
+        ))}
       </div>
     </div>
   );
