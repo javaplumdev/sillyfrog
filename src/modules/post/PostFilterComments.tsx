@@ -1,7 +1,6 @@
 import React from 'react';
 import { startCase } from 'lodash';
 import { Filter } from 'lucide-react';
-import { useRouter, useSearchParams } from 'next/navigation';
 import {
   DropdownMenu,
   DropdownMenuItem,
@@ -10,26 +9,12 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
+import { useQuery } from '@/hooks/useQuery';
 
 // TODO: Fix filter
 
 const PostFilterComments = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [name, setName] = React.useState<string>('');
-  const query = searchParams.get('query') || '';
-
-  React.useEffect(() => {
-    const newParams = new URLSearchParams(searchParams.toString());
-    if (name) {
-      newParams.set('query', name);
-    } else {
-      newParams.delete('query');
-    }
-    router.push(`?${newParams.toString()}`);
-  }, [name, router, searchParams]);
-
-  const handleFilterClick = (filterName: string) => setName(filterName);
+  const { onHandleQuery, query } = useQuery();
 
   return (
     <DropdownMenu>
@@ -41,10 +26,10 @@ const PostFilterComments = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuGroup>
-          <DropdownMenuItem onClick={() => handleFilterClick('')}>Relevant</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => onHandleQuery('')}>Relevant</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuGroup>
-          <DropdownMenuItem onClick={() => handleFilterClick('latest')}>Latest</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => onHandleQuery('latest')}>Latest</DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

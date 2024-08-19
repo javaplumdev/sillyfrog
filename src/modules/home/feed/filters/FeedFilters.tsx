@@ -1,28 +1,10 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { useQuery } from '@/hooks/useQuery';
 
 const FeedFilters: React.FC = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [name, setName] = useState<string>('');
-  const query = searchParams.get('query') || '';
-
-  useEffect(() => {
-    const newParams = new URLSearchParams(searchParams.toString());
-    if (name) {
-      newParams.set('query', name);
-    } else {
-      newParams.delete('query');
-    }
-    router.push(`?${newParams.toString()}`);
-  }, [name, router, searchParams]);
-
-  const handleFilterClick = (filterName: string) => {
-    setName(filterName);
-  };
+  const { onHandleQuery, name, query } = useQuery();
 
   return (
     <div className="flex justify-between items-center">
@@ -34,7 +16,7 @@ const FeedFilters: React.FC = () => {
             className={cn('cursor-pointer', {
               'font-extrabold': filter === name || filter === query,
             })}
-            onClick={() => handleFilterClick(filter)}
+            onClick={() => onHandleQuery(filter)}
           >
             {filter ? filter.charAt(0).toUpperCase() + filter.slice(1) : 'Relevant'}
           </h3>
