@@ -50,6 +50,7 @@ const FeedCard: React.FC<FeedCardProps> = (props) => {
       setTimeout(() => {
         if (hasMore) loadMore();
       }, 500),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [data]
   );
 
@@ -59,6 +60,7 @@ const FeedCard: React.FC<FeedCardProps> = (props) => {
 
       <Virtuoso
         data={data}
+        useWindowScroll
         endReached={_loadMore}
         style={{ height: '100vh' }}
         increaseViewportBy={200}

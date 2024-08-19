@@ -12,6 +12,7 @@ import {
   getDocs,
 } from 'firebase/firestore';
 import { sonnerToast } from '@/lib/toast';
+import { useSearchParams } from 'next/navigation';
 
 type DataProps = {
   id: string;
@@ -23,18 +24,27 @@ const useGetFeed = () => {
   const [data, setData] = React.useState<{ id: string }[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
+  const searchParams = useSearchParams();
+  const _query = searchParams.get('query');
+
   React.useEffect(() => {
     getData();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_query]);
 
   const getData = async () => {
     setIsLoading(true);
 
+    const constraints = [
+      _query === 'latest' ? orderBy('timestamp', 'desc') : undefined,
+      // _query === 'top' ? orderBy('populariry', 'desc') : undefined,
+      limit(30),
+    ].filter(Boolean);
+
     try {
       const q: Query<DocumentData, DocumentData> = query(
         collectionRefFeeds,
-        limit(30)
-        // orderBy('timestamp', 'desc'),
+        ...(constraints as any)
       );
 
       onSnapshot(q, (snapshot: QuerySnapshot<DocumentData>) => {

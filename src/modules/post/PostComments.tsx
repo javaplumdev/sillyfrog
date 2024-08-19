@@ -1,7 +1,9 @@
 'use client';
 
 import React from 'react';
+import { isEmpty } from 'lodash';
 import PostInputComment from './PostInputComment';
+import PostFilterComments from './PostFilterComments';
 import FeedCardUserInfo from '../home/feed/card/FeedCardUserInfo';
 
 import { cn } from '@/lib/utils';
@@ -27,6 +29,14 @@ const PostComments: React.FC<PostCommentsProps> = ({ data = [], isLoading, ...re
       <PostInputComment {...rest} />
 
       {!!isLoading && <BaseCardSkeletons count={5} />}
+
+      {!isEmpty(data) && <PostFilterComments />}
+
+      {isEmpty(data) && (
+        <div className="py-24 text-center">
+          <span>No comments found :(</span>
+        </div>
+      )}
 
       <div className={cn('flex flex-col space-y-4', styles['border-parent'])}>
         {!isLoading &&
