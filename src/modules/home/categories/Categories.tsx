@@ -13,6 +13,7 @@ import BaseButton from '@/components/base/buttons/BaseButton';
 import CategoriesFrog from '../../../assets/feed//3d-fluency-frog.png';
 import useShare from '../feed/useShare';
 import FeedShareDialog from '../feed/FeedShareDialog';
+import BaseFooter from '@/components/base/layout/BaseFooter';
 
 const Categories = () => {
   const { isAuth } = useAuth();
@@ -71,6 +72,8 @@ const Categories = () => {
           </Link>{' '}
           from <Link href={urlJoin(ICONS_EIGHT_ILLUSTRATIONS || '')}>Ouch!</Link>
         </div>
+
+        <BaseFooter />
       </div>
 
       <FeedShareDialog

@@ -102,6 +102,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     }
   };
 
+  // checks if the user is authenticated, if not, show modal
   const onActionWithAuth = (action: () => any) => {
     return isAuth ? action : toggleIsAuthConfirmation;
   };

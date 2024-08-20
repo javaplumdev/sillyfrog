@@ -11,8 +11,6 @@ import {
 import { Button } from '@/components/ui/button';
 import { useQuery } from '@/hooks/useQuery';
 
-// TODO: Fix filter
-
 const PostFilterComments = () => {
   const { onHandleQuery, query } = useQuery();
 

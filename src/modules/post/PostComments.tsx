@@ -28,9 +28,9 @@ const PostComments: React.FC<PostCommentsProps> = ({ data = [], isLoading, ...re
       </div>
       <PostInputComment {...rest} />
 
-      {!!isLoading && <BaseCardSkeletons count={5} />}
-
       {!isEmpty(data) && <PostFilterComments />}
+
+      {!!isLoading && <BaseCardSkeletons count={5} />}
 
       {isEmpty(data) && (
         <div className="py-24 text-center">
