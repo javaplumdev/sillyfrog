@@ -21,7 +21,7 @@ type DataProps = {
 const useGetFeed = () => {
   const [hasMore, setHasMore] = React.useState(true);
   const [lastDoc, setLastDoc] = React.useState<any>(null);
-  const [data, setData] = React.useState<{ id: string }[]>([]);
+  const [data, setData] = React.useState<{ id: string; label?: string }[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const searchParams = useSearchParams();
