@@ -1,6 +1,6 @@
 import React from 'react';
 import { startCase } from 'lodash';
-import { Filter } from 'lucide-react';
+import { Filter, Flame, Link } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuItem,
@@ -10,8 +10,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { useQuery } from '@/hooks/useQuery';
-
-// TODO: Fix filter
 
 const PostFilterComments = () => {
   const { onHandleQuery, query } = useQuery();
@@ -26,10 +24,15 @@ const PostFilterComments = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuGroup>
-          <DropdownMenuItem onClick={() => onHandleQuery('')}>Relevant</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => onHandleQuery('')}>
+            <Link className="mr-2 h-4 w-4" /> <span>Relevant</span>
+          </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuGroup>
-          <DropdownMenuItem onClick={() => onHandleQuery('latest')}>Latest</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => onHandleQuery('latest')}>
+            <Flame className="mr-2 h-4 w-4" />
+            <span>Latest</span>
+          </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

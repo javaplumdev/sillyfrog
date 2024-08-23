@@ -36,21 +36,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={cn(
-          'min-h-screen bg-background font-sans antialiased text-sm sm:text-base relative',
-          fontSans.variable
-        )}
-      >
-        <AppProviders>
-          <BaseNavbar />
-          <main> {children}</main>
+      <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
+        <div className={cn('sm:container text-sm sm:text-base relative')}>
+          <AppProviders>
+            <BaseNavbar />
+            <main> {children}</main>
 
-          <Toaster position="bottom-center" expand={false} richColors />
+            <Toaster position="bottom-center" expand={false} richColors />
 
-          {/* <BaseNavFooter /> */}
-          {/* <BaseFooter /> */}
-        </AppProviders>
+            {/* <BaseNavFooter /> */}
+            {/* <BaseFooter /> */}
+          </AppProviders>
+        </div>
       </body>
     </html>
   );

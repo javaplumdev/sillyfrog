@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { sonnerToast } from '@/lib/toast';
 import { collectionRefLabels } from '@/firebase/firebaseConfig';

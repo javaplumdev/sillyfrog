@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { isEmpty } from 'lodash';
+import { isEmpty, lowerCase } from 'lodash';
 import { Plus, Tags } from 'lucide-react';
 import { UseFormReturn } from 'react-hook-form';
 
@@ -95,19 +95,26 @@ export default function ComboboxDropdownMenu({
                       onClick={() => {
                         if (label.trim() === '') return;
 
-                        const exists = data.find(
-                          ({ label: text }: { label: string }) => text === label
-                        );
+                        // checks if the data already exists
+                        const exists = data.find((item: { label: string }) => {
+                          const { label: text } = item || {};
+                          return text === lowerCase(label);
+                        });
+
+                        // if label is more than 20, it should be less than 20
+                        if (label.length >= 20) {
+                          return sonnerToast('error', `"${label}" must be less than 20 characters`);
+                        }
 
                         if (exists)
-                          return sonnerToast(
+                          sonnerToast(
                             'error',
                             `"${label}" already exists. Select label if you wish to add`
                           );
 
                         setLabel('');
                         setOpen(false);
-                        setValue('label', label);
+                        setValue('label', lowerCase(label));
                       }}
                     >
                       Add

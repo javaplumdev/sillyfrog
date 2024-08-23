@@ -6,6 +6,7 @@ import FeedCardUserInfo from '../home/feed/card/FeedCardUserInfo';
 import FeedCardLikeButtons from '../home/feed/card/FeedCardLikeButtons';
 import FeedCardInteractions from '../home/feed/card/FeedCardInteractions';
 import BaseCardSkeletons from '@/components/base/skeletons/BaseCardSkeletons';
+import { Badge } from '@/components/ui/badge';
 
 type dataPayload = { id: string; user: string };
 
@@ -30,7 +31,7 @@ const PostCard: React.FC<{
   onSave: (id: string, data: dataPayload[]) => Promise<void>;
   onDislike: (id: string, data: dataPayload[]) => Promise<void>;
 }> = ({ data, isLoading, seconds, toggleDelete, toggleShare, onDislike, onLike, onSave }) => {
-  const { saves, likes, postId, dislikes, feed_content } = data || {};
+  const { saves, likes, postId, dislikes, feed_content, label } = data || {};
 
   return (
     <div>
@@ -42,6 +43,8 @@ const PostCard: React.FC<{
             <FeedCardUserInfo seconds={seconds} toggleDelete={toggleDelete} {...data} />
           </div>
           <div className="my-3">{feed_content}</div>
+
+          <Badge className="inline-block max-w-max bg-secondary text-foreground">{label}</Badge>
 
           <div className="flex space-x-2 items-center">
             <FeedCardLikeButtons
