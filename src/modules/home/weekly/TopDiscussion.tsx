@@ -1,9 +1,11 @@
 import React from 'react';
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import { GoCommentDiscussion } from 'react-icons/go';
 import useGetLabels from '@/components/base/combobox/useGetLabels';
 import BaseSkeleton from '@/components/base/skeletons/BaseSkeleton';
+import useGetFeed from '../feed/useGetFeed';
 
 type TagsProps = {
   label: string;
@@ -12,6 +14,7 @@ type TagsProps = {
 
 const TopDiscussion: React.FC<{ className: string }> = ({ className }) => {
   const { data, isLoading } = useGetLabels('');
+  const { data: feeds } = useGetFeed();
 
   let _data: TagsProps[] = [];
 
@@ -38,18 +41,27 @@ const TopDiscussion: React.FC<{ className: string }> = ({ className }) => {
       <div className="flex flex-col space-y-3">
         {!isLoading &&
           (_data || []).slice(0, 10).map(({ label, id }: TagsProps) => {
+            const posts = feeds.filter((item) => item.label === label);
+
             return (
-              <p
+              <div
                 key={`top-discussion-${id}`}
-                className="hover:bg-primary hover:text-background rounded p-1 cursor-pointer"
+                className="flex justify-between hover:bg-primary hover:text-background rounded p-1 cursor-pointer px-2"
               >
-                {label === 'ribbit' && <span>🐸</span>} {label}
-              </p>
+                <span>
+                  {label === 'ribbit' && '🐸'} {label}
+                </span>
+                <div className="text-xs flex items-center space-x-1">
+                  <span>{posts.length}</span> <span>{posts.length === 1 ? 'post' : 'posts'}</span>
+                </div>
+              </div>
             );
           })}
       </div>
-      <div className="text-xs my-3">
-        <Badge>see more...</Badge>
+      <div className="text-xs my-3 px-2">
+        <Link href="/discussions">
+          <Badge>see more...</Badge>
+        </Link>
       </div>
     </div>
   );

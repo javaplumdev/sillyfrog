@@ -40,7 +40,8 @@ const BaseNavbar = () => {
       <div className="flex items-center">
         <BaseSheet />
 
-        <Link href="/">
+        <Link href="/" className="flex items-center space-x-1">
+          <span className="text-lg">🐸</span>
           <h2 className="font-bold text-lg ml-2">Sillyfrog</h2>
         </Link>
       </div>
