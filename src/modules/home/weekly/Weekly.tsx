@@ -29,12 +29,7 @@ const tags = [
 
 const Weekly: React.FC<{ isLoading?: boolean }> = ({ isLoading }) => {
   return (
-    <div
-      className={cn(
-        styles['separator-parent'],
-        'flex flex-wrap space-y-2 md:overflow-y-scroll md:sticky md:top-20 md:h-[700px]'
-      )}
-    >
+    <div className={cn(styles['separator-parent'], 'flex flex-wrap space-y-2')}>
       <TopDiscussion className={cn(styles['separator-child'])} />
     </div>
   );
