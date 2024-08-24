@@ -1,8 +1,7 @@
 import React from 'react';
-import { useView } from './ViewProvider';
+import useAuth from '@/hooks/useAuth';
 import BaseAvatar from '@/components/base/avatars/BaseAvatar';
 import BaseButton from '@/components/base/buttons/BaseButton';
-import useAuth from '@/hooks/useAuth';
 
 type DataProps = {
   photo: string;
@@ -11,11 +10,10 @@ type DataProps = {
 
 type PostProfileProps = {
   data: DataProps;
+  isLoading: boolean;
 };
 
-const PostProfile = (props: PostProfileProps) => {
-  const { data } = props;
-
+const PostProfile: React.FC<PostProfileProps> = ({ data, isLoading }) => {
   const { onActionWithAuth } = useAuth();
 
   const { photo, name } = data || ({} as DataProps);
@@ -23,10 +21,21 @@ const PostProfile = (props: PostProfileProps) => {
   return (
     <div className="rounded-sm p-3 flex flex-col space-y-3 w-full">
       <div className="flex items-center space-x-3 rounded-lg">
-        <BaseAvatar photo={photo} name={name} className="h-auto sm:h-[50px] w-auto sm:w-[50px]" />
+        {!isLoading && (
+          <React.Fragment>
+            <BaseAvatar
+              photo={photo}
+              name={name}
+              className="h-auto sm:h-[50px] w-auto sm:w-[50px]"
+            />
 
-        <h3 className="text-lg bottom-0 flex-auto mt-4">{name}</h3>
+            <h3 className="text-lg bottom-0 flex-auto mt-4">{name}</h3>
+          </React.Fragment>
+        )}
+
+        {!!isLoading && <p>Loading...</p>}
       </div>
+
       <BaseButton onClick={onActionWithAuth(() => console.log('TODO: Add follow feat'))}>
         Follow
       </BaseButton>
