@@ -21,12 +21,11 @@ const PostView = () => {
   const dislikeProps = useDislike();
   const commentProps = usePostComment(reload);
 
-  const { timestamp = { seconds: 0 } } = data || {};
+  const { timestamp = { seconds: 0 } } = data || ({} as any);
   const seconds: number = timestamp.seconds;
 
   return (
     <div className="flex flex-col space-y-2">
-      <PostNav data={data as any} {...rest} />
       <PostCard
         data={data}
         seconds={seconds}

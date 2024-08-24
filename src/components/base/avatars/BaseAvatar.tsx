@@ -1,13 +1,17 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { cn } from '@/lib/utils';
 import { DataProps } from '@/modules/post/PostCard';
 
 type BaseAvatarProps = {
   photo?: string;
   name?: string;
+  height?: string;
+  width?: string;
+  className?: string;
 };
 
 export default function BaseAvatar(props: BaseAvatarProps & DataProps) {
-  const { photo = '', name = '' } = props;
+  const { photo = '', name = '', className } = props;
 
   const fallback = (name || '')
     .split(' ')
@@ -16,7 +20,7 @@ export default function BaseAvatar(props: BaseAvatarProps & DataProps) {
     .join('');
 
   return (
-    <Avatar>
+    <Avatar className={cn(className)}>
       <AvatarImage src={photo} alt={fallback} />
       <AvatarFallback>{fallback}</AvatarFallback>
     </Avatar>
