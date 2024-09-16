@@ -7,6 +7,7 @@ import FeedCardLikeButtons from '../home/feed/card/FeedCardLikeButtons';
 import FeedCardInteractions from '../home/feed/card/FeedCardInteractions';
 import BaseCardSkeletons from '@/components/base/skeletons/BaseCardSkeletons';
 import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 
 type dataPayload = { id: string; user: string };
 
