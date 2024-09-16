@@ -24,7 +24,7 @@ const BaseBreadcrumb: React.FC<BaseBreadcrumbProps> = (props) => {
       {!!isLoading && <BaseSkeleton />}
 
       {!isLoading && (
-        <Breadcrumb className="my-3">
+        <Breadcrumb className="my-3 px-3">
           <BreadcrumbList>
             {data.map(({ path, name }, index: number) => {
               return (
