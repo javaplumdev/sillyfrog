@@ -28,7 +28,7 @@ const DiscussionsPage = () => {
           return (
             <div
               key={index}
-              onClick={() => push(`/discussions/${id}`)}
+              onClick={() => push(`/discussions/${label}`)}
               className="flex justify-between hover:bg-primary hover:text-background rounded p-1 cursor-pointer mb-3 px-2"
             >
               <span>{label}</span>

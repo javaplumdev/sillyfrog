@@ -1,7 +1,8 @@
 import React from 'react';
+import DiscussionsView from '@/modules/discussions/view/DiscussionsView';
 
 const Page = () => {
-  return <div>Page</div>;
+  return <DiscussionsView />;
 };
 
 export default Page;

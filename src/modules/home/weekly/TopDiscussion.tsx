@@ -48,7 +48,7 @@ const TopDiscussion: React.FC<{ className: string }> = ({ className }) => {
             return (
               <div
                 key={`top-discussion-${id}`}
-                onClick={() => push(`/discussions/${id}`)}
+                onClick={() => push(`/discussions/${label}`)}
                 className="flex justify-between hover:bg-primary hover:text-background rounded p-1 cursor-pointer px-2"
               >
                 <span>

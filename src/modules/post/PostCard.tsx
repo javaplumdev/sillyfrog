@@ -7,7 +7,7 @@ import FeedCardLikeButtons from '../home/feed/card/FeedCardLikeButtons';
 import FeedCardInteractions from '../home/feed/card/FeedCardInteractions';
 import BaseCardSkeletons from '@/components/base/skeletons/BaseCardSkeletons';
 import { Badge } from '@/components/ui/badge';
-import { cn } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
 
 type dataPayload = { id: string; user: string };
 
@@ -32,6 +32,7 @@ const PostCard: React.FC<{
   onSave: (id: string, data: dataPayload[]) => Promise<void>;
   onDislike: (id: string, data: dataPayload[]) => Promise<void>;
 }> = ({ data, isLoading, seconds, toggleDelete, toggleShare, onDislike, onLike, onSave }) => {
+  const { push } = useRouter();
   const { saves, likes, postId, dislikes, feed_content, label } = data || {};
 
   return (
@@ -45,7 +46,12 @@ const PostCard: React.FC<{
           </div>
           <div className="my-3">{feed_content}</div>
 
-          <Badge className="inline-block max-w-max bg-secondary text-foreground">{label}</Badge>
+          <Badge
+            onClick={() => push(`/discussions/${label}`)}
+            className="inline-block max-w-max bg-secondary text-foreground cursor-pointer"
+          >
+            {label}
+          </Badge>
 
           <div className="flex space-x-2 items-center">
             <FeedCardLikeButtons
