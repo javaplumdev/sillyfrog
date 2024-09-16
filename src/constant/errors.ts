@@ -1,8 +1,4 @@
-type errroMessages = {
-  [key: string]: string;
-};
-
-export const ERROR_MESSAGES: errroMessages = {
+export const ERROR_MESSAGES: { [key: string]: string } = {
   'auth/email-already-in-use': 'Email already in use.',
   'auth/invalid-credential': 'Incorrect email or password.',
 };
