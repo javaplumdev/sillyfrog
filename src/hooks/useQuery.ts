@@ -5,15 +5,15 @@ export const useQuery = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [name, setName] = useState<string>('');
-  const query = searchParams.get('query') || '';
+  const query = searchParams.get('q') || '';
 
   // for every change from query, this useEffect will trigger
   useEffect(() => {
     const newParams = new URLSearchParams(searchParams.toString());
     if (name) {
-      newParams.set('query', name);
+      newParams.set('q', name);
     } else {
-      newParams.delete('query');
+      newParams.delete('q');
     }
     router.push(`?${newParams.toString()}`);
   }, [name, router, searchParams]);

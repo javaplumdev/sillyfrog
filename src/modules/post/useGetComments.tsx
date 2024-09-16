@@ -13,7 +13,7 @@ const useGetComments = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const searchParams = useSearchParams();
-  const _query = searchParams.get('query') || '';
+  const _query = searchParams.get('q') || '';
 
   React.useEffect(() => {
     getData();
