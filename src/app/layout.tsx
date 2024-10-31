@@ -7,6 +7,7 @@ import { Inter as FontSans } from 'next/font/google';
 import AppProviders from '@/modules/app/AppProviders';
 import BaseNavbar from '@/components/base/layout/BaseNavbar';
 import { Toaster } from '@/components/ui/sonner';
+import { Suspense } from 'react';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -39,7 +40,9 @@ export default function RootLayout({
         <div className={cn('sm:container text-sm sm:text-base relative')}>
           <AppProviders>
             <BaseNavbar />
-            <main> {children}</main>
+            <main>
+              <Suspense>{children}</Suspense>
+            </main>
 
             <Toaster position="bottom-center" expand={false} richColors />
 
