@@ -6,6 +6,7 @@ import { GoCommentDiscussion } from 'react-icons/go';
 import useGetLabels from '@/components/base/combobox/useGetLabels';
 import BaseSkeleton from '@/components/base/skeletons/BaseSkeleton';
 import useGetFeed from '../feed/useGetFeed';
+import { useRouter } from 'next/navigation';
 
 type TagsProps = {
   label: string;
@@ -13,6 +14,7 @@ type TagsProps = {
 };
 
 const TopDiscussion: React.FC<{ className: string }> = ({ className }) => {
+  const { push } = useRouter();
   const { data, isLoading } = useGetLabels('');
   const { data: feeds } = useGetFeed();
 
@@ -46,6 +48,7 @@ const TopDiscussion: React.FC<{ className: string }> = ({ className }) => {
             return (
               <div
                 key={`top-discussion-${id}`}
+                onClick={() => push(`/discussions/${label}`)}
                 className="flex justify-between hover:bg-primary hover:text-background rounded p-1 cursor-pointer px-2"
               >
                 <span>

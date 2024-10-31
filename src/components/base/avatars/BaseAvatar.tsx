@@ -2,13 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { DataProps } from '@/modules/post/PostCard';
 
-type BaseAvatarProps = {
-  photo?: string;
-  name?: string;
-  height?: string;
-  width?: string;
-  className?: string;
-};
+type BaseAvatarProps = Record<string, string>;
 
 export default function BaseAvatar(props: BaseAvatarProps & DataProps) {
   const { photo = '', name = '', className } = props;

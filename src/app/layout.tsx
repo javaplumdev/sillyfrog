@@ -6,7 +6,6 @@ import type { Metadata } from 'next';
 import { Inter as FontSans } from 'next/font/google';
 import AppProviders from '@/modules/app/AppProviders';
 import BaseNavbar from '@/components/base/layout/BaseNavbar';
-import BaseFooter from '@/components/base/layout/BaseFooter';
 import { Toaster } from '@/components/ui/sonner';
 
 const fontSans = FontSans({

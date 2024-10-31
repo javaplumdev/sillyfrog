@@ -1,4 +1,4 @@
-import { getUnixTime, getMilliseconds, format, formatDistanceToNow } from 'date-fns';
+import { format, formatDistanceToNow } from 'date-fns';
 
 export const dateLabel = (seconds: number) => {
   const unixTimestamp = seconds * 1000;

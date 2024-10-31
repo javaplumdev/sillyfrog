@@ -3,12 +3,15 @@ import React from 'react';
 import useGetLabels from '@/components/base/combobox/useGetLabels';
 import BaseSkeleton from '@/components/base/skeletons/BaseSkeleton';
 import useGetFeed from '../home/feed/useGetFeed';
+import { useRouter } from 'next/navigation';
 
 type DataProps = {
   label: string;
+  id: string;
 };
 
 const DiscussionsPage = () => {
+  const { push } = useRouter();
   const { data, isLoading } = useGetLabels('');
   const { data: feeds, isLoading: isFeedLoading } = useGetFeed();
 
@@ -18,12 +21,16 @@ const DiscussionsPage = () => {
 
       {!isLoading &&
         !isFeedLoading &&
-        (data || []).map((item: DataProps) => {
-          const { label } = item || {};
+        (data || []).map((item: DataProps, index: number) => {
+          const { label, id } = item || {};
           const posts = feeds.filter((item) => item.label === label);
 
           return (
-            <div className="flex justify-between hover:bg-primary hover:text-background rounded p-1 cursor-pointer mb-3 px-2">
+            <div
+              key={index}
+              onClick={() => push(`/discussions/${label}`)}
+              className="flex justify-between hover:bg-primary hover:text-background rounded p-1 cursor-pointer mb-3 px-2"
+            >
               <span>{label}</span>
               <div className="text-sm flex items-center space-x-1">
                 <span>{posts.length}</span>
