@@ -6,10 +6,19 @@ import { Menu } from 'lucide-react';
 import Weekly from '@/modules/home/weekly/Weekly';
 import Categories from '@/modules/home/categories/Categories';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { usePathname } from 'next/navigation';
 
 const BaseSheet = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const toggleOpen = () => setIsOpen(!isOpen);
+  const pathname = usePathname();
+
+  React.useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={toggleOpen}>
       <SheetTrigger>
         <Menu className="block md:hidden" />
       </SheetTrigger>
