@@ -18,9 +18,9 @@ const useLike = () => {
 
   const onSubmit = async (
     id: string,
-    data: { id: string; user: string }[],
-    postId: string,
-    userId: string
+    data?: { id: string; user: string }[],
+    postId?: string,
+    userId?: string
   ) => {
     setIsLoading(true);
 
