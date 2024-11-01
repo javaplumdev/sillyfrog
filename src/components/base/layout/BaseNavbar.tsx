@@ -19,6 +19,7 @@ import BaseAvatar from '../avatars/BaseAvatar';
 import BaseSkeleton from '../skeletons/BaseSkeleton';
 import ModeToggle from '../theme/ModeToggle';
 import BaseConfirmationDialog from '../dialogs/BaseConfirmationDialog';
+import BaseNotification from '../notifications/BaseNotification';
 // import { anonAvatar } from '@/constant/keys';
 
 const useLogout = () => {
@@ -48,7 +49,10 @@ const BaseNavbar = () => {
       <div className="w-full md:w-auto flex items-center justify-end">
         {/* Show skeleton when isLoading is true */}
         {isLoading && <BaseSkeleton />}
-        {!isLoading && <ModeToggle className="mr-2" />}
+        {!isLoading && <ModeToggle />}
+
+        {!!isAuth && !isLoading && <BaseNotification />}
+
         {/* Show avatar when authenticated and isLoading false */}
         {!!isAuth && !isLoading && (
           <DropdownMenu>

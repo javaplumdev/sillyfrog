@@ -41,7 +41,7 @@ export default function RootLayout({
           <AppProviders>
             <BaseNavbar />
             <main>
-              <Suspense>{children}</Suspense>
+              <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
             </main>
 
             <Toaster position="bottom-center" expand={false} richColors />

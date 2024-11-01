@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { FeedFormDialog } from './FeedFormDialog';
 import BaseAvatar from '@/components/base/avatars/BaseAvatar';
 import { UseFormReturn } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
 const FeedForm: React.FC<
   {
@@ -16,7 +17,7 @@ const FeedForm: React.FC<
   } & any
 > = ({ isPostingFeed, isOpenPostFeed, postFeedForm, onSubmitPostFeed, toggleOpenPostFeed }) => {
   const { onActionWithAuth, userData } = useAuth();
-
+  const router = useRouter();
   const { photoURL, displayName, username } = userData || {};
 
   return (
@@ -28,7 +29,7 @@ const FeedForm: React.FC<
         <Input
           type="text"
           placeholder="Tell us what you feel!"
-          onClick={onActionWithAuth(toggleOpenPostFeed)}
+          onClick={onActionWithAuth(() => router.push('/create'))}
         />
       </div>
 

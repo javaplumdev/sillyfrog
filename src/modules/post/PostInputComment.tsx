@@ -13,7 +13,7 @@ type PostInputCommentProps = {
   form: UseFormReturn<FieldValues, {}, undefined>;
 };
 
-const PostInputComment: React.FC<PostInputCommentProps & any> = ({ form, onSubmit }) => {
+const PostInputComment: React.FC<PostInputCommentProps & any> = ({ form, onSubmit, postData }) => {
   const { userData, isAuth, onActionWithAuth } = useAuth();
 
   const { handleSubmit } = form || {};
@@ -48,7 +48,7 @@ const PostInputComment: React.FC<PostInputCommentProps & any> = ({ form, onSubmi
             <BaseButton
               type="submit"
               onClick={onActionWithAuth(() => {})}
-              className="rounded-full absolute absolute top-5 right-0 mr-4"
+              className="rounded-full absolute top-5 right-0 mr-4"
             >
               <ArrowUp size={16} />
             </BaseButton>

@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 
-const ModeToggle: React.FC<{ className: string }> = ({ className, ...rest }) => {
+const ModeToggle: React.FC<{ className?: string }> = ({ className, ...rest }) => {
   const { setTheme } = useTheme();
 
   return (
