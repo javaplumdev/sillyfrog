@@ -19,7 +19,7 @@ const PostView = () => {
   const likeProps = useLike();
   const saveProps = useSave();
   const dislikeProps = useDislike();
-  const commentProps = usePostComment(reload);
+  const commentProps = usePostComment(reload, data);
 
   const { timestamp = { seconds: 0 } } = data || ({} as any);
   const seconds: number = timestamp.seconds;

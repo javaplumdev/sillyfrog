@@ -8,11 +8,14 @@ import { collectionRefComments, db } from '@/firebase/firebaseConfig';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { arrayUnion, doc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 import { sonnerToast } from '@/lib/toast';
+import { useNotification } from '@/hooks/useNotifications';
 
-const usePostComment = (callback: () => void) => {
+const usePostComment = (callback: () => void, viewData: any) => {
   const { id } = useParams();
+  const { addNotif } = useNotification();
   const { userData } = useAuth();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const { userId } = viewData || {};
 
   const { uid, displayName, photoURL, username } = userData || {};
 
@@ -48,6 +51,8 @@ const usePostComment = (callback: () => void) => {
       await updateDoc(doc(db, 'feed', id as string), {
         comments: arrayUnion({ commentId: commentId }),
       });
+
+      await addNotif({ to: userId, type: 'comment', postId: id });
 
       if (callback) callback();
     } catch (error) {

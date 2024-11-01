@@ -19,6 +19,8 @@ const FeedCardLikeButtons: React.FC<FeedCardLikeButtonsProps & any> = ({
   type,
   Icon,
   onClick,
+  postId,
+  userId,
 }) => {
   const { onActionWithAuth, userData } = useAuth();
   const { uid } = userData || {};
@@ -31,7 +33,7 @@ const FeedCardLikeButtons: React.FC<FeedCardLikeButtonsProps & any> = ({
         'text-emerald-500': !!isLike && type === 'like',
         'text-red-500': !!isLike && type === 'dislike',
       })}
-      onClick={onActionWithAuth(() => onClick(id, data || []))}
+      onClick={onActionWithAuth(() => onClick(id, data || [], postId, userId))}
     >
       <Icon size="18" />
     </Badge>
