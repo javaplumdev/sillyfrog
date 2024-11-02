@@ -10,6 +10,7 @@ export const addUserToFirestore = (credentials: Record<string, string>) => {
       email: email,
       name: displayName,
       photo: fbPhoto || photoURL,
+      id: uid,
     });
   } catch (error) {
     console.error(error);

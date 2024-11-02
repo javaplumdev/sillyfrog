@@ -38,7 +38,7 @@ const FeedCardUserInfo: React.FC<FeedCardUserInfoProps> = ({
   return (
     <div className="flex items-center justify-between w-full">
       <div className="flex flex-col">
-        <span className="font-bold">{name}</span>
+        <span className="font-bold break-all">{name}</span>
         <span className="text-xs">
           {dateLabel(sec)} - {timeDifference(sec)}
         </span>

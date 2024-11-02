@@ -36,7 +36,7 @@ const NotificationsProvider: React.FC<NotificationsProviderProps> = ({ children 
   const [data, setData] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { userData } = useAuth();
-  const { uid, photoURL } = userData || {};
+  const { uid, photoURL, displayName, email } = userData || {};
 
   React.useEffect(() => {
     getData();
@@ -74,6 +74,7 @@ const NotificationsProvider: React.FC<NotificationsProviderProps> = ({ children 
         to: to,
         type: type,
         photo: photoURL,
+        name: displayName || email,
         timestamp: serverTimestamp() || getTimestamp(),
       });
     } catch (err) {

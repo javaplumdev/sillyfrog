@@ -7,8 +7,6 @@ import { isEmpty } from 'lodash';
 const BaseNotification = () => {
   const { data } = useNotification();
 
-  console.log(data);
-
   return (
     <Link href="/notifications" className="mx-4 hover:cursor-pointer">
       <div className="relative">
