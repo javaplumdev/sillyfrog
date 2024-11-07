@@ -16,7 +16,7 @@ const useAddLabels = () => {
 
       setIsLoading(true);
     } catch (error) {
-      sonnerToast('error', error instanceof Error && 'An unknown error occurred');
+      sonnerToast('error', error);
     } finally {
       setIsLoading(false);
     }

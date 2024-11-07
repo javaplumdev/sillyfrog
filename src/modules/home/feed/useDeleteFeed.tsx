@@ -23,14 +23,14 @@ const useDeleteFeed = () => {
       const feedDoc: DocumentReference<DocumentData, DocumentData> = doc(db, 'feed', idToDelete);
       await deleteDoc(feedDoc);
     } catch (error) {
-      sonnerToast('error', error instanceof Error && error.message);
+      sonnerToast('error', error);
     } finally {
       setIsLoading(false);
       setIsOpen(false);
 
       if (paramsId) router.push('/');
 
-      sonnerToast('success', 'Successfully deleted.');
+      sonnerToast('success', { message: 'Successfully deleted.' });
     }
   };
 

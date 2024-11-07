@@ -42,7 +42,7 @@ const useGetLabels = (search: string) => {
         setData(d);
       });
     } catch (error) {
-      sonnerToast('error', error instanceof Error && error.message);
+      sonnerToast('error', error);
     } finally {
       setTimeout(() => setIsLoading(false), 500);
     }

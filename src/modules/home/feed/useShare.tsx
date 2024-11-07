@@ -31,12 +31,12 @@ const useShare = () => {
       const url = id ? urlJoin(baseUrl, `post/${id}`) : baseUrl;
       navigator.clipboard.writeText(url);
     } catch (error) {
-      sonnerToast('error', error instanceof Error && error.message);
+      sonnerToast('error', error);
     } finally {
       setIsLoading(false);
       setIsCopied(true);
 
-      sonnerToast('success', 'Link copied!');
+      sonnerToast('success', { message: 'Link copied!' });
     }
   };
 

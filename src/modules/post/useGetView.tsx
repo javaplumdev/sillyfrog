@@ -28,7 +28,7 @@ const useGetView = () => {
         setData(snapshot.data({ serverTimestamps: 'estimate' }) as any);
       });
     } catch (error) {
-      sonnerToast('error', error instanceof Error && error.message);
+      sonnerToast('error', error);
     } finally {
       setTimeout(() => setIsLoading(false), 500);
     }

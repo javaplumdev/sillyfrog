@@ -7,6 +7,7 @@ import { auth } from '@/firebase/firebaseConfig';
 import { addUserToFirestore } from '@/lib/users';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import UserAuthConfirmationDialog from '@/components/base/dialogs/UserAuthConfirmationDialog';
+import { sonnerToast } from '@/lib/toast';
 
 let userDataInitValues = { uid: '', photoURL: '', displayName: '', email: '', username: '' };
 
@@ -59,13 +60,13 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
   const [isPasswordOpen, setIsPasswordOpen] = React.useState<boolean>(true);
   const [isAuth, setIsAuth] = React.useState<boolean>(!!cookies.get('token'));
   const [userData, setUserData] = React.useState<userDataProps>(userDataInitValues);
-  const [isAuthConfirmation, setIsAuthCofirmation] = React.useState<boolean>(false);
+  const [isAuthConfirmation, setIsAuthConfirmation] = React.useState<boolean>(false);
 
   const togglePasswordOpen = () => setIsPasswordOpen(!isPasswordOpen);
-  const toggleIsAuthConfirmation = () => setIsAuthCofirmation(!isAuthConfirmation);
+  const toggleIsAuthConfirmation = () => setIsAuthConfirmation(!isAuthConfirmation);
 
   React.useEffect(() => {
-    setIsAuthCofirmation(false);
+    setIsAuthConfirmation(false);
   }, [pathname]);
 
   React.useEffect(() => {
@@ -96,7 +97,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
       cookies.remove('token');
       window.location.replace('/');
     } catch (error) {
-      console.error(error);
+      sonnerToast('error', error);
     } finally {
       setIsLoading(false);
     }

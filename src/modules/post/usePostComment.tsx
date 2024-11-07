@@ -56,7 +56,7 @@ const usePostComment = (callback: () => void, viewData: any) => {
 
       if (callback) callback();
     } catch (error) {
-      sonnerToast('error', error instanceof Error && error.message);
+      sonnerToast('error', error);
     } finally {
       setIsLoading(false);
       reset();

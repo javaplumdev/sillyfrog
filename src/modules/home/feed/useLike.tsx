@@ -37,7 +37,7 @@ const useLike = () => {
         await addNotif({ to: userId, type: 'like', postId: postId });
       }
     } catch (error) {
-      sonnerToast('error', error instanceof Error && error.message);
+      sonnerToast('error', error);
     } finally {
       setIsLoading(false);
     }

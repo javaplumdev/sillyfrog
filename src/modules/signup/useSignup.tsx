@@ -23,7 +23,7 @@ const useSignup = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
 
-      sonnerToast('success', 'Successfully created! You may not log in your account.');
+      sonnerToast('success', { message: 'Successfully created! You may not log in your account.' });
 
       router.push('/signin');
     } catch (error) {

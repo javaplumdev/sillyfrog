@@ -55,7 +55,7 @@ const NotificationsProvider: React.FC<NotificationsProviderProps> = ({ children 
 
       setData(filteredData);
     } catch (error) {
-      sonnerToast('error', error instanceof Error && error.message);
+      sonnerToast('error', error);
     } finally {
       setIsLoading(false);
     }

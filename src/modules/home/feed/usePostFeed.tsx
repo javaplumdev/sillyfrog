@@ -71,7 +71,7 @@ const usePostFeed = () => {
 
       sonnerToast('success', 'Post Created!');
     } catch (error) {
-      sonnerToast('error', error instanceof Error && error.message);
+      sonnerToast('error', error);
     } finally {
       setIsOpen(false);
       reset();

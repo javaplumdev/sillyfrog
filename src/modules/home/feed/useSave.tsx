@@ -31,7 +31,7 @@ const useSave = () => {
         saves: isSave ? arrayRemove({ user: uid }) : arrayUnion({ user: uid }),
       });
     } catch (error) {
-      sonnerToast('error', error instanceof Error && error.message);
+      sonnerToast('error', error);
     } finally {
       setIsLoading(false);
     }

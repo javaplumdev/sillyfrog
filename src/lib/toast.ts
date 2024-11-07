@@ -2,7 +2,9 @@ import { toast } from 'sonner';
 
 type _type = 'success' | 'error' | 'info' | 'warning' | undefined;
 
-const sonnerToast = (type: _type, message: string | unknown | any) => {
+const sonnerToast = (type: _type, content: any) => {
+  const { message } = content || {};
+
   switch (type) {
     case 'success':
       toast.success(message);
